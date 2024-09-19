@@ -15,7 +15,7 @@ export default function Home() {
                         <img
                             src="src/assets/resources/logo.jpeg"
                             alt="Logo"
-                            height="80"
+                            height="60"
                         />
                     </CNavbarBrand>
 
@@ -28,12 +28,12 @@ export default function Home() {
                     <CCollapse className="navbar-collapse" visible={visible}>
                         <CNavbarNav className="ms-auto d-flex align-items-center" style={{ gap: '20px' }}>
                             <CNavItem>
-                                <CNavLink href="#" active style={{ fontWeight: 'bold', color: 'black' }}>
+                                <CNavLink href="http://localhost:3000/#/login" active style={{ fontWeight: 'bold', color: 'black' }}>
                                     SIGN IN
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
-                                <CNavLink href="#" active style={{ fontWeight: 'bold', color: 'black' }}>
+                                <CNavLink href="http://localhost:3000/#/register" active style={{ fontWeight: 'bold', color: 'black' }}>
                                     SIGN UP
                                 </CNavLink>
                             </CNavItem>
