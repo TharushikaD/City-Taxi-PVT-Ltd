@@ -1,10 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   CButton,
   CCard,
   CCardBody,
-  CCardGroup,
   CCol,
   CContainer,
   CForm,
@@ -18,64 +16,62 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
   return (
-    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+    <div className="d-flex align-items-center min-vh-100" style={{backgroundColor:'#2a303d'}}>
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={8}>
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody>
-                  <CForm>
-                    <h1>Login</h1>
-                    <p className="text-body-secondary">Sign In to your account</p>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon={cilUser} />
-                      </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
-                    </CInputGroup>
-                    <CInputGroup className="mb-4">
-                      <CInputGroupText>
-                        <CIcon icon={cilLockLocked} />
-                      </CInputGroupText>
-                      <CFormInput
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="current-password"
-                      />
-                    </CInputGroup>
-                    <CRow>
-                      <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
-                          Login
-                        </CButton>
-                      </CCol>
-                      <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
-                        </CButton>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        Register Now!
+        <CRow className="justify-content-between">
+          <CCol lg={6} className="d-flex flex-column justify-content-center text-center p-5" style={{color:'#2a303d'}}>
+            <h1 className='text-white'>Welcome to City Taxis</h1>
+            <p className="text-white lead">Your Journey Begins Here!</p>
+          </CCol>
+
+          <CCol lg={4} md={6} className="d-flex justify-content-center align-items-center">
+            <CCard className="p-4 shadow-lg" style={{backgroundColor:'#e0b506'}}>
+              <CCardBody>
+                <div className="text-center mb-4">
+                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'100px',marginBottom:'1 rem'}} />
+                </div>
+                <CForm>
+                  <h2 className="text-center mb-4">Login</h2>
+                  <p className="text-body-secondary text-center mb-4">Sign in to your account</p>
+
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="Username" autoComplete="username" />
+                  </CInputGroup>
+
+                  <CInputGroup className="mb-4">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="password"
+                      placeholder="Password"
+                      autoComplete="current-password"
+                    />
+                     <CCol xs={12} className="text-right">
+                      <CButton color="link" className="px-0">
+                        Forgot password?
                       </CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
+                    </CCol>
+                  </CInputGroup>
+
+                  <CRow className="mb-3">
+                    <CCol xs={12}>
+                      <CButton className="w-100 text-white" style={{backgroundColor:'#2a303d'}}>
+                        Login
+                      </CButton>
+                    </CCol>
+                    <CCol xs={12} className="text-center">
+                      <CButton color="link" className="px-0" href='http://localhost:3000/#/register'>
+                       Don't have an account!
+                      </CButton>
+                    </CCol>
+                  </CRow>
+                </CForm>
+              </CCardBody>
+            </CCard>
           </CCol>
         </CRow>
       </CContainer>

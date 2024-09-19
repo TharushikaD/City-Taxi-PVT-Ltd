@@ -16,16 +16,24 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Register = () => {
   return (
-    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+    <div className="d-flex align-items-center min-vh-100" style={{backgroundColor:'#2a303d'}}>
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
+        <CRow className="justify-content-between">
+          <CCol lg={6} className="d-flex flex-column justify-content-center text-center p-5" style={{color:'#2a303d'}}>
+            <h1 className='text-white'>Join City Taxi today and enjoy fast, reliable service at your fingertips</h1>
+            <p className="text-white lead">Sign up to get started!</p>
+          </CCol>
+
+          <CCol lg={4} md={6} className="d-flex justify-content-center align-items-center">
+            <CCard className="p-5 shadow-lg" style={{backgroundColor:'#e0b506'}}>
+              <CCardBody>
+                <div className="text-center mb-4">
+                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'100px',marginBottom:'1 rem'}} />
+                </div>
                 <CForm>
-                  <h1>Register</h1>
-                  <p className="text-body-secondary">Create your account</p>
-                  <CInputGroup className="mb-3">
+                <h3 className='text-center'>Register</h3>
+                <p className="text-body-secondary text-center mb-4">Create your account</p>
+                <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
@@ -55,9 +63,20 @@ const Register = () => {
                       autoComplete="new-password"
                     />
                   </CInputGroup>
-                  <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
-                  </div>
+
+               
+                  <CRow className="mb-3">
+                    <CCol xs={12}>
+                      <CButton className="w-100 text-white" style={{backgroundColor:'#2a303d'}}>
+                        Register
+                      </CButton>
+                    </CCol>
+                    <CCol xs={12} className="text-center">
+                      <CButton color="link" className="px-0" href='http://localhost:3000/#/login'>
+                      Already have an account!
+                      </CButton>
+                    </CCol>
+                  </CRow>
                 </CForm>
               </CCardBody>
             </CCard>
@@ -65,6 +84,7 @@ const Register = () => {
         </CRow>
       </CContainer>
     </div>
+    
   )
 }
 
