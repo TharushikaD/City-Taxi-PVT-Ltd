@@ -1,0 +1,122 @@
+
+.form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-header {
+    text-align: center;
+    background-color: #e0b506;
+    padding: 1.5rem;
+  }
+  
+  .form-header h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+  
+  .form-body {
+    padding: 2rem;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    padding: 0.75rem !important;
+    font-size: 1rem !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+.form-control:focus {
+    border-color: #5b9ed8;    
+    box-shadow: 0 0 5px rgba(91, 158, 216, 0.5); 
+}
+
+.btn-submit {
+    background-color:#e0b506;
+    border-color:#e0b506;
+    width:250px;
+    color: white;
+  }
+
+.btn-submit:hover{
+    background-color:#ffe694;
+    border-color:#ffe694;
+  }
+  
+
+  .btn-clear {
+    background-color:#212631;
+    border-color:#212631;
+    color: white;
+    width:250px;
+  }
+  
+  .btn-submit:hover,
+  .btn-clear:hover {
+    opacity: 0.85;
+  }
+
+  .opportunity-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;  /* Centers the section horizontally */
+  }
+  
+  .opportunity-section {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center; 
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+  
+  .opportunity-section p, .opportunity-section ul {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .opportunity-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .opportunity-section li {
+    margin: 5px 0;
+  }
+
+  /* .search-bar-group {
+    border-radius: 4px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .search-bar-icon {
+    background-color: #f8f9fa; 
+    border: 1px solid #ced4da; 
+  }
+  
+  .search-bar {
+    border: 1px solid #ced4da; 
+    border-left: none; 
+    border-radius: 0; 
+    padding-left: 10px; 
+    font-size: 16px; 
+  } */
+  
+ 
