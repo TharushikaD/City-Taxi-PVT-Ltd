@@ -1,0 +1,234 @@
+.wall{
+    background-size: cover;
+}
+
+.navLinks:hover{
+    color:#2a303d !important;
+}
+
+.caption {
+    margin-top: 80px;
+}
+
+.caption .round-icard h4 {
+    font-size: 35px;
+    color: #e0b506;
+}
+
+.caption .round-icard h6 {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #2a303d;
+    line-height: 35px;
+}
+
+.container-3 {
+    background-image: url(src/assets/resources/car1.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+    position: relative; 
+    margin-top: 100px;
+}
+
+.container-3::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(13, 13, 13, 0.5), rgba(143, 114, 0, 0.5)); 
+    z-index: 1; 
+}
+
+
+.container-3 .round-icard h4 {
+    color: white;
+    font-weight: 500;
+    margin-top: 10px;
+    z-index: 2; }
+
+.container-3 .round-icard h6 {
+    color: white !important;
+    font-size: 30px;
+    z-index: 2; 
+}
+
+.content {
+    position: relative;
+    z-index: 2; 
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.content .round-icard img {
+    margin-top:50px;
+    height: 200px;
+    border-radius: 50%;
+    z-index: 2; 
+}
+
+.container-2{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.container-2 button{
+    background-color: #2a303d;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    /* border-radius: 30px; */
+    transition: background-color 0.3s ease;
+}
+
+.container-2 .btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:#e0b506;
+    width: 60%;
+    padding: 50px;
+    border-radius: 40px;
+    color: black;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    margin-bottom: 80px;
+}
+
+.show h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.show p, .show ul {
+    font-size: 18px;
+}
+
+.show ul {
+    list-style: none;
+    padding: 0;
+}
+
+.show ul li {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .show {
+        width: 80%;
+        padding: 30px;
+    }
+
+    .container-2 {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.container-1 {
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: center;
+    padding: 20px;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+
+/* .container-1.visible {
+    opacity: 1;
+    transform: translateY(0);
+  } */
+
+.owner-image {
+    height: auto;
+    max-height: 600px;
+    margin-right: -40px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.section-title {
+    font-weight: bolder;
+    margin-bottom: 30px; 
+    font-size: 30px; 
+    color:#b8a249;
+}
+
+.owner-name {
+    font-weight: bolder;
+    margin-bottom: 30px; 
+    font-size: 50px;
+    color: #3f3022;
+}
+
+.owner-description {
+    font-size: 20px;
+    width: 92%; 
+    color: #0b0a09;
+    line-height: 1.6;
+}
+
+.all-description {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .container-1 {
+        padding: 10px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .owner-name {
+        font-size: 1.8rem;
+    }
+
+    .owner-description {
+        font-size: 1rem;
+    }
+
+    .owner-img .img-fluid {
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .all-description {
+        text-align: center;
+        padding: 10px;
+    }
+}
+
+.show:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-out; 
+    z-index: 10; 
+    position: relative; 
+}
+
