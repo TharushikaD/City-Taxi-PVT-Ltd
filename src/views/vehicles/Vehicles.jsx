@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CCard, CCardBody, CCardHeader, CForm, CInputGroup, CButton, CRow, CCol, CCarousel, CCarouselItem, CImage} from '@coreui/react';
+import { CCard, CCardBody, CCardHeader, CForm, CInputGroup, CButton, CRow, CCol, CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '../../scss/formStyles.css';
 
 
@@ -41,7 +41,14 @@ const Vehicles = () => {
         <>
             <CCarousel>
                 <CCarouselItem>
-                    <CImage className="d-block w-100" src="src/assets/resources/driver.png" alt="slide 1" style={{ height: '580px' }} />
+                    {/* <CImage className="d-block w-100" src="src/assets/resources/drives.png" alt="slide 1" /> */}
+                    <div className="container-fluid p-0">
+                        <img
+                            src="src/assets/resources/drives6.png"
+                            alt="carousel image"
+                            className="wall img-fluid w-100"
+                        />
+                    </div>
                 </CCarouselItem>
             </CCarousel>
 
@@ -133,17 +140,16 @@ const Vehicles = () => {
                                         required
                                     />
                                 </CInputGroup>
+                                <div className="form-buttons" style={{ display: 'flex', gap: '15px', marginTop: '3.5rem' }}>
+                                    <CButton type="submit" color="primary" className="btn-submit">
+                                        Submit
+                                    </CButton>
+                                    <CButton type="button" color="secondary" className="btn-clear" onClick={handleClear}>
+                                        Clear
+                                    </CButton>
+                                </div>
                             </CCol>
                         </CRow>
-
-                        <div className="form-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '1.5rem' }}>
-                            <CButton type="submit" color="primary" className="btn-submit">
-                                Submit
-                            </CButton>
-                            <CButton type="button" color="secondary" className="btn-clear" onClick={handleClear}>
-                                Clear
-                            </CButton>
-                        </div>
                     </CForm>
                 </CCardBody>
             </CCard>

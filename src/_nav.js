@@ -14,18 +14,18 @@ const _nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
-  {
-    component: CNavGroup,
-    name: 'Vehicles',
-    icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Register Vehicle',
-        to: '/vehicles',
-      },
-      ]
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Vehicles',
+  //   icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Register Vehicle',
+  //       to: '/vehicles',
+  //     },
+  //     ]
+  // },
   {
     component: CNavTitle,
     name: 'Extras',

@@ -2,8 +2,14 @@
     background-size: cover;
 }
 
-.navLinks:hover {
+.navLinks{
+    font-weight: bold !important;
     color: #2a303d !important;
+    font-size: 16px !important;
+}
+
+.navLinks:hover {
+    color: white !important;
 }
 
 .container-3 {
@@ -52,7 +58,7 @@
 
 .content .round-icard img {
     margin-top: 50px;
-    height: 200px;
+    height: 150px;
     border-radius: 50%;
     z-index: 2;
 }

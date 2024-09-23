@@ -37,7 +37,7 @@
     font-size: 1rem !important;
     border: 1px solid #ced4da !important;
     border-radius: 4px !important;
-    width: 100% !important;
+    width: 80% !important;
     box-sizing: border-box !important;
   }
 
@@ -49,7 +49,7 @@
 .btn-submit {
     background-color:#e0b506;
     border-color:#e0b506;
-    width:250px;
+    width:200px;
     color: white;
   }
 
@@ -63,7 +63,7 @@
     background-color:#212631;
     border-color:#212631;
     color: white;
-    width:250px;
+    width:200px;
   }
   
   .btn-submit:hover,
@@ -74,11 +74,11 @@
   .opportunity-container {
     display: flex;
     justify-content: center;
-    width: 100%;  /* Centers the section horizontally */
+    width: 100%; 
   }
   
   .opportunity-section {
-    background-color: black;
+    background-color:#2a303d;
     color: white;
     padding: 20px;
     margin-top: 20px;
