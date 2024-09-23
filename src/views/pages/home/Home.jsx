@@ -54,15 +54,43 @@ export default function Home() {
                     />
 
                     <CCollapse className="navbar-collapse" visible={visible}>
-                        <CNavbarNav className="ms-auto d-flex align-items-center" style={{ gap: '20px' }}>
+                        <CNavbarNav className="me-auto d-flex align-items-center" style={{ gap: '40px', marginLeft: '150px' }}>
                             <CNavItem>
-                                <CNavLink className='navLinks' href="http://localhost:3000/#/login" active style={{ fontWeight: 'bold', color: 'white' }}>
-                                    SIGN IN
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/home" active>
+                                    Home
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
-                                <CNavLink className='navLinks' href="http://localhost:3000/#/register" active style={{ fontWeight: 'bold', color: 'white' }}>
-                                    SIGN UP
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/ride" active>
+                                    Ride
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/vehicles" active>
+                                    Drive
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/contact" active >
+                                    About Us
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/contact" active >
+                                    Contact Us
+                                </CNavLink>
+                            </CNavItem>
+                        </CNavbarNav>
+
+                        <CNavbarNav className="ms-auto d-flex align-items-center" style={{ gap: '20px' }}>
+                            <CNavItem>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/login" active>
+                                    Sign In
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/register" active>
+                                    Sign Up
                                 </CNavLink>
                             </CNavItem>
                         </CNavbarNav>
@@ -200,7 +228,7 @@ export default function Home() {
             <div className='container-5'>
                 <h5>CALL US TO BOOK A TAXI</h5>
                 <h1>(+94) 134548050</h1>
-                <p>For a customized seamless experience, make sure to join us by registering with City Taxis. Get 10% off for booking online.</p>
+                <p>For a customized seamless experience, make sure to join us by registering with City Taxis. Get 40% off your first booking online.</p>
             </div>
 
             <div className="footer">
