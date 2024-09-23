@@ -1,25 +1,9 @@
-.wall{
+.wall {
     background-size: cover;
 }
 
-.navLinks:hover{
-    color:#2a303d !important;
-}
-
-.caption {
-    margin-top: 80px;
-}
-
-.caption .round-icard h4 {
-    font-size: 35px;
-    color: #e0b506;
-}
-
-.caption .round-icard h6 {
-    margin-top: 25px;
-    font-size: 20px;
-    color: #2a303d;
-    line-height: 35px;
+.navLinks:hover {
+    color: #2a303d !important;
 }
 
 .container-3 {
@@ -27,7 +11,7 @@
     background-size: cover;
     width: 100%;
     height: 400px;
-    position: relative; 
+    position: relative;
     margin-top: 100px;
 }
 
@@ -38,8 +22,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom right, rgba(13, 13, 13, 0.5), rgba(143, 114, 0, 0.5)); 
-    z-index: 1; 
+    background: linear-gradient(to bottom right, rgba(13, 13, 13, 0.5), rgba(143, 114, 0, 0.5));
+    z-index: 1;
 }
 
 
@@ -47,17 +31,18 @@
     color: white;
     font-weight: 500;
     margin-top: 10px;
-    z-index: 2; }
+    z-index: 2;
+}
 
 .container-3 .round-icard h6 {
     color: white !important;
     font-size: 30px;
-    z-index: 2; 
+    z-index: 2;
 }
 
 .content {
     position: relative;
-    z-index: 2; 
+    z-index: 2;
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -66,33 +51,33 @@
 }
 
 .content .round-icard img {
-    margin-top:50px;
+    margin-top: 50px;
     height: 200px;
     border-radius: 50%;
-    z-index: 2; 
+    z-index: 2;
 }
 
-.container-2{
+.container-2 {
     display: flex;
     justify-content: center;
     gap: 50px;
     margin-bottom: 30px;
 }
 
-.container-2 button{
+.container-2 button {
     background-color: #2a303d;
     color: white;
     border: none;
     padding: 10px 40px;
     font-size: 16px;
     cursor: pointer;
-    /* border-radius: 30px; */
     transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .container-2 .btn:hover {
     background-color: white;
-    color: black;
+    color: #e0b506;
 }
 
 .show {
@@ -100,7 +85,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:#e0b506;
+    background-color: #e0b506;
     width: 60%;
     padding: 50px;
     border-radius: 40px;
@@ -116,7 +101,8 @@
     margin-bottom: 20px;
 }
 
-.show p, .show ul {
+.show p,
+.show ul {
     font-size: 18px;
 }
 
@@ -166,7 +152,6 @@
 .owner-image {
     height: auto;
     max-height: 600px;
-    margin-right: -40px;
     max-width: 100%;
     height: auto;
     border-radius: 8px;
@@ -174,21 +159,21 @@
 
 .section-title {
     font-weight: bolder;
-    margin-bottom: 30px; 
-    font-size: 30px; 
-    color:#b8a249;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #b8a249;
 }
 
 .owner-name {
     font-weight: bolder;
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
     font-size: 50px;
     color: #3f3022;
 }
 
 .owner-description {
     font-size: 20px;
-    width: 92%; 
+    width: 92%;
     color: #0b0a09;
     line-height: 1.6;
 }
@@ -215,7 +200,7 @@
     }
 
     .owner-img .img-fluid {
-        max-width: 80%;
+        max-width: 100%;
         margin-bottom: 20px;
     }
 
@@ -225,10 +210,209 @@
     }
 }
 
-.show:hover{
+.show:hover {
     transform: scale(1.05);
-    transition: transform 0.3s ease-out; 
-    z-index: 10; 
-    position: relative; 
+    transition: transform 0.3s ease-out;
+    z-index: 10;
+    position: relative;
 }
 
+.caption {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.caption .round-icard h4 {
+    font-size: 32px;
+    color: #e0b506;
+}
+
+.caption .round-icard h6 {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #2a303d;
+    line-height: 1.5;
+}
+
+.phone-image {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 20px;
+}
+
+.phone-image img {
+    width: 100%;
+    height: auto;
+}
+
+.app-description {
+    width: 100%;
+    color: #2a303d;
+    padding: 0 20px;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.feature-icon button {
+    width: 50px;
+    height: 50px;
+    margin-right: 30px;
+    background-color: #2a303d;
+    color: white;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-text h5 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.feature-text p {
+    color: #6c757d;
+    font-size: 15px;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-out;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5px, 0);
+    }
+
+    20% {
+        transform: translate(5px, 0);
+    }
+
+    30% {
+        transform: translate(-5px, 0);
+    }
+
+    40% {
+        transform: translate(5px, 0);
+    }
+
+    50% {
+        transform: translate(0, -5px);
+    }
+
+    60% {
+        transform: translate(0, 5px);
+    }
+
+    70% {
+        transform: translate(0, -5px);
+    }
+
+    80% {
+        transform: translate(0, 5px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.container-4:hover .phone-image {
+    animation: shake 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .caption {
+        margin-top: 20px;
+    }
+
+    .phone-image {
+        max-width: 150px;
+    }
+
+    .app-description {
+        text-align: center;
+    }
+
+    .features {
+        gap: 20px;
+    }
+
+    .feature-item {
+        justify-content: center;
+    }
+}
+
+.container-5 {
+    background-image: url(src/assets/resources/map.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-top: 10px;
+    padding: 60px 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container-5 h5 {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+.container-5 h1 {
+    font-size: 40px;
+    margin: 10px 0;
+    z-index: 2;
+}
+
+.container-5 p {
+    font-size: 16px;
+    margin-top: 10px;
+    z-index: 2;
+}
+
+.container-5::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(13, 13, 13, 0.5), rgba(143, 114, 0, 0.5));
+    z-index: 1;
+}
+
+.footer{
+    background-color:#e0b506;
+    display: flex;
+    justify-content: right;
+}
