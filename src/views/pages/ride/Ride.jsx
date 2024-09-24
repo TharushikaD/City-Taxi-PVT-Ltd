@@ -2,6 +2,7 @@ import React from 'react'
 import { CCard, CCardBody, CCardHeader, CForm, CInputGroup, CButton, CRow, CCol, CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import Layout from '../../../components/layoutNav/Layout';
 import './style.css'
+import { CFooter } from '@coreui/react'
 
 
 
@@ -40,7 +41,7 @@ export default function Ride() {
       </CCard>
       <div class="opportunity-container">
         <div class="opportunity-section">
-          <h3 style={{ margin: '20px', color: '#e0b506' }}>Reasons why you should go with City Taxis as your Travel Partner</h3>
+          <h3 style={{ margin: '20px', color: '#e0b506' }}>Why you should select City Taxis as your Travel Partner</h3>
           <ul> 
             <li>City Taxis maintain high standards of cleanliness, with well-maintained and comfortable vehicles for a pleasant ride</li>
             <li>Can easily book taxis through the website, with options.</li>
@@ -51,6 +52,17 @@ export default function Ride() {
           </ul>
         </div>
       </div>
+      <div className="footer">
+                <CFooter className="px-4">
+                    <div>
+                        <a href="http://localhost:3000/#/home" target="_blank" rel="noopener noreferrer">
+                            CITY TAXI PVT LTD
+                        </a>
+                        <span className="ms-1">&copy; @2024.</span>
+                    </div>
+                </CFooter>
+
+            </div>
     </Layout>
   )
 }
