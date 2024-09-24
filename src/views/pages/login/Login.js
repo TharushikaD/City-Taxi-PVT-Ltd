@@ -20,7 +20,7 @@ const Login = () => {
       <CContainer>
         <CRow className="justify-content-between">
           <CCol lg={6} className="d-flex flex-column justify-content-center text-center p-5" style={{color:'#2a303d'}}>
-            <h1 className='text-white'>Welcome to City Taxis</h1>
+            <h1 className='text-white' style={{fontSize:'40px'}}>Welcome to City Taxis</h1>
             <p className="text-white lead">Your Journey Begins Here!</p>
           </CCol>
 
@@ -28,10 +28,10 @@ const Login = () => {
             <CCard className="p-4 shadow-lg" style={{backgroundColor:'#e0b506'}}>
               <CCardBody>
                 <div className="text-center mb-4">
-                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'100px',marginBottom:'1 rem'}} />
+                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'80px',marginBottom:'1 rem'}} />
                 </div>
                 <CForm>
-                  <h2 className="text-center mb-4">Login</h2>
+                  <h2 className="text-center mb-4" style={{fontSize:'30px'}}>Login</h2>
                   <p className="text-body-secondary text-center mb-4">Sign in to your account</p>
 
                   <CInputGroup className="mb-3">

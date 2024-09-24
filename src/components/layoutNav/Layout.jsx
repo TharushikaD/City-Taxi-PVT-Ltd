@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
                         <img
                             src={logo} 
                             alt="City Taxi Logo"
-                            height="70"
+                            height="60"
                         />
                     </CNavbarBrand>
 
@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
 
                     <CCollapse className="navbar-collapse" visible={visible}>
                         {/* Centered links */}
-                        <CNavbarNav className="mx-auto d-flex align-items-center" style={{ gap: '40px' }}>
+                        <CNavbarNav className="mx-auto d-flex align-items-center" style={{ gap: '50px' }}>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/home" active>
                                     HOME
@@ -43,13 +43,8 @@ const Layout = ({ children }) => {
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
-                                <CNavLink className='navLinks' href="http://localhost:3000/#/vehicles" active>
+                                <CNavLink className='navLinks' href="http://localhost:3000/#/drive" active>
                                     DRIVE
-                                </CNavLink>
-                            </CNavItem>
-                            <CNavItem>
-                                <CNavLink className='navLinks' href="http://localhost:3000/#/about" active>
-                                    ABOUT US
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>

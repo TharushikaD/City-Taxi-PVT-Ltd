@@ -1,0 +1,44 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color:white;
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-header {
+    text-align: center;
+    background-color: #e0b506;
+    padding: 1rem;
+  }
+
+  .form-header h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+  
+  .form-body {
+    padding: 2rem;
+    padding-left: 60px;
+  }
+
+  .form-body h5{
+    font-size: 15px;
+    color: #000;
+    margin-bottom: 15px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: right;
+}
+
+.contact h5{
+    color: #2a303d;
+    font-size: 15px;
+
+}
