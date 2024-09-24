@@ -13,8 +13,9 @@ const Register = React.lazy(() => import('./views/pages/register/Register'))
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const Home = React.lazy(() => import('./views/pages/home/Home'))
-const Vehicles = React.lazy(() => import('./views/vehicles/Vehicles'))
+// const Vehicles = React.lazy(() => import('./views/vehicles/Vehicles'))
 const Ride = React.lazy(() => import('./views/pages/ride/Ride'))
+const Drive = React.lazy(() => import('./views/pages/drive/Drive'))
 const Contact = React.lazy(() => import('./views/pages/contact/Contact'))
 
 const App = () => {
@@ -51,9 +52,10 @@ const App = () => {
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
           <Route exact path="/home" name="Home" element={<Home />} />
           <Route path="*" name="Home" element={<Home />} />
-          <Route path="/vehicles" name="Vehicles" element={<Vehicles />} />
+          {/* <Route path="/vehicles" name="Vehicles" element={<Vehicles />} /> */}
           <Route path="/ride" name="Ride" element={<Ride/>} />
           <Route path="/contact" name="Contact" element={<Contact/>} />
+          <Route path="/drive" name="Drive" element={<Drive/>} />
         </Routes>
       </Suspense>
     </HashRouter>

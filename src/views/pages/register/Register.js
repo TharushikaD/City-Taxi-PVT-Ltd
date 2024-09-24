@@ -20,7 +20,7 @@ const Register = () => {
       <CContainer>
         <CRow className="justify-content-between">
           <CCol lg={6} className="d-flex flex-column justify-content-center text-center p-5" style={{color:'#2a303d'}}>
-            <h1 className='text-white'>Join City Taxi today and enjoy fast, reliable service at your fingertips</h1>
+            <h1 className='text-white' style={{fontSize:'30px'}}>Join City Taxi today and enjoy fast, reliable service at your fingertips</h1>
             <p className="text-white lead">Sign up to get started!</p>
           </CCol>
 
@@ -28,7 +28,7 @@ const Register = () => {
             <CCard className="p-5 shadow-lg" style={{backgroundColor:'#e0b506'}}>
               <CCardBody>
                 <div className="text-center mb-4">
-                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'100px',marginBottom:'1 rem'}} />
+                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{width:'80px',marginBottom:'1 rem'}} />
                 </div>
                 <CForm>
                 <h3 className='text-center'>Register</h3>
