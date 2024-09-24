@@ -34,27 +34,27 @@ const Layout = ({ children }) => {
                         <CNavbarNav className="mx-auto d-flex align-items-center" style={{ gap: '40px' }}>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/home" active>
-                                    Home
+                                    HOME
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/ride" active>
-                                    Ride
+                                    RIDE
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/vehicles" active>
-                                    Drive
+                                    DRIVE
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/about" active>
-                                    About Us
+                                    ABOUT US
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/contact" active>
-                                    Contact Us
+                                    CONTACT US
                                 </CNavLink>
                             </CNavItem>
                         </CNavbarNav>
@@ -63,12 +63,12 @@ const Layout = ({ children }) => {
                         <CNavbarNav className="ms-auto d-flex align-items-center" style={{ gap: '20px' }}>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/login" active>
-                                    Sign In
+                                    LOGIN
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/register" active>
-                                    Sign Up
+                                    REGISTER
                                 </CNavLink>
                             </CNavItem>
                         </CNavbarNav>

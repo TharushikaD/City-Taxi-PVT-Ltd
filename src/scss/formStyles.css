@@ -1,3 +1,8 @@
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+}
+
 
 .form-container {
     width: 100%;
@@ -8,7 +13,7 @@
   .form-header {
     text-align: center;
     background-color: #e0b506;
-    padding: 1.5rem;
+    padding: 1rem;
   }
   
   .form-header h3 {
