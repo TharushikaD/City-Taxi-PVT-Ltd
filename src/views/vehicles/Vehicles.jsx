@@ -4,6 +4,7 @@ import '../../scss/formStyles.css';
 import Layout from '../../components/layoutNav/Layout';
 
 
+
 const Vehicles = () => {
     const [formData, setFormData] = useState({
         manufacturer: '',
@@ -45,7 +46,7 @@ const Vehicles = () => {
                     <CCarouselItem>
                         <div className="container-fluid p-0">
                             <img
-                                src="src/assets/resources/driver12.png"
+                                src="src/assets/resources/join4.png"
                                 alt="carousel image"
                                 className="wall img-fluid w-100"
                             />
@@ -111,9 +112,9 @@ const Vehicles = () => {
                                             required
                                         >
                                             <option value="">Select vehicle type</option>
-                                            <option value="Car1">Car1</option>
-                                            <option value="Car2">Car2</option>
-                                            <option value="Car3">Car3</option>
+                                            <option value="Bike">Bike</option>
+                                            <option value="Three Wheel">Three Wheel </option>
+                                            <option value="Car">Car</option>
                                         </select>
                                     </CInputGroup>
                                 </CCol>

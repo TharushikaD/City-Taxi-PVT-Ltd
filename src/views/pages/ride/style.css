@@ -1,0 +1,73 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-header {
+    text-align: center;
+    background-color: #e0b506;
+    padding: 1rem;
+  }
+  
+  .form-header h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+  
+  .form-body {
+    padding: 2rem;
+  }
+
+  .form-body h5{
+    font-size: 20px;
+    color: #000;
+  }
+
+  .btn-submit {
+    background-color:#2a303d;
+    border-color:#2a303d;
+    width:200px;
+    color: white;
+  }
+
+.btn-submit:hover{
+    background-color:#ffe694;
+    border-color:#ffe694;
+  }
+
+  .opportunity-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+  }
+  
+  .opportunity-section {
+    background-color:#2a303d;
+    color:white;
+    padding: 20px;
+    text-align: center; 
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+  
+  .opportunity-section p, .opportunity-section ul {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .opportunity-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .opportunity-section li {
+    margin: 5px 0;
+    line-height: 40px;
+  }
