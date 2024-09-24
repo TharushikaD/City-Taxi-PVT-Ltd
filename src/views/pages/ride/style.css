@@ -71,3 +71,8 @@ body{
     margin: 5px 0;
     line-height: 40px;
   }
+
+  .footer{
+    display: flex;
+    justify-content:right;
+}

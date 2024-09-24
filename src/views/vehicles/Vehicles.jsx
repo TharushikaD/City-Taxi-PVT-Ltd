@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CCard, CCardBody, CCardHeader, CForm, CInputGroup, CButton, CRow, CCol, CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '../../scss/formStyles.css';
 import Layout from '../../components/layoutNav/Layout';
+import { CFooter } from '@coreui/react'
 
 
 
@@ -168,6 +169,17 @@ const Vehicles = () => {
                         </ul>
                     </div>
                 </div>
+                <div className="footer">
+                <CFooter className="px-4">
+                    <div>
+                        <a href="http://localhost:3000/#/home" target="_blank" rel="noopener noreferrer">
+                            CITY TAXI PVT LTD
+                        </a>
+                        <span className="ms-1">&copy; @2024.</span>
+                    </div>
+                </CFooter>
+
+            </div>
 
             </Layout>
 
