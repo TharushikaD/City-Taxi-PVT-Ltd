@@ -46,7 +46,7 @@ export default function Contact() {
                   <CInputGroup className="mb-3">
                     <CFormTextarea placeholder="Your Message" rows="4" />
                   </CInputGroup>
-                  <CButton className="w-100 text-white" style={{backgroundColor:'#2a303d'}} >
+                  <CButton className="w-100 text-white cSubmit" style={{backgroundColor:'#2a303d'}} >
                     Submit
                   </CButton>
                 </CForm>

@@ -3,7 +3,8 @@ import CIcon from '@coreui/icons-react'
 import {
   cilSpeedometer,
   cilStar,
-  cilCarAlt
+  cilCarAlt,
+  cilHome
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -13,6 +14,13 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Home',
+    to: '/home',
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+
   },
   // {
   //   component: CNavGroup,
@@ -28,7 +36,14 @@ const _nav = [
   // },
   {
     component: CNavTitle,
-    name: 'Extras',
+    name: 'Ride',
+  },
+  {
+    component: CNavItem,
+    name:'Trip',
+    icon:<CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+    to:'/trip'
+
   },
 
   {
@@ -36,11 +51,6 @@ const _nav = [
     name: 'Pages',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
     items: [
-      {
-        component: CNavItem,
-        name: 'Home',
-        to: '/home',
-      },
       {
         component: CNavItem,
         name: 'Error 404',

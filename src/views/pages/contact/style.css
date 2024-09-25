@@ -32,7 +32,8 @@ body {
     margin-bottom: 15px;
   }
 
-  .footer {
+  .footer{
+    background-color:#e0b506;
     display: flex;
     justify-content: right;
 }
@@ -45,4 +46,8 @@ body {
 
 .contact a{
     color: #e0b506 !important;
+}
+
+.cSubmit:hover{
+    background-color: bisque !important;
 }

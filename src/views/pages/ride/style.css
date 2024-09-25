@@ -73,6 +73,7 @@ body{
   }
 
   .footer{
+    background-color:#e0b506;
     display: flex;
-    justify-content:right;
+    justify-content: right;
 }
