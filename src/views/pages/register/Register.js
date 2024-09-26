@@ -17,6 +17,7 @@ import instance from '../../../components/service/Service';
 import { Alert } from '../../../components/alert/Alert';
 
 const Register = () => {
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -28,14 +29,17 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
+
   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const regexName = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
   const regexPassword = /^(?=.*[A-Z])(?=.*\W)(?=.*\d).{8,}$/;
 
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -43,6 +47,7 @@ const Register = () => {
       [name]: value,
     });
   };
+
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -54,8 +59,49 @@ const Register = () => {
     }
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validateFormData();
+    setErrors(validationErrors);
+
+  
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const formDataToSubmit = new FormData();
+        formDataToSubmit.append('username', formData.username);
+        formDataToSubmit.append('password', formData.password);
+        formDataToSubmit.append('email', formData.email);
+        formDataToSubmit.append('userType', formData.userType);
+
+        if (formData.profileImage) {
+          formDataToSubmit.append('profileImage', formData.profileImage);
+        }
+
+        const response = await instance.post('/register', formDataToSubmit, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        Alert('Registration Successful', 'You have registered successfully!', 'success');
+        console.log('Registration successful:', response.data);
+        clearForm();
+      } catch (error) {
+        console.error('Registration error:', error);
+
+        if (error.response && error.response.data) {
+          setErrors({ server: error.response.data.message });
+        }
+
+        Alert('Registration Failed', 'There was an error during registration.', 'error');
+      }
+    }
+  };
+
+  
+  const validateFormData = () => {
     const validationErrors = {};
 
     if (!regexName.test(formData.username)) {
@@ -71,39 +117,15 @@ const Register = () => {
         'Password must be at least 8 characters long, contain one uppercase letter, one special character, and one number.';
     }
 
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      try {
-        const data = new FormData();
-        data.append('username', formData.username);
-        data.append('password', formData.password);
-        data.append('email', formData.email);
-        data.append('userType', formData.userType);
-        if (formData.profileImage) {
-          data.append('profileImage', formData.profileImage);
-        }
-
-        const response = await instance.post('/register', data, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-
-        Alert('Registration Successful', 'You have registered successfully!', 'success');
-        console.log('Registration successful:', response.data);
-        clearText();
-      } catch (error) {
-        console.error('Registration error:', error);
-
-        Alert('Registration Failed', 'There was an error during registration.', 'error');
-      }
-      
+    if (!formData.userType) {
+      validationErrors.userType = 'User type is required';
     }
 
+    return validationErrors;
   };
 
-  const clearText = () => {
+ 
+  const clearForm = () => {
     setFormData({
       username: '',
       password: '',

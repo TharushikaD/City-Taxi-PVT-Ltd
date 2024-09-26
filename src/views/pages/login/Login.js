@@ -13,17 +13,20 @@ import {
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser, cilLowVision } from '@coreui/icons';
-import instance from '../../../components/service/Service'; 
+import instance from '../../../components/service/Service';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,35 +36,48 @@ const Login = () => {
     }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      
-      const response = await instance.post('/login', loginData);
-      const token = response.data.token;
-      const userId = response.data.userId;
+    setErrorMessage('');
 
-     
+    try {
+
+      const response = await instance.post('/login', loginData);
+      const { token, userId } = response.data;
+
+
       localStorage.setItem('authToken', token);
       localStorage.setItem('userId', userId);
 
-     
-      const userResponse = await instance.get(`/users/${userId}`);
 
+      const userResponse = await instance.get(`/users/${userId}`);
       const userRole = userResponse.data.role;
 
-      
-      if (userRole === 'admin') {
-        navigate('/adminLayout');
-      } else if (userRole === 'driver') {
-        navigate('/driverLayout');
-      } else if (userRole === 'customer') {
-        navigate('/defaultLayout');
+
+      switch (userRole) {
+        case 'admin':
+          navigate('/adminLayout');
+          break;
+        case 'driver':
+          navigate('/driverLayout');
+          break;
+        case 'customer':
+          navigate('/defaultLayout');
+          break;
+        default:
+          throw new Error('Invalid user role');
       }
 
       console.log('Login successful:', userResponse.data);
     } catch (error) {
+
       console.error('Login error:', error);
+      setErrorMessage(
+        error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : 'Login failed. Please check your username and password.'
+      );
     }
   };
 
@@ -93,6 +109,7 @@ const Login = () => {
                   </h2>
                   <p className="text-body-secondary text-center mb-4">Sign in to your account</p>
 
+
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -106,6 +123,7 @@ const Login = () => {
                       required
                     />
                   </CInputGroup>
+
 
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -125,12 +143,22 @@ const Login = () => {
                     </CInputGroupText>
                   </CInputGroup>
 
+
+                  {errorMessage && (
+                    <div className="text-danger mb-3 text-center">
+                      {errorMessage}
+                    </div>
+                  )}
+
+
                   <CRow className="mb-3">
                     <CCol xs={12}>
                       <CButton type="submit" className="w-100 text-white" style={{ backgroundColor: '#2a303d' }}>
                         Login
                       </CButton>
                     </CCol>
+
+
                     <CCol xs={12} className="text-center">
                       <CButton color="link" className="px-0" href="http://localhost:3000/#/register">
                         Don't have an account!
