@@ -43,11 +43,11 @@ const Vehicles = () => {
     return (
         <>
 
-                {/* <CCard className="form-container">
+                 <CCard className="form-container">
                     <CCardHeader className="form-header">
                         <h3>Sign Up to Drive </h3>
-                    </CCardHeader> */}
-                {/* <CCardBody className="form-body">
+                    </CCardHeader> 
+                 <CCardBody className="form-body">
                         <CForm onSubmit={handleSubmit}>
                             <CRow>
                                 <CCol md="6">
@@ -143,7 +143,7 @@ const Vehicles = () => {
                             </CRow>
                         </CForm>
                     </CCardBody>
-                </CCard> */}
+                </CCard>
 
 
         </>
