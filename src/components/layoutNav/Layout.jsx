@@ -30,7 +30,6 @@ const Layout = ({ children }) => {
                     />
 
                     <CCollapse className="navbar-collapse" visible={visible}>
-                        {/* Centered links */}
                         <CNavbarNav className="mx-auto d-flex align-items-center" style={{ gap: '50px' }}>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/home" active>
@@ -54,7 +53,6 @@ const Layout = ({ children }) => {
                             </CNavItem>
                         </CNavbarNav>
 
-                        {/* Right aligned Sign In and Sign Up */}
                         <CNavbarNav className="ms-auto d-flex align-items-center" style={{ gap: '20px' }}>
                             <CNavItem>
                                 <CNavLink className='navLinks' href="http://localhost:3000/#/login" active>
