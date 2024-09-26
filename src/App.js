@@ -15,6 +15,7 @@ import axios from 'axios'
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const DriverLayout = React.lazy(() => import('./layout/DriverLayout'))
+const AdminLayout = React.lazy(() => import('./layout/AdminLayout'))
 
 
 
@@ -58,12 +59,15 @@ const App = () => {
         }
       >
         <Routes>
+        <Route exact path="/adminLayout" name="AdminLayout" element={<AdminLayout />} />
+          <Route exact path="/defaultLayout" name="DefaultLayout" element={<DefaultLayout />} />
+          <Route exact path="/driverLayout" name="DriverLayout" element={<DriverLayout />} />
           <Route exact path="/login" name="Login Page" element={<Login />} />
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
           <Route exact path="/home" name="Home" element={<Home />} />
-          <Route path="*" name="Home" element={<DriverLayout />} />
+          <Route path="*" name="Home" element={<AdminLayout />} />
           {/* <Route path="/vehicles" name="Vehicles" element={<Vehicles />} /> */}
           <Route path="/ride" name="Ride" element={<Ride/>} />
           <Route path="/contact" name="Contact" element={<Contact/>} />

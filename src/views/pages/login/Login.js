@@ -13,14 +13,13 @@ import {
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser, cilLowVision } from '@coreui/icons';
-import instance from '../../../components/service/Service';
+import instance from '../../../components/service/Service'; 
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: ''
-  });
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -28,32 +27,52 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setLoginData(prevState => ({
+    setLoginData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await instance.post('/login', loginData); 
-        const token = response.data.token; 
-        localStorage.setItem('authToken', token); 
-        window.location.reload()
-        console.log('Login successful:', response.data);
+      
+      const response = await instance.post('/login', loginData);
+      const token = response.data.token;
+      const userId = response.data.userId;
+
+     
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userId', userId);
+
+     
+      const userResponse = await instance.get(`/users/${userId}`);
+
+      const userRole = userResponse.data.role;
+
+      
+      if (userRole === 'admin') {
+        navigate('/adminLayout');
+      } else if (userRole === 'driver') {
+        navigate('/driverLayout');
+      } else if (userRole === 'customer') {
+        navigate('/defaultLayout');
+      }
+
+      console.log('Login successful:', userResponse.data);
     } catch (error) {
-        console.error('Login error:', error);
-        
+      console.error('Login error:', error);
     }
-};
+  };
 
   return (
     <div className="d-flex align-items-center min-vh-100" style={{ backgroundColor: '#2a303d' }}>
       <CContainer>
         <CRow className="justify-content-between">
           <CCol lg={6} className="d-flex flex-column justify-content-center text-center p-5">
-            <h1 className='text-white' style={{ fontSize: '40px' }}>Welcome to City Taxis</h1>
+            <h1 className="text-white" style={{ fontSize: '40px' }}>
+              Welcome to City Taxis
+            </h1>
             <p className="text-white lead">Your Journey Begins Here!</p>
           </CCol>
 
@@ -61,10 +80,17 @@ const Login = () => {
             <CCard className="p-4 shadow-lg" style={{ backgroundColor: '#e0b506' }}>
               <CCardBody>
                 <div className="text-center mb-4">
-                  <img src="src/assets/resources/logo.jpeg" alt="City Taxis Logo" className="logo img-fluid" style={{ width: '80px', marginBottom: '1rem' }} />
+                  <img
+                    src="src/assets/resources/logo.jpeg"
+                    alt="City Taxis Logo"
+                    className="logo img-fluid"
+                    style={{ width: '80px', marginBottom: '1rem' }}
+                  />
                 </div>
                 <CForm onSubmit={handleSubmit}>
-                  <h2 className="text-center mb-4" style={{ fontSize: '30px' }}>Login</h2>
+                  <h2 className="text-center mb-4" style={{ fontSize: '30px' }}>
+                    Login
+                  </h2>
                   <p className="text-body-secondary text-center mb-4">Sign in to your account</p>
 
                   <CInputGroup className="mb-3">
@@ -95,7 +121,7 @@ const Login = () => {
                       required
                     />
                     <CInputGroupText onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                      <CIcon icon={showPassword ? cilLowVision : cilLowVision} />
+                      <CIcon icon={cilLowVision} />
                     </CInputGroupText>
                   </CInputGroup>
 
@@ -106,7 +132,7 @@ const Login = () => {
                       </CButton>
                     </CCol>
                     <CCol xs={12} className="text-center">
-                      <CButton color="link" className="px-0" href='http://localhost:3000/#/register'>
+                      <CButton color="link" className="px-0" href="http://localhost:3000/#/register">
                         Don't have an account!
                       </CButton>
                     </CCol>
