@@ -3,7 +3,7 @@ import { CFooter } from '@coreui/react'
 
 const AppFooter = () => {
   return (
-    <CFooter className="px-4" >
+    <CFooter className="px-4" style={{backgroundColor:'#e0b506'}} >
       <div>
         <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
           CITY TAXI PVT LTD
