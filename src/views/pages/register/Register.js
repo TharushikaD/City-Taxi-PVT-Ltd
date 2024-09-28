@@ -18,28 +18,114 @@ import { Alert } from '../../../components/alert/Alert';
 
 const Register = () => {
 
+  // const [formData, setFormData] = useState({
+  //   username: '',
+  //   password: '',
+  //   email: '',
+  //   userType: '',
+  //   profileImage: null,
+  // });
+  // const [selectedImage, setSelectedImage] = useState(null);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [errors, setErrors] = useState({});
+
+  // const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  // const regexName = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
+  // const regexPassword = /^(?=.*[A-Z])(?=.*\W)(?=.*\d).{8,}$/;
+  // const allowedImageTypes = ['image/jpeg', 'image/png'];
+  // const maxImageSize = 2 * 1024 * 1024; //2mb
+
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     if (!allowedImageTypes.includes(file.type)) {
+  //       setErrors({ ...errors, profileImage: 'Only JPEG or PNG images are allowed.' });
+  //     } else if (file.size > maxImageSize) {
+  //       setErrors({ ...errors, profileImage: 'Image size must be less than 2MB.' });
+  //     } else {
+  //       setFormData({
+  //         ...formData,
+  //         profileImage: file,
+  //       });
+  //       setSelectedImage(URL.createObjectURL(file));
+  //     }
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const validationErrors = validateFormData();
+  //   setErrors(validationErrors);
+
+  //   if (Object.keys(validationErrors).length === 0) {
+  //     try {
+  //       const formDataToSubmit = new FormData();
+  //       formDataToSubmit.append('username', formData.username);
+  //       formDataToSubmit.append('password', formData.password);
+  //       formDataToSubmit.append('email', formData.email);
+  //       formDataToSubmit.append('userType', formData.userType);
+
+  //       if (formData.profileImage) {
+  //         formDataToSubmit.append('profileImage', formData.profileImage);
+  //       }
+
+  //       console.log('Submitting form data:', formDataToSubmit);
+
+  //       const response = await instance.post('/register', formDataToSubmit, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       });
+
+  //       Alert('Registration Successful', 'You have registered successfully!', 'success');
+  //       console.log('Registration successful:', response.data);
+  //       clearForm();
+  //     } catch (error) {
+  //       console.error('Registration error:', error);
+
+  //       if (error.response && error.response.data) {
+  //         setErrors({ server: error.response.data.message });
+  //       }
+
+  //       Alert('Registration Failed', 'There was an error during registration.', 'error');
+  //     }
+  //   } else {
+  //     console.error('Validation errors:', validationErrors);
+  //   }
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     email: '',
     userType: '',
-    profileImage: null,
+    profileImage:'',
+    // profileImage: null,  // Removed profile image
   });
-  const [selectedImage, setSelectedImage] = useState(null);
+
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-
 
   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const regexName = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
   const regexPassword = /^(?=.*[A-Z])(?=.*\W)(?=.*\d).{8,}$/;
 
-  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
- 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -48,46 +134,34 @@ const Register = () => {
     });
   };
 
-
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData({
-        ...formData,
-        profileImage: e.target.files[0],
-      });
-      setSelectedImage(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validateFormData();
     setErrors(validationErrors);
 
-  
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const formDataToSubmit = new FormData();
-        formDataToSubmit.append('username', formData.username);
-        formDataToSubmit.append('password', formData.password);
-        formDataToSubmit.append('email', formData.email);
-        formDataToSubmit.append('userType', formData.userType);
+        
+        const formDataToSubmit = {
+          username: formData.username,
+          password: formData.password,
+          email: formData.email,
+          userType: formData.userType,
+          profileImage: formData.profileImage,
+        };
 
-        if (formData.profileImage) {
-          formDataToSubmit.append('profileImage', formData.profileImage);
-        }
+        console.log('Submitting form data:', formDataToSubmit);
 
         const response = await instance.post('/register', formDataToSubmit, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',  
           },
         });
 
         Alert('Registration Successful', 'You have registered successfully!', 'success');
         console.log('Registration successful:', response.data);
-        clearForm();
+        // clearForm();
       } catch (error) {
         console.error('Registration error:', error);
 
@@ -97,10 +171,13 @@ const Register = () => {
 
         Alert('Registration Failed', 'There was an error during registration.', 'error');
       }
+    } else {
+      console.error('Validation errors:', validationErrors);
     }
   };
 
-  
+
+
   const validateFormData = () => {
     const validationErrors = {};
 
@@ -121,20 +198,22 @@ const Register = () => {
       validationErrors.userType = 'User type is required';
     }
 
+
+
     return validationErrors;
   };
 
- 
-  const clearForm = () => {
-    setFormData({
-      username: '',
-      password: '',
-      email: '',
-      userType: '',
-      profileImage: null,
-    });
-    setSelectedImage(null);
-  };
+  // const clearForm = () => {
+  //   setFormData({
+  //     username: '',
+  //     password: '',
+  //     email: '',
+  //     userType: '',
+  //     profileImage: null,
+  //   });
+  //   setSelectedImage(null);
+  //   setErrors({});
+  // };
 
 
   return (
@@ -228,11 +307,11 @@ const Register = () => {
                     </select>
                   </CInputGroup>
 
-                  <CInputGroup className="mb-3">
+                  {/* <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilCamera} />
                     </CInputGroupText>
-                    <CFormInput type="file" name="profileImage" onChange={handleImageChange} required />
+                    <CFormInput type="file" name="profileImage" onChange={handleImageChange} />
                   </CInputGroup>
 
                   {selectedImage && (
@@ -243,7 +322,16 @@ const Register = () => {
                         style={{ width: '80px', height: '80px', borderRadius: '50%' }}
                       />
                     </div>
-                  )}
+                  )} */}
+                  <CInputGroup className="mb-3">
+                    <CFormInput
+                      name="profileImage"
+                      placeholder="Email"
+                      value={formData.profileImage}
+                      onChange={handleInputChange}
+                    />
+                  </CInputGroup>
+
 
                   <CRow className="mb-3">
                     <CCol xs={12}>
