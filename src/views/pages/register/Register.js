@@ -22,7 +22,7 @@ const Register = () => {
     password: '',
     email: '',
     userType: '',
-    contactNumber: '', 
+    contact: '',
     profileImage: '',
   });
 
@@ -59,13 +59,13 @@ const Register = () => {
           password: formData.password,
           email: formData.email,
           userType: formData.userType,
-          contactNumber: formData.contactNumber,
+          contact: formData.contact,
           profileImage: formData.profileImage,
         };
 
         console.log('Submitting form data:', formDataToSubmit);
 
-        const response = await instance.post('/register', formDataToSubmit, {
+        const response = await instance.post('/users/register', formDataToSubmit, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -101,8 +101,8 @@ const Register = () => {
     if (!formData.userType) {
       validationErrors.userType = 'User type is required';
     }
-    if (!formData.contactNumber) {
-      validationErrors.contactNumber = 'Contact number is required';
+    if (!formData.contact) {
+      validationErrors.contact = 'Contact number is required';
     }
 
     return validationErrors;
@@ -168,7 +168,7 @@ const Register = () => {
                           <CIcon icon={cilPhone} />
                         </CInputGroupText>
                         <CFormInput
-                          name="contactNumber"
+                          name="contact"
                           placeholder="Contact Number"
                           value={formData.contactNumber}
                           onChange={handleInputChange}
@@ -229,6 +229,11 @@ const Register = () => {
                   >
                     Register
                   </CButton>
+                  <CCol xs={12} className="text-center">
+                    <CButton color="link" className="px-0" href="http://localhost:3000/#/login">
+                      Already have an account!
+                    </CButton>
+                  </CCol>
                 </CForm>
               </CCardBody>
             </CCard>

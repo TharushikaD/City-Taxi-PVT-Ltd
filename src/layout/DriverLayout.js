@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppContent, DriverSideBar, AppFooter, AppHeader } from '../components/index'
-// import DriverSideBar from '../components/DriverSideBar'
+
 
 const DriverLayout = () => {
   
