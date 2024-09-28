@@ -36,79 +36,49 @@ const Login = () => {
     }));
   };
 
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setErrorMessage('');
 
-  //   try {
-      
-  //     const response = await instance.post('/login', loginData);
-
-      
-  //     const { token, userId } = response.data;
-
-      
-  //     localStorage.setItem('authToken', token);
-
-     
-  //     const userResponse = await instance.get(`/users/${userId}`);
-  //     const userRole = userResponse.data.role;
-
-    
-  //     switch (userRole) {
-  //       case 'admin':
-  //         navigate('/adminLayout');
-  //         break;
-  //       case 'driver':
-  //         navigate('/driverLayout');
-  //         break;
-  //       case 'customer':
-  //         navigate('/defaultLayout');
-  //         break;
-  //       default:
-  //         throw new Error('Invalid user role');
-  //     }
-
-  //     console.log('Login successful:', userResponse.data);
-  //   } catch (error) {
-  //     console.error('Login error:', error);
-  //     setErrorMessage(
-  //       error.response && error.response.data && error.response.data.message
-  //         ? error.response.data.message
-  //         : 'Login failed. Please check your username and password.'
-  //     );
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-
+  
     try {
-        console.log('Submitting login data:', loginData); 
-        
-        const response = await instance.post('/login', loginData);
-        
-       
-        // const { token } = response.data;
-        // localStorage.setItem('authToken', token);
-
-        console.log('Login successful:', response.data);
-
-        
-        navigate('/home'); 
+      console.log('Submitting login data:', loginData);
+  
+      const response = await instance.post('/users/login', loginData);
+  
+      
+      const { token, object: { id, usertype } } = response.data;
+  
+      
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userId', id);
+      localStorage.setItem('userType', usertype);
+  
+      console.log('Login successful:', response.data);
+  
+     
+      if (usertype === 'Admin') {
+        navigate('/adminLayout');
+      } else if (usertype === 'Driver') {
+        navigate('/driverLayout');
+      } else {
+        navigate('/defaultLayout');
+      }
+  
     } catch (error) {
-        console.error('Login error:', error);
-        if (error.response) {
-            console.error('Error response:', error.response.data); 
-        }
-        setErrorMessage(
-            error.response && error.response.data && error.response.data.message
-                ? error.response.data.message
-                : 'Login failed. Please check your username and password.'
-        );
+      console.error('Login error:', error);
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+      }
+      setErrorMessage(
+        error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : 'Login failed. Please check your username and password.'
+      );
     }
-};
+  };
+
+
 
 
   return (

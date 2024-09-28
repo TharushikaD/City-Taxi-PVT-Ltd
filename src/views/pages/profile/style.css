@@ -1,0 +1,39 @@
+.pro {
+    display: flex;                 
+    justify-content: center;      
+    align-items: center;         
+    height: 100vh;                
+  }
+  
+  .profile-form {
+    max-width: 400px;              
+    width: 100%;                  
+    padding: 2rem;                
+    background-color: #f8f9fa;    
+    border-radius: 0.5rem;         
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .profile-form h3 {
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+  }
+  
+  .profile-form h5 {
+    font-size: 1.2rem; 
+    margin-bottom: 1rem; 
+  }
+  
+  .profile-form .input-group {
+    margin-bottom: 0.75rem; 
+  }
+  
+  .profile-form .input-group input {
+    font-size: 0.9rem; 
+  }
+  
+  .profile-form .btn {
+    font-size: 0.9rem; 
+    padding: 0.5rem; 
+  }
+  
