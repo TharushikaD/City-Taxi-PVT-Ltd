@@ -5,13 +5,6 @@ import { CSpinner, useColorModes } from '@coreui/react'
 import './scss/style.scss'
 import axios from 'axios'
 
-//Set default headers for all requests (e.g., Content-Type or Authorization)
-    axios.defaults.headers.common['Content-Type'] = 'application/json';
-    axios.defaults.headers.common['Authorization'] = 'Bearer your-token';
-
-    // Set credentials for cross-origin requests if needed
-    axios.defaults.withCredentials = true;
-
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const DriverLayout = React.lazy(() => import('./layout/DriverLayout'))

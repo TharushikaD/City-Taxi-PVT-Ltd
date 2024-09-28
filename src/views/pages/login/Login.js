@@ -22,12 +22,12 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginData((prevState) => ({
@@ -36,50 +36,80 @@ const Login = () => {
     }));
   };
 
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setErrorMessage('');
 
+  //   try {
+      
+  //     const response = await instance.post('/login', loginData);
+
+      
+  //     const { token, userId } = response.data;
+
+      
+  //     localStorage.setItem('authToken', token);
+
+     
+  //     const userResponse = await instance.get(`/users/${userId}`);
+  //     const userRole = userResponse.data.role;
+
+    
+  //     switch (userRole) {
+  //       case 'admin':
+  //         navigate('/adminLayout');
+  //         break;
+  //       case 'driver':
+  //         navigate('/driverLayout');
+  //         break;
+  //       case 'customer':
+  //         navigate('/defaultLayout');
+  //         break;
+  //       default:
+  //         throw new Error('Invalid user role');
+  //     }
+
+  //     console.log('Login successful:', userResponse.data);
+  //   } catch (error) {
+  //     console.error('Login error:', error);
+  //     setErrorMessage(
+  //       error.response && error.response.data && error.response.data.message
+  //         ? error.response.data.message
+  //         : 'Login failed. Please check your username and password.'
+  //     );
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
 
     try {
+        console.log('Submitting login data:', loginData); 
+        
+        const response = await instance.post('/login', loginData);
+        
+       
+        // const { token } = response.data;
+        // localStorage.setItem('authToken', token);
 
-      const response = await instance.post('/login', loginData);
-      const { token, userId } = response.data;
+        console.log('Login successful:', response.data);
 
-
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('userId', userId);
-
-
-      const userResponse = await instance.get(`/users/${userId}`);
-      const userRole = userResponse.data.role;
-
-
-      switch (userRole) {
-        case 'admin':
-          navigate('/adminLayout');
-          break;
-        case 'driver':
-          navigate('/driverLayout');
-          break;
-        case 'customer':
-          navigate('/defaultLayout');
-          break;
-        default:
-          throw new Error('Invalid user role');
-      }
-
-      console.log('Login successful:', userResponse.data);
+        
+        navigate('/home'); 
     } catch (error) {
-
-      console.error('Login error:', error);
-      setErrorMessage(
-        error.response && error.response.data && error.response.data.message
-          ? error.response.data.message
-          : 'Login failed. Please check your username and password.'
-      );
+        console.error('Login error:', error);
+        if (error.response) {
+            console.error('Error response:', error.response.data); 
+        }
+        setErrorMessage(
+            error.response && error.response.data && error.response.data.message
+                ? error.response.data.message
+                : 'Login failed. Please check your username and password.'
+        );
     }
-  };
+};
+
 
   return (
     <div className="d-flex align-items-center min-vh-100" style={{ backgroundColor: '#2a303d' }}>
