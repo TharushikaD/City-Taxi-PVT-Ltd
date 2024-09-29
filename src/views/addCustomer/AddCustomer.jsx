@@ -113,7 +113,7 @@ export default function AddCustomer() {
         <>
             <CCard className="form-container">
                 <CCardHeader className="form-header" style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e)' }}>
-                    <h3 className='text-white'>Add Customer</h3>
+                    <h3 className='text-white text-center'>Add Customer</h3>
                 </CCardHeader>
                 <CCardBody className="form-body">
 

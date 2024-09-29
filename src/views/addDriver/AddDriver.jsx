@@ -113,7 +113,7 @@ export default function AddDriver() {
         <>
             <CCard className="form-container">
                 <CCardHeader className="form-header" style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e)' }}>
-                    <h3 className='text-white'>Add Driver</h3>
+                    <h3 className='text-white text-center'>Add Driver</h3>
                 </CCardHeader>
                 <CCardBody className="form-body">
 
