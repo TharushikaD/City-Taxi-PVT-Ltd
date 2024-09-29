@@ -9,9 +9,21 @@ import {
 import { cilUser, cilLockLocked } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '../alert/Alert';
 
 const AppHeaderDropdown = () => {
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    Alert('Log Out', 'Are you sure you want to log out?', 'warning')
+      .then((result) => {
+        if (result.isConfirmed) {
+          localStorage.clear();
+          
+          navigate('/home');
+        }
+      });
+  };
 
   return (
     <CDropdown variant="nav-item">
@@ -23,7 +35,7 @@ const AppHeaderDropdown = () => {
           <CIcon icon={cilUser} className="me-2" />
           Profile
         </CDropdownItem>
-        <CDropdownItem href="#">
+        <CDropdownItem onClick={handleLogOut}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Log Out
         </CDropdownItem>

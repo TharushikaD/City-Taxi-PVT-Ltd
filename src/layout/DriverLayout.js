@@ -1,12 +1,12 @@
 import React from 'react'
-import { AppContent, DriverSideBar, AppFooter, AppHeader } from '../components/index'
+import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 
 const DriverLayout = () => {
   
   return (
     <div>
-      <DriverSideBar />
+      <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100">
         <AppHeader />
         <div className="body flex-grow-1">

@@ -1,11 +1,34 @@
-import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { CContainer, CSpinner } from '@coreui/react'
+import React, { Suspense, useEffect, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { CContainer, CSpinner } from '@coreui/react';
+import routes from '../routes';
 
-
-import routes from '../routes'
+const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'));
+const DriverDashboard = React.lazy(() => import('../views/dashboard/DriverDashboard'));
+const AdminDashboard = React.lazy(() => import('../views/dashboard/AdminDashboard'));
 
 const AppContent = () => {
+  const [userRole, setUserRole] = useState(null);
+
+
+  useEffect(() => {
+    const role = localStorage.getItem('userType');
+    setUserRole(role);
+  }, []);
+
+  
+  const getDashboardComponent = () => {
+    switch (userRole) {
+      case 'Admin':
+        return <AdminDashboard />;
+      case 'Driver':
+        return <DriverDashboard />;
+      case 'Customer':
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
     <CContainer className="px-4" lg>
       <Suspense fallback={<CSpinner color="primary" />}>
@@ -21,13 +44,13 @@ const AppContent = () => {
                   element={<route.element />}
                 />
               )
-            )
+            );
           })}
-          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="/" element={getDashboardComponent()} />
         </Routes>
       </Suspense>
     </CContainer>
-  )
-}
+  );
+};
 
-export default React.memo(AppContent)
+export default React.memo(AppContent);
