@@ -11,6 +11,8 @@ const Trip =  React.lazy(() => import('./views/trip/Trip'))
 const DriverVehicles = React.lazy(() => import('./views/driverVehicles/DriverVehicles'))
 const AllCustomers = React.lazy(() => import('./views/allCustomers/AllCustomers'))
 const AllDrivers = React.lazy(() => import('./views/allDrivers/AllDrivers'))
+const AllVehicles = React.lazy(() => import('./views/allVehicles/AllVehicles'))
+
  
 
 
@@ -24,6 +26,7 @@ const routes = [
   { path: '/driverVehicles', name: 'DriverVehicles', element: DriverVehicles },
   { path: '/allCustomers', name: 'AllCustomers', element: AllCustomers },
   { path: '/allDrivers', name: 'AllDrivers', element: AllDrivers },
+  { path: '/allVehicles', name: 'AllVehicles', element: AllVehicles },
   
   
 
