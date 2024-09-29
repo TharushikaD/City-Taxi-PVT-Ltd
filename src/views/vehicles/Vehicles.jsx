@@ -87,8 +87,8 @@ const Vehicles = () => {
                 year: formData.year,
                 licensePlateNumber: formData.licensePlateNumber,
                 vehicleType: formData.vehicleType,
-                image1: 'D:Top UpADCourseworksABC Car TradersABC Car TradersResourcesCarsBBE 7774.jpg', 
-                image2: 'D:Top UpADCourseworksABC Car TradersABC Car TradersResourcesCarsBBE 7774.jpg',  
+                image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp", 
+                image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",  
                 userID: userID
             };
     
@@ -97,9 +97,9 @@ const Vehicles = () => {
     
             try {
                 const response = await instance.post(`/vehicles/create?userId=${userID}`, vehicleData, {
-                    headers: {
-                        Authorization: `Bearer ${token}`, 
-                    },
+                    // headers: {
+                    //     Authorization: `Bearer ${token}`, 
+                    // },
                 });
                 console.log('Vehicle created:', response.data);
                 setLoading(false);
@@ -127,8 +127,8 @@ const Vehicles = () => {
     return (
         <>
             <CCard className="form-container">
-                <CCardHeader className="form-header">
-                    <h3>Register Vehicle</h3>
+                <CCardHeader className="form-header" style={{background:'linear-gradient(135deg, #FFD700, #322e2e)'}}>
+                    <h3 className='text-white'>Register Vehicle</h3>
                 </CCardHeader>
                 <CCardBody className="form-body">
                     <CForm onSubmit={handleSubmit}>

@@ -3,7 +3,8 @@ import CIcon from '@coreui/icons-react'
 import {
   cilSpeedometer,
   cilGroup,
-  cilHome
+  cilHome,
+  cilCarAlt,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -13,13 +14,6 @@ const adminNav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Home',
-    to: '/home',
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
-
   },
   {
     component: CNavTitle,
@@ -37,6 +31,18 @@ const adminNav = [
     name:'Drivers',
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
     to: '/allDrivers',
+
+  },
+
+  {
+    component: CNavTitle,
+    name: 'Manage',
+  },
+  {
+    component: CNavItem,
+    name:'Vehicles',
+    icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+    to: '/allVehicles',
 
   },
 

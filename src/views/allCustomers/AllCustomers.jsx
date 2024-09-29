@@ -10,6 +10,7 @@ import {
     CSpinner
 } from '@coreui/react';
 import instance from '../../components/service/Service';
+import './style.css';
 
 export default function AllCustomers() {
     const [customers, setCustomers] = useState([]);
@@ -35,8 +36,8 @@ export default function AllCustomers() {
             const fetchUsers = async () => {
                 
                 const mockData = [
-                    { userType: 'Customer', profileImage: 'customer.png', username: 'customer1', email: 'customer1@example.com', contact: '1234567890' },
-                    { userType: 'Customer', profileImage: 'customer.png', username: 'customer2', email: 'customer2@example.com', contact: '0987654321' },
+                    { userType: 'Customer', profileImage: 'customer.png', username: 'Sasindu Kumara', email: 'sasindu123@gmail.com.com', contact: '0743234567' },
+                    { userType: 'Customer', profileImage: 'customer.png', username: 'DasunP', email: 'dasun2024@gmail.com', contact: '0775434567' },
                 ];
             
                 
@@ -71,11 +72,11 @@ export default function AllCustomers() {
 
     return (
         <div className="container mt-4">
-            <h2 className="text-center mb-4">All Customers</h2>
+            <h2 className="text-center text-white mb-4">All Customers</h2>
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead>
                     <CTableRow>
-                        <CTableHeaderCell>Profile Image</CTableHeaderCell>
+                        <CTableHeaderCell className="text-center">Profile Image</CTableHeaderCell>
                         <CTableHeaderCell>Username</CTableHeaderCell>
                         <CTableHeaderCell>Email</CTableHeaderCell>
                         <CTableHeaderCell>Contact</CTableHeaderCell>
@@ -86,7 +87,8 @@ export default function AllCustomers() {
                         customers.map((user, index) => (
                             <CTableRow key={index}>
                                 <CTableDataCell className="text-center">
-                                    <CAvatar size="md" src={user.profileImage || 'default-avatar.png'} />
+                                    {/* <CAvatar size="md" src={user.profileImage || 'default-avatar.png'} /> */}
+                                    <CAvatar color="warning" textColor="white">CUI</CAvatar>
                                 </CTableDataCell>
                                 <CTableDataCell>{user.username}</CTableDataCell>
                                 <CTableDataCell>{user.email}</CTableDataCell>

@@ -43,8 +43,8 @@ const Trip = () => {
 
   return (
     <CCard className="form-container">
-      <CCardHeader className="form-header">
-        <h3>Book Your Trip</h3>
+      <CCardHeader className="form-header" style={{background:'linear-gradient(135deg, #FFD700, #322e2e)'}}>
+        <h3 className='text-white'>Book Your Trip</h3>
       </CCardHeader>
       <CCardBody className="form-body">
         <CForm onSubmit={handleSubmit}>

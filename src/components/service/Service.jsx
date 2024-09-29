@@ -6,6 +6,7 @@ const instance = axios.create({
     
     headers: {
         'Content-Type': 'application/json',
+        'Authorization':`Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEcml2ZXIiLCJpYXQiOjE3Mjc2MzkxNjYsImV4cCI6MTc1OTE3NTE2Nn0.SwSX-6HBilcvytnxH6_jDDQR2Il28s5c6oKjTEVudtNAmKa-IyRYI7Dr1SgShS7PrIZhy09pc_A4tdgrCFDekg`
     },
 });
 
