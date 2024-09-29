@@ -8,7 +8,8 @@ import {
     CTableHeaderCell,
     CTableRow,
     CSpinner,
-    CButton
+    CButton,
+    CImage
 } from '@coreui/react';
 import instance from '../../components/service/Service';
 import './style.css';
@@ -37,8 +38,20 @@ export default function AllCustomers() {
         const fetchUsers = async () => {
 
             const mockData = [
-                { userType: 'Customer', profileImage: 'customer.png', username: 'Sasindu Kumara', email: 'sasindu123@gmail.com', contact: '0743234567' },
-                { userType: 'Customer', profileImage: 'customer.png', username: 'DasunP', email: 'dasun2024@gmail.com', contact: '0775434567' },
+                {
+                    userType: 'Customer',
+                    profileImage: 'src/assets/resources/img2.jpg',
+                    username: 'Sasindu Kumara',
+                    email: 'sasindu123@gmail.com',
+                    contact: '0743234567'
+                },
+                {
+                    userType: 'Customer',
+                    profileImage: 'src/assets/resources/img1.jpg',
+                    username: 'DasunP',
+                    email: 'dasun2024@gmail.com',
+                    contact: '0775434567'
+                },
             ];
 
 
@@ -78,6 +91,7 @@ export default function AllCustomers() {
     return (
         <div className="container mt-4">
             <h2 className="text-center text-white mb-4">All Customers</h2>
+            <CButton className=" Add mb-3" href='http://localhost:3000/#/addCustomer'>Add Customer</CButton>
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead>
                     <CTableRow>
@@ -92,15 +106,18 @@ export default function AllCustomers() {
                     {customers.length > 0 ? (
                         customers.map((user, index) => (
                             <CTableRow key={index}>
+                                {/* <CTableDataCell className="text-center">
+                                    <CAvatar size="md" src={user.profileImage || 'default-avatar.png'} /> 
+                                </CTableDataCell> */}
                                 <CTableDataCell className="text-center">
-                                    {/* <CAvatar size="md" src={user.profileImage || 'default-avatar.png'} /> */}
-                                    <CAvatar color="warning" textColor="white">CUI</CAvatar>
+                                    <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
                                 </CTableDataCell>
                                 <CTableDataCell>{user.username}</CTableDataCell>
                                 <CTableDataCell>{user.email}</CTableDataCell>
                                 <CTableDataCell>{user.contact}</CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                    <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
+                                    <CButton className='Update me-2'>Update</CButton>
+                                    <CButton className='Delete'>Delete</CButton>
                                 </CTableDataCell>
                             </CTableRow>
                         ))

@@ -13,3 +13,25 @@
     background-color:#FFD700 !important; 
     color: white;
 }
+
+.Update{
+    background-color: #2a303d; 
+    color: white; 
+    padding: 10px;
+}
+
+.Update:hover {
+    background-color:#FFD700 !important; 
+    color: white;
+}
+
+.Add{
+    background-color: #2a303d; 
+    color: white; 
+    padding: 10px;
+}
+
+.Add:hover {
+    background-color:#FFD700 !important; 
+    color: white;
+}

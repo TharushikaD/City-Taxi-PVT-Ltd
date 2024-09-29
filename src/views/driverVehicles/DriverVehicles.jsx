@@ -12,7 +12,8 @@ import {
   CModalHeader,
   CModalTitle,
   CModalBody,
-  CModalFooter
+  CModalFooter,
+  CImage
 } from '@coreui/react';
 import instance from '../../components/service/Service';
 import Vehicles from '../vehicles/Vehicles'; // Assuming Vehicles is in the same folder
@@ -47,9 +48,27 @@ export default function DriverVehicles() {
 
     // Mock data for testing
     const mockVehicles = [
-      { registrationNumber: 'DR123', manufacturer: 'Tesla', model: 'Model S', vehicleType: 'Electric' },
-      { registrationNumber: 'DR456', manufacturer: 'Ford', model: 'F-150', vehicleType: 'Truck' },
-      { registrationNumber: 'DR789', manufacturer: 'BMW', model: 'X5', vehicleType: 'SUV' }
+      { 
+        imageUrl: 'src/assets/resources/bike1.webp',
+        registrationNumber: 'DV001', 
+        manufacturer: 'Bajaj', 
+        model: 'Pulsor', 
+        vehicleType: 'Bike' 
+      },
+      { 
+        imageUrl: 'src/assets/resources/nano.jpg',
+        registrationNumber: 'DV002', 
+        manufacturer: 'Tata', 
+        model: 'Nano', 
+        vehicleType: 'Car' 
+      },
+      { 
+        imageUrl: 'src/assets/resources/alto.jpg',
+        registrationNumber: 'DV003', 
+        manufacturer: 'Suzuki', 
+        model: 'Alto', 
+        vehicleType: 'Car' 
+      }
     ];
 
     setLoading(true);
@@ -104,6 +123,7 @@ export default function DriverVehicles() {
       <CTable align="middle" className="mb-0 border" hover responsive>
         <CTableHead>
           <CTableRow>
+          <CTableHeaderCell className="text-center">Image</CTableHeaderCell>
             <CTableHeaderCell className="text-center">Registration Number</CTableHeaderCell>
             <CTableHeaderCell>Manufacturer</CTableHeaderCell>
             <CTableHeaderCell>Model</CTableHeaderCell>
@@ -115,6 +135,9 @@ export default function DriverVehicles() {
           {vehicles.length > 0 ? (
             vehicles.map((vehicle, index) => (
               <CTableRow key={index}>
+                 <CTableDataCell className="text-center">
+                                    <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
+                                </CTableDataCell>
                 <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
                 <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
                 <CTableDataCell>{vehicle.model}</CTableDataCell>
