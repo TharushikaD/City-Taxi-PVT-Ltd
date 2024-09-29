@@ -6,11 +6,12 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
-    CSpinner
+    CSpinner,
+    CButton,
+    CImage
 } from '@coreui/react';
 import instance from '../../components/service/Service';
 import './style.css';
-
 
 export default function AllVehicles() {
     const [vehicles, setVehicles] = useState([]);
@@ -19,18 +20,25 @@ export default function AllVehicles() {
 
     useEffect(() => {
         const fetchVehicles = async () => {
-            
             const mockData = [
-                { registrationNumber: 'ABC123', manufacturer: 'Toyota', model: 'Corolla', vehicleType: 'Sedan' },
-                { registrationNumber: 'XYZ789', manufacturer: 'Honda', model: 'Civic', vehicleType: 'Sedan' },
+                { 
+                    registrationNumber: 'ABC123', 
+                    manufacturer: 'Suzuki', 
+                    model: 'Alto', 
+                    vehicleType: 'Car', 
+                    imageUrl: 'src/assets/resources/alto.jpg'  
+                },
+                { 
+                    registrationNumber: 'XYZ789', 
+                    manufacturer: 'Toyota', 
+                    model: 'Vitz', 
+                    vehicleType: 'Car', 
+                    imageUrl: 'src/assets/resources/vitz.jpg' 
+                },
             ];
 
-            
             setLoading(true);
             try {
-                
-               
-                
                 const data = mockData; 
                 setVehicles(data);
             } catch (err) {
@@ -40,6 +48,7 @@ export default function AllVehicles() {
                 setLoading(false);
             }
         };
+
         // const fetchVehicles = async () => {
         //     setLoading(true);
         //     try {
@@ -80,25 +89,33 @@ export default function AllVehicles() {
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead>
                     <CTableRow>
-                        <CTableHeaderCell className="text-center" >Registration Number</CTableHeaderCell>
+                        <CTableHeaderCell className="text-center">Image</CTableHeaderCell>
+                        <CTableHeaderCell className="text-center">Registration Number</CTableHeaderCell>
                         <CTableHeaderCell>Manufacturer</CTableHeaderCell>
                         <CTableHeaderCell>Model</CTableHeaderCell>
                         <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
+                        <CTableHeaderCell>Action</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                     {vehicles.length > 0 ? (
                         vehicles.map((vehicle, index) => (
                             <CTableRow key={index}>
-                                <CTableDataCell>{vehicle.registrationNumber}</CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                    <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
+                                </CTableDataCell>
+                                <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
                                 <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
                                 <CTableDataCell>{vehicle.model}</CTableDataCell>
                                 <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>
+                                <CTableDataCell>
+                                    <CButton className='Delete'>Delete</CButton>
+                                </CTableDataCell>
                             </CTableRow>
                         ))
                     ) : (
                         <CTableRow>
-                            <CTableDataCell colSpan="4" className="text-center">
+                            <CTableDataCell colSpan="6" className="text-center">
                                 No vehicles found
                             </CTableDataCell>
                         </CTableRow>

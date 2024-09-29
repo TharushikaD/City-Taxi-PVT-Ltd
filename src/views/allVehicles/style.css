@@ -2,3 +2,14 @@
     background: linear-gradient(135deg, #FFD700, #322e2e);
     padding: 30px;
 }
+
+.Delete{
+    background-color: #2a303d; 
+    color: white; 
+    padding: 10px;
+}
+
+.Delete :hover {
+    background-color:#FFD700 !important; 
+    color: white;
+}
