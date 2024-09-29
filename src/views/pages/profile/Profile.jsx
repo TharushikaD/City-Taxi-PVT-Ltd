@@ -61,13 +61,11 @@ const Profile = () => {
     }
 
     try {
-      const response = await instance.put(
-        `/users/${userId}`,
+      const response = await instance.put(`/users/${userId}`,
         {
           username,
           email,
           contact,
-
         },
         {
           headers: {

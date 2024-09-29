@@ -14,7 +14,14 @@ const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Home = React.lazy(() => import('./views/pages/home/Home'));
 const Profile = React.lazy(() => import('./views/pages/profile/Profile'));
+
+//views
 const Vehicles = React.lazy(() => import('./views/vehicles/Vehicles'));
+const DriverVehicles = React.lazy(() => import('./views/driverVehicles/DriverVehicles'))
+const AllCustomers = React.lazy(() => import('./views/allCustomers/AllCustomers'))
+const AllDrivers = React.lazy(() => import('./views/allDrivers/AllDrivers'))
+
+
 
 
 const App = () => {
@@ -79,6 +86,9 @@ const App = () => {
           <Route path="/driverLayout/*" element={<PrivateRoute element={<DriverLayout />} />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
           <Route path="/vehicles" element={<PrivateRoute element={<Vehicles />} />} />
+          <Route path="/allCustomers" element={<PrivateRoute element={<AllCustomers />} />} />
+          <Route path="/allDrivers" element={<PrivateRoute element={<AllDrivers />} />} />
+
          
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>

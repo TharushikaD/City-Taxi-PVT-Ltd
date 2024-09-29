@@ -15,16 +15,16 @@ const driverNav = [
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Home',
-    to: '/home',
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+  // {
+  //   component: CNavItem,
+  //   name: 'Home',
+  //   to: '/home',
+  //   icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
 
-  },
+  // },
   {
     component: CNavTitle,
-    name: 'Drive',
+    name: 'Manage',
   },
   {
     component: CNavItem,
@@ -34,23 +34,19 @@ const driverNav = [
 
   },
 
-//   {
-//     component: CNavGroup,
-//     name: 'Pages',
-//     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-//     items: [
-//       {
-//         component: CNavItem,
-//         name: 'Error 404',
-//         to: '/404',
-//       },
-//       {
-//         component: CNavItem,
-//         name: 'Error 500',
-//         to: '/500',
-//       },
-//     ],
-//   },
+  {
+    component: CNavTitle,
+    name: 'Availables',
+  },
+  {
+    component: CNavItem,
+    name:'Vehicles',
+    icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+    to: '/driverVehicles',
+
+  },
+
+
 ]
 
 export default driverNav
