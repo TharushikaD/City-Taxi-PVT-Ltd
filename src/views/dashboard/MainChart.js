@@ -30,7 +30,7 @@ const MainChart = () => {
 
   return (
     <>
-      <CChartLine
+      {/* <CChartLine
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
@@ -125,7 +125,7 @@ const MainChart = () => {
             },
           },
         }}
-      />
+      /> */}
     </>
   )
 }
