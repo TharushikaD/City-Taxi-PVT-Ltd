@@ -10,7 +10,7 @@
 }
 
 .Add :hover {
-    background-color:#FFD700 !important; 
+    background-color:#FFD700; 
     color: white;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .Update :hover {
-    background-color:#FFD700 !important; 
+    background-color:#FFD700; 
     color: white;
 }
 
@@ -32,6 +32,6 @@
 }
 
 .Delete :hover {
-    background-color:#FFD700 !important; 
+    background-color:#FFD700; 
     color: white;
 }
