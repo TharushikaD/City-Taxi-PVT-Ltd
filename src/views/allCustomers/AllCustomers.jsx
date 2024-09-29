@@ -7,7 +7,8 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
-    CSpinner
+    CSpinner,
+    CButton
 } from '@coreui/react';
 import instance from '../../components/service/Service';
 import './style.css';
@@ -18,44 +19,48 @@ export default function AllCustomers() {
     const [error, setError] = useState(null);
 
     // useEffect(() => {
-        // const fetchUsers = async () => {
-        //     try {
-        //         const response = await instance.get('/users');
-        //         const data = Array.isArray(response.data) ? response.data : [];
-        //         const customersData = data.filter(user => user.userType === 'Customer');
-        //         setCustomers(customersData);
-        //     } catch (err) {
-        //         setError('Failed to fetch users');
-        //         console.error('Error fetching users:', err);
-        //     } finally {
-        //         setLoading(false);
-        //     }
-        // };
-        useEffect(() => {
-      
-            const fetchUsers = async () => {
-                
-                const mockData = [
-                    { userType: 'Customer', profileImage: 'customer.png', username: 'Sasindu Kumara', email: 'sasindu123@gmail.com.com', contact: '0743234567' },
-                    { userType: 'Customer', profileImage: 'customer.png', username: 'DasunP', email: 'dasun2024@gmail.com', contact: '0775434567' },
-                ];
-            
-                
-                setLoading(true);
-                try {
-                  
-                    const data = mockData; 
-                    const customerData = data.filter(user => user.userType === 'Customer');
-                    setCustomers(customerData);
-                } catch (err) {
-                    setError('Failed to fetch users');
-                    console.error('Error fetching users:', err);
-                } finally {
-                    setLoading(false);
-                }
-            };
+    // const fetchUsers = async () => {
+    //     try {
+    //         const response = await instance.get('/users');
+    //         const data = Array.isArray(response.data) ? response.data : [];
+    //         const customersData = data.filter(user => user.userType === 'Customer');
+    //         setCustomers(customersData);
+    //     } catch (err) {
+    //         setError('Failed to fetch users');
+    //         console.error('Error fetching users:', err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+    useEffect(() => {
+
+        const fetchUsers = async () => {
+
+            const mockData = [
+                { userType: 'Customer', profileImage: 'customer.png', username: 'Sasindu Kumara', email: 'sasindu123@gmail.com', contact: '0743234567' },
+                { userType: 'Customer', profileImage: 'customer.png', username: 'DasunP', email: 'dasun2024@gmail.com', contact: '0775434567' },
+            ];
+
+
+            setLoading(true);
+            try {
+
+                const data = mockData;
+                const customerData = data.filter(user => user.userType === 'Customer');
+                setCustomers(customerData);
+            } catch (err) {
+                setError('Failed to fetch users');
+                console.error('Error fetching users:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchUsers();
     }, []);
+
+    const handleDelete = (username) => {
+        setCustomers(prevCustomers => prevCustomers.filter(customer => customer.username !== username));
+    };
 
     if (loading) {
         return (
@@ -80,6 +85,7 @@ export default function AllCustomers() {
                         <CTableHeaderCell>Username</CTableHeaderCell>
                         <CTableHeaderCell>Email</CTableHeaderCell>
                         <CTableHeaderCell>Contact</CTableHeaderCell>
+                        <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -93,11 +99,14 @@ export default function AllCustomers() {
                                 <CTableDataCell>{user.username}</CTableDataCell>
                                 <CTableDataCell>{user.email}</CTableDataCell>
                                 <CTableDataCell>{user.contact}</CTableDataCell>
+                                <CTableDataCell className="text-center">
+                                    <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
+                                </CTableDataCell>
                             </CTableRow>
                         ))
                     ) : (
                         <CTableRow>
-                            <CTableDataCell colSpan="4" className="text-center">
+                            <CTableDataCell colSpan="5" className="text-center">
                                 No customers found
                             </CTableDataCell>
                         </CTableRow>
