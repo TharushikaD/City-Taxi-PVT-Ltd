@@ -13,6 +13,9 @@ const AdminLayout = React.lazy(() => import('./layout/AdminLayout'));
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Home = React.lazy(() => import('./views/pages/home/Home'));
+const Ride =  React.lazy(() => import('./views/pages/ride/Ride'));
+const Drive =  React.lazy(() => import('./views/pages/drive/Drive'));
+const Contact =  React.lazy(() => import('./views/pages/contact/Contact'));
 const Profile = React.lazy(() => import('./views/pages/profile/Profile'));
 
 //views
@@ -78,6 +81,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" name="Home" element={<Home />} />
+          <Route path="/ride" name="Ride" element={<Ride />} />
+          <Route path="/drive" name="Drive" element={<Drive />} />
+          <Route path="/contact" name="Contact" element={<Contact />} />
           <Route path="/login" name="Login Page" element={<Login onLoginSuccess={handleLoginSuccess} />} />
           <Route path="/register" name="Register Page" element={<Register />} />
 
