@@ -26,18 +26,7 @@ const driverNav = [
     component: CNavTitle,
     name: 'Manage',
   },
-  {
-    component: CNavItem,
-    name:'Register Vehicle',
-    icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
-    to: '/vehicles',
-
-  },
-
-  {
-    component: CNavTitle,
-    name: 'Availables',
-  },
+  
   {
     component: CNavItem,
     name:'Vehicles',
