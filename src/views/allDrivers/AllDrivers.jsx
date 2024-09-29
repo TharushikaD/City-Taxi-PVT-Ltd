@@ -7,31 +7,32 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
-    CSpinner
+    CSpinner,
+    CButton
 } from '@coreui/react';
 import instance from '../../components/service/Service';
 import './style.css';
 
 
 export default function AllDrivers() {
-    const [drivers, setDrivers] = useState([]); 
+    const [drivers, setDrivers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-      
+
         const fetchUsers = async () => {
-            
+
             const mockData = [
                 { userType: 'Driver', profileImage: 'driver.png', username: 'HarendraP', email: 'harendra2024@gmail.com', contact: '0776567890' },
                 { userType: 'Driver', profileImage: 'driver2.png', username: 'HasinduW', email: 'hasindu2024@gmail.com', contact: '0765434567' },
             ];
-        
-            
+
+
             setLoading(true);
             try {
-              
-                const data = mockData; 
+
+                const data = mockData;
                 const driversData = data.filter(user => user.userType === 'Driver');
                 setDrivers(driversData);
             } catch (err) {
@@ -60,6 +61,7 @@ export default function AllDrivers() {
     return (
         <div className="container mt-4">
             <h2 className="text-center text-white mb-4">All Drivers</h2>
+            <CButton className=" Add mb-3">Add Driver</CButton>
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead >
                     <CTableRow >
@@ -67,6 +69,7 @@ export default function AllDrivers() {
                         <CTableHeaderCell>Username</CTableHeaderCell>
                         <CTableHeaderCell>Email</CTableHeaderCell>
                         <CTableHeaderCell>Contact</CTableHeaderCell>
+                        <CTableHeaderCell>Action</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -80,6 +83,14 @@ export default function AllDrivers() {
                                 <CTableDataCell>{user.username}</CTableDataCell>
                                 <CTableDataCell>{user.email}</CTableDataCell>
                                 <CTableDataCell>{user.contact}</CTableDataCell>
+                                <CTableDataCell>
+                                    <CButton className=" Update me-2">
+                                        Update
+                                    </CButton>
+                                    <CButton className="Delete">
+                                        Delete
+                                    </CButton>
+                                </CTableDataCell>
                             </CTableRow>
                         ))
                     ) : (
