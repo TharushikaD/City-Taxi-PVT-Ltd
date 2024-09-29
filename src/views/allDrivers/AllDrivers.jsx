@@ -19,20 +19,17 @@ export default function AllDrivers() {
     useEffect(() => {
       
         const fetchUsers = async () => {
-            // Mock data for testing
+            
             const mockData = [
                 { userType: 'Driver', profileImage: 'driver.png', username: 'driver1', email: 'driver1@example.com', contact: '1234567890' },
                 { userType: 'Driver', profileImage: 'driver2.png', username: 'driver2', email: 'driver2@example.com', contact: '0987654321' },
             ];
         
-            // Simulate API call
+            
             setLoading(true);
             try {
-                // Uncomment this when API is fixed
-                // const response = await instance.get('/users');
-                
-                // Use mock data
-                const data = mockData; // Replace with response.data when using the real API
+              
+                const data = mockData; 
                 const driversData = data.filter(user => user.userType === 'Driver');
                 setDrivers(driversData);
             } catch (err) {
