@@ -74,7 +74,7 @@ export default function AllDrivers() {
     return (
         <div className="container mt-4">
             <h2 className="text-center text-white mb-4">All Drivers</h2>
-            <CButton className=" Add mb-3">Add Driver</CButton>
+            <CButton className=" Add mb-3" href='http://localhost:3000/#/addDriver'>Add Driver</CButton>
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead >
                     <CTableRow >
