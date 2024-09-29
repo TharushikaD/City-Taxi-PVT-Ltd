@@ -1,39 +1,54 @@
 .pro {
-    display: flex;                 
-    justify-content: center;      
-    align-items: center;         
-    height: 100vh;                
+  display: flex;                 
+  justify-content: center;      
+  align-items: center;         
+  height: 100vh;                
+  background: linear-gradient(135deg, #FFD700, #322e2e); 
+}
+
+.profile-form {
+  max-width: 400px;              
+  width: 100%;                   
+  padding: 2rem;                
+  background-color: #f0f0f0;   
+  border-radius: 1rem;         
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+}
+
+.profile-form h3 {
+  font-size: 25px;           
+  margin-bottom: 1rem; 
+  color: #2a303d;            
+}
+
+.profile-form h5 {
+  font-size: 15px;           
+  margin-bottom: 1rem; 
+  color: #2a303d;           
   }
-  
-  .profile-form {
-    max-width: 400px;              
-    width: 100%;                  
-    padding: 2rem;                
-    background-color: #f8f9fa;    
-    border-radius: 0.5rem;         
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .profile-form h3 {
-    font-size: 1.5rem; 
-    margin-bottom: 1rem; 
-  }
-  
-  .profile-form h5 {
-    font-size: 1.2rem; 
-    margin-bottom: 1rem; 
-  }
-  
-  .profile-form .input-group {
-    margin-bottom: 0.75rem; 
-  }
-  
-  .profile-form .input-group input {
-    font-size: 0.9rem; 
-  }
-  
-  .profile-form .btn {
-    font-size: 0.9rem; 
-    padding: 0.5rem; 
-  }
-  
+
+.profile-form .input-group {
+  margin-bottom: 0.75rem; 
+}
+
+.profile-form .input-group input {
+  font-size: 1rem;             
+}
+
+.profile-form .btn {
+  font-size: 1rem; 
+  padding: 0.5rem; 
+  border-radius: 1rem;   
+  background-color: #FFD700;  
+  color: #3f4654;  
+  outline: none;
+  border: none;  
+}
+
+.profile-form .btn:hover {
+  background-color: #e0b506;  
+  color: #fff;  
+  outline: none;
+  border: none;  
+}

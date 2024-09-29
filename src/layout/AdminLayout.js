@@ -1,11 +1,11 @@
 import React from 'react'
-import { AppContent, AppFooter, AppHeader, AdminSideBar } from '../components/index'
+import { AppContent, AppFooter, AppHeader, AppSidebar } from '../components/index'
 
 const AdminLayout = () => {
   
   return (
     <div>
-      <AdminSideBar />
+      <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100">
         <AppHeader />
         <div className="body flex-grow-1">

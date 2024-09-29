@@ -10,95 +10,92 @@ import {
   CAlert,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilUser, cilLockLocked } from '@coreui/icons';
+import { cilUser, cilPhone } from '@coreui/icons';
+import './style.css';
 import instance from '../../../components/service/Service';
-import './style.css'
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({
-    name: '',
+    username: '',
     email: '',
     contact: '',
     password: '',
     confirmPassword: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
+    const storedUserName = localStorage.getItem('userName') || '';
+    const storedProfileData = JSON.parse(localStorage.getItem('profileData')) || {};
 
-    const fetchUserData = async () => {
-      try {
-        const response = await instance.get(`/users/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        console.log('User data response:', response.data);
-
-        const { name, email, contact } = response.data;
-
-        setProfileData({
-          name: name || '',
-          email: email || '',
-          contact: contact || '',
-          password: '',
-          confirmPassword: '',
-        });
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData();
+    setUserName(storedUserName);
+    setProfileData({
+      username: storedProfileData.username || '',
+      email: storedProfileData.email || '',
+      contact: storedProfileData.contact || '',
+      password: '',
+      confirmPassword: '',
+    });
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfileData((prevState) => ({
-      ...prevState,
-      [name]: value,
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: value || '',
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage('');
 
-    if (profileData.password !== profileData.confirmPassword) {
-      setErrorMessage('Passwords do not match.');
+    const userId = localStorage.getItem('userId');
+    const authToken = localStorage.getItem('authToken');
+    const { username, email, contact, password, confirmPassword } = profileData;
+
+    if (password && password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
     try {
-      const userId = localStorage.getItem('userId');
-      const token = localStorage.getItem('token');
+      const response = await instance.put(
+        `/users/${userId}`,
+        {
+          username,
+          email,
+          contact,
 
-      await instance.put(`/users/${userId}`, {
-        name: profileData.name,
-        email: profileData.email,
-        contact: profileData.contact,
-        password: profileData.password,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
         },
-      });
-      console.log('Profile updated successfully');
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setSuccessMessage("Profile updated successfully!");
+        setErrorMessage('');
+        localStorage.setItem('profileData', JSON.stringify({ username, email, contact }));
+      }
     } catch (error) {
-      console.error('Error updating profile:', error);
-      setErrorMessage('Failed to update profile. Please try again.');
+      setErrorMessage("An error occurred while updating the profile.");
+      console.error(error);
     }
   };
 
   return (
-    <div className="pro">
-      <CCard className="profile-form">
+    <div className='pro'>
+      <CCard className="profile-form shadow-lg">
         <CCardBody>
+          <h5 className="text-center mb-4">{`Hello, ${userName || 'User'}`}</h5>
           <h3 className="text-center mb-4">Update Profile</h3>
-          <h5 className="text-center mb-4">{`Hello, ${profileData.name || 'User'}`}</h5>
+          {errorMessage && <CAlert color="danger">{errorMessage}</CAlert>}
+          {successMessage && <CAlert color="success">{successMessage}</CAlert>}
+
           <CForm onSubmit={handleSubmit}>
             <CInputGroup className="mb-3">
               <CInputGroupText>
@@ -106,18 +103,16 @@ const Profile = () => {
               </CInputGroupText>
               <CFormInput
                 type="text"
-                name="name"
-                value={profileData.name}
+                name="username"
+                value={profileData.username}
                 onChange={handleInputChange}
-                placeholder="Name"
+                placeholder="Username"
                 required
               />
             </CInputGroup>
 
             <CInputGroup className="mb-3">
-              <CInputGroupText>
-                <CIcon icon={cilLockLocked} />
-              </CInputGroupText>
+              <CInputGroupText>@</CInputGroupText>
               <CFormInput
                 type="email"
                 name="email"
@@ -129,7 +124,9 @@ const Profile = () => {
             </CInputGroup>
 
             <CInputGroup className="mb-3">
-              <CInputGroupText>📞</CInputGroupText>
+              <CInputGroupText>
+                <CIcon icon={cilPhone} />
+              </CInputGroupText>
               <CFormInput
                 type="text"
                 name="contact"
@@ -140,42 +137,13 @@ const Profile = () => {
               />
             </CInputGroup>
 
-            <CInputGroup className="mb-3">
-              <CInputGroupText>
-                <CIcon icon={cilLockLocked} />
-              </CInputGroupText>
-              <CFormInput
-                type="password"
-                name="password"
-                value={profileData.password}
-                onChange={handleInputChange}
-                placeholder="Password"
-              />
-            </CInputGroup>
-
-            <CInputGroup className="mb-4">
-              <CInputGroupText>
-                <CIcon icon={cilLockLocked} />
-              </CInputGroupText>
-              <CFormInput
-                type="password"
-                name="confirmPassword"
-                value={profileData.confirmPassword}
-                onChange={handleInputChange}
-                placeholder="Confirm Password"
-              />
-            </CInputGroup>
-
-            {errorMessage && <CAlert color="danger">{errorMessage}</CAlert>}
-
-            <CButton type="submit" color="primary" className="w-100">
+            <CButton type="submit" color="primary" className="w-100 rounded-pill">
               Update Profile
             </CButton>
           </CForm>
         </CCardBody>
       </CCard>
     </div>
-
   );
 };
 

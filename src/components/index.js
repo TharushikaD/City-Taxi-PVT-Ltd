@@ -7,8 +7,6 @@ import AppSidebar from './AppSidebar'
 import DocsCallout from './DocsCallout'
 import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
-import DriverSideBar from './DriverSideBar'
-import AdminSideBar from './AdminSideBar'
 
 export {
   AppBreadcrumb,
@@ -17,8 +15,6 @@ export {
   AppHeader,
   AppHeaderDropdown,
   AppSidebar,
-  DriverSideBar,
-  AdminSideBar,
   DocsCallout,
   DocsLink,
   DocsExample,

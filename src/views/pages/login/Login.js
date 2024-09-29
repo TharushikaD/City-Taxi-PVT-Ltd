@@ -16,18 +16,16 @@ import { cilLockLocked, cilUser, cilLowVision } from '@coreui/icons';
 import instance from '../../../components/service/Service';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginData((prevState) => ({
@@ -36,27 +34,30 @@ const Login = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-  
+
     try {
       console.log('Submitting login data:', loginData);
-  
+
       const response = await instance.post('/users/login', loginData);
-  
+
+      const { object: { id, usertype, username, email, contact }, token } = response.data;
+
       
-      const { token, object: { id, usertype } } = response.data;
-  
-      
-      localStorage.setItem('authToken', token);
       localStorage.setItem('userId', id);
-      localStorage.setItem('userType', usertype);
-  
+      localStorage.setItem('userRole', usertype);
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userName', username);
+      
+      
+      localStorage.setItem('profileData', JSON.stringify({ username, email, contact }));
+
+      onLoginSuccess(token, usertype, username);
+
       console.log('Login successful:', response.data);
-  
-     
+
       if (usertype === 'Admin') {
         navigate('/adminLayout');
       } else if (usertype === 'Driver') {
@@ -64,7 +65,7 @@ const Login = () => {
       } else {
         navigate('/defaultLayout');
       }
-  
+
     } catch (error) {
       console.error('Login error:', error);
       if (error.response) {
@@ -77,9 +78,6 @@ const Login = () => {
       );
     }
   };
-
-
-
 
   return (
     <div className="d-flex align-items-center min-vh-100" style={{ backgroundColor: '#2a303d' }}>
@@ -109,7 +107,6 @@ const Login = () => {
                   </h2>
                   <p className="text-body-secondary text-center mb-4">Sign in to your account</p>
 
-
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -123,7 +120,6 @@ const Login = () => {
                       required
                     />
                   </CInputGroup>
-
 
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -143,13 +139,11 @@ const Login = () => {
                     </CInputGroupText>
                   </CInputGroup>
 
-
                   {errorMessage && (
-                    <div className="text-danger mb-3 text-center">
+                    <div className="text-white mb-3 text-center">
                       {errorMessage}
                     </div>
                   )}
-
 
                   <CRow className="mb-3">
                     <CCol xs={12}>
@@ -157,7 +151,6 @@ const Login = () => {
                         Login
                       </CButton>
                     </CCol>
-
 
                     <CCol xs={12} className="text-center">
                       <CButton color="link" className="px-0" href="http://localhost:3000/#/register">
