@@ -6,7 +6,7 @@ export function Alert(title, text, icon) {
         text: text,
         icon: icon,
         showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
+        // confirmButtonText: 'Yes',
+        // cancelButtonText: 'No',
     });
 }
