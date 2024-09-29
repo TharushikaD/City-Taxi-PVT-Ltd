@@ -2,8 +2,6 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilSpeedometer,
-  cilStar,
-  cilCarAlt,
   cilGroup,
   cilHome
 } from '@coreui/icons'
