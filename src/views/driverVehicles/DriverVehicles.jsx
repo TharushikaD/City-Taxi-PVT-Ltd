@@ -8,15 +8,22 @@ import {
   CTableRow,
   CSpinner,
   CButton,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
   CImage
 } from '@coreui/react';
 import instance from '../../components/service/Service';
+import Vehicles from '../vehicles/Vehicles'; // Assuming Vehicles is in the same folder
 import './style.css';
 
 export default function DriverVehicles() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
 
   useEffect(() => {
     // const fetchDriverVehicles = async () => {
@@ -78,8 +85,7 @@ export default function DriverVehicles() {
   }, []);
 
   const handleAdd = () => {
-    console.log('Add Vehicle button clicked');
-    
+    setModalVisible(true); // Show the modal when the button is clicked
   };
 
   const handleUpdate = (registrationNumber) => {
@@ -90,6 +96,10 @@ export default function DriverVehicles() {
   const handleDelete = (registrationNumber) => {
     console.log(`Delete Vehicle button clicked for ${registrationNumber}`);
     
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false); // Close the modal
   };
 
   if (loading) {
@@ -108,7 +118,8 @@ export default function DriverVehicles() {
   return (
     <div className="container mt-4">
       <h2 className="text-center text-white mb-4">Registered Vehicles</h2>
-      <CButton  onClick={handleAdd} className=" Add mb-3" href='http://localhost:3000/#/vehicles'>Add Vehicle</CButton>
+      <CButton onClick={handleAdd} className="Add mb-3">Add Vehicle</CButton>
+      
       <CTable align="middle" className="mb-0 border" hover responsive>
         <CTableHead>
           <CTableRow>
@@ -132,7 +143,7 @@ export default function DriverVehicles() {
                 <CTableDataCell>{vehicle.model}</CTableDataCell>
                 <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>
                 <CTableDataCell>
-                  <CButton  onClick={() => handleUpdate(vehicle.registrationNumber)} className=" Update me-2">
+                  <CButton onClick={() => handleUpdate(vehicle.registrationNumber)} className="Update me-2">
                     Update
                   </CButton>
                   <CButton onClick={() => handleDelete(vehicle.registrationNumber)} className="Delete">
@@ -150,6 +161,16 @@ export default function DriverVehicles() {
           )}
         </CTableBody>
       </CTable>
+
+      {/* Modal for Adding Vehicle */}
+      <CModal visible={modalVisible} onClose={handleCloseModal} size='xl'>
+        <CModalHeader>
+          <CModalTitle>Add Vehicle</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <Vehicles onClose={handleCloseModal} /> {/* Pass the onClose function to the Vehicles component */}
+        </CModalBody>
+      </CModal>
     </div>
   );
 }
