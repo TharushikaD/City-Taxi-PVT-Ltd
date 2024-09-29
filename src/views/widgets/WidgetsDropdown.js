@@ -60,7 +60,7 @@ const WidgetsDropdown = (props) => {
   }, [widgetChartRef1, widgetChartRef2])
 
   return (
-    <CRow className={props.className} xs={{ gutter: 4 }}  style={{gap:'90px'}}>
+    <CRow className={props.className} xs={{ gutter: 4 }}>
      
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
