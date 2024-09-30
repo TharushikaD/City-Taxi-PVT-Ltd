@@ -5,6 +5,7 @@ import {
   cilGroup,
   cilHome,
   cilCarAlt,
+  cilBadge
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -43,6 +44,13 @@ const adminNav = [
     name:'Vehicles',
     icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
     to: '/allVehicles',
+
+  },
+  {
+    component: CNavItem,
+    name:'Promotions',
+    icon: <CIcon icon={cilBadge} customClassName="nav-icon" />,
+    to: '/promotions',
 
   },
 
