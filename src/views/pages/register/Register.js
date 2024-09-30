@@ -12,7 +12,7 @@ import {
   CRow,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilLockLocked, cilUser, cilLowVision, cilPhone } from '@coreui/icons';
+import { cilLockLocked, cilUser, cilLowVision, cilPhone, cilCamera } from '@coreui/icons';
 import instance from '../../../components/service/Service';
 import { Alert } from '../../../components/alert/Alert';
 
@@ -218,6 +218,21 @@ const Register = () => {
                         </select>
                       </CInputGroup>
                     </CCol>
+                    {/* <CCol>
+                    <CInputGroup>
+                        <CInputGroupText>
+                          <CIcon icon={cilCamera} />
+                        </CInputGroupText>
+                        <CFormInput
+                          type='file'
+                          name="contact"
+                          placeholder="Select Profile Image"
+                          value={formData.contactNumber}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </CInputGroup>
+                    </CCol> */}
                   </CRow>
 
                   <CButton type="submit" className="w-100 text-white" style={{
