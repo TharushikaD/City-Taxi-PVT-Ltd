@@ -10,7 +10,9 @@ import {
     CButton,
     CImage
 } from '@coreui/react';
-import instance from '../../components/service/Service';
+import AppHeader from '../../components/AppHeader';
+import AppFooter from '../../components/AppFooter';
+import AppSidebar from '../../components/AppSidebar';
 import './style.css';
 
 export default function AllVehicles() {
@@ -18,6 +20,7 @@ export default function AllVehicles() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Mock data to simulate fetched vehicle data
     useEffect(() => {
         const fetchVehicles = async () => {
             const mockData = [
@@ -39,7 +42,7 @@ export default function AllVehicles() {
 
             setLoading(true);
             try {
-                const data = mockData; 
+                const data = mockData;
                 setVehicles(data);
             } catch (err) {
                 setError('Failed to fetch vehicles');
@@ -49,10 +52,11 @@ export default function AllVehicles() {
             }
         };
 
+        // Real fetch method that could be used once integrated with an API
         // const fetchVehicles = async () => {
         //     setLoading(true);
         //     try {
-        //         const token = localStorage.getItem('authToken'); 
+        //         const token = localStorage.getItem('authToken');
         //         const response = await instance.get('/vehicles/all', {
         //             headers: {
         //                 Authorization: `Bearer ${token}`, 
@@ -84,44 +88,55 @@ export default function AllVehicles() {
     }
 
     return (
-        <div className="container mt-4">
-            <h2 className="text-center text-white mb-4">All Vehicles</h2>
-            <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell className="text-center">Image</CTableHeaderCell>
-                        <CTableHeaderCell className="text-center">Registration Number</CTableHeaderCell>
-                        <CTableHeaderCell>Manufacturer</CTableHeaderCell>
-                        <CTableHeaderCell>Model</CTableHeaderCell>
-                        <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
-                        <CTableHeaderCell>Action</CTableHeaderCell>
-                    </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                    {vehicles.length > 0 ? (
-                        vehicles.map((vehicle, index) => (
-                            <CTableRow key={index}>
-                                <CTableDataCell className="text-center">
-                                    <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
-                                <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
-                                <CTableDataCell>{vehicle.model}</CTableDataCell>
-                                <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>
-                                <CTableDataCell>
-                                    <CButton className='Delete'>Delete</CButton>
-                                </CTableDataCell>
-                            </CTableRow>
-                        ))
-                    ) : (
-                        <CTableRow>
-                            <CTableDataCell colSpan="6" className="text-center">
-                                No vehicles found
-                            </CTableDataCell>
-                        </CTableRow>
-                    )}
-                </CTableBody>
-            </CTable>
+        <div className="app-container">
+            {/* Header, Sidebar, and Footer integration */}
+            <AppHeader />
+            <div className="main-content">
+                <AppSidebar className="app-sidebar" />
+                <div className="content-wrap">
+                    <div className="gradient-container"> {/* Gradient background */}
+                        <h2 className="text-center text-white mb-4">All Vehicles</h2>
+
+                        <CTable align="middle" className="mb-0 border" hover responsive>
+                            <CTableHead>
+                                <CTableRow>
+                                    <CTableHeaderCell className="text-center">Image</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Registration Number</CTableHeaderCell>
+                                    <CTableHeaderCell>Manufacturer</CTableHeaderCell>
+                                    <CTableHeaderCell>Model</CTableHeaderCell>
+                                    <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
+                                    <CTableHeaderCell>Action</CTableHeaderCell>
+                                </CTableRow>
+                            </CTableHead>
+                            <CTableBody>
+                                {vehicles.length > 0 ? (
+                                    vehicles.map((vehicle, index) => (
+                                        <CTableRow key={index}>
+                                            <CTableDataCell className="text-center">
+                                                <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
+                                            <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
+                                            <CTableDataCell>{vehicle.model}</CTableDataCell>
+                                            <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>
+                                            <CTableDataCell>
+                                                <CButton className='Delete'>Delete</CButton>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    ))
+                                ) : (
+                                    <CTableRow>
+                                        <CTableDataCell colSpan="6" className="text-center">
+                                            No vehicles found
+                                        </CTableDataCell>
+                                    </CTableRow>
+                                )}
+                            </CTableBody>
+                        </CTable>
+                    </div>
+                </div>
+            </div>
+            <AppFooter />
         </div>
     );
 }
