@@ -1,15 +1,60 @@
-.container {
+.gradient-container {
     background: linear-gradient(135deg, #FFD700, #322e2e);
-    padding: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
-.Delete{
-    background-color: #2a303d; 
-    color: white; 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.app-sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.content-wrap {
+    margin-left: 250px;
+    flex-grow: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.Delete {
+    background-color: #2a303d;
+    color: white;
     padding: 10px;
 }
 
-.Delete :hover {
-    background-color:#FFD700 !important; 
+.Delete:hover {
+    background-color: #FFD700 !important;
     color: white;
+}
+
+.app-header, .app-footer {
+    background-color: #444;
+    color: white;
+    padding: 15px;
+    width: calc(100% - 250px); /* Sidebar width subtracted */
+    margin-left: 250px; /* Sidebar width */
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
