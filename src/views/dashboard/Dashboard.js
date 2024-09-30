@@ -26,7 +26,7 @@ const getTripStatus = () => {
   });
 };
 
-const CustomerDashboard = () => {
+const Dashboard = () => {
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -97,4 +97,4 @@ const CustomerDashboard = () => {
   );
 };
 
-export default CustomerDashboard;
+export default Dashboard;
