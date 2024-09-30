@@ -12,10 +12,6 @@ import {
     CModal,
     CModalHeader,
     CModalBody,
-    CModalFooter,
-} from '@coreui/react';
-import instance from '../../components/service/Service';
-import AddDriver from '../../views/addDriver/AddDriver';
 } from '@coreui/react';
 import AddDriver from '../../views/addDriver/AddDriver';
 import AppHeader from '../../components/AppHeader';
@@ -77,55 +73,6 @@ export default function AllDrivers() {
     }
 
     return (
-        <div className="container mt-4">
-            <h2 className="text-center text-white mb-4">All Drivers</h2>
-            <CButton className="Add mb-3" onClick={() => setShowAddDriverModal(true)}>Add Driver</CButton>
-
-            <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell className="text-center">Profile Image</CTableHeaderCell>
-                        <CTableHeaderCell>Username</CTableHeaderCell>
-                        <CTableHeaderCell>Email</CTableHeaderCell>
-                        <CTableHeaderCell>Contact</CTableHeaderCell>
-                        <CTableHeaderCell>Action</CTableHeaderCell>
-                    </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                    {drivers.length > 0 ? (
-                        drivers.map((user, index) => (
-                            <CTableRow key={index}>
-                                <CTableDataCell className="text-center">
-                                    <CImage src={user.profileImage} width={100} height={100} alt="Driver" />
-                                </CTableDataCell>
-                                <CTableDataCell>{user.username}</CTableDataCell>
-                                <CTableDataCell>{user.email}</CTableDataCell>
-                                <CTableDataCell>{user.contact}</CTableDataCell>
-                                <CTableDataCell>
-                                    <CButton className="Update me-2">Update</CButton>
-                                    <CButton className="Delete">Delete</CButton>
-                                </CTableDataCell>
-                            </CTableRow>
-                        ))
-                    ) : (
-                        <CTableRow>
-                            <CTableDataCell colSpan="4" className="text-center">
-                                No drivers found
-                            </CTableDataCell>
-                        </CTableRow>
-                    )}
-                </CTableBody>
-            </CTable>
-
-            {/* Modal for adding a driver */}
-            <CModal visible={showAddDriverModal} onClose={() => setShowAddDriverModal(false)} size="lg">
-                <CModalHeader closeButton>
-                    <h5 className="modal-title">Add Driver</h5>
-                </CModalHeader>
-                <CModalBody>
-                    <AddDriver />
-                </CModalBody>
-            </CModal>
         <div className="app-container">
             <AppHeader />
             <div className="main-content">
