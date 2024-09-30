@@ -9,34 +9,24 @@ import {
     CTableRow,
     CSpinner,
     CButton,
-    CImage
+    CImage,
+    CModal,
+    CModalHeader,
+    CModalBody,
+    CModalFooter,
 } from '@coreui/react';
 import instance from '../../components/service/Service';
+import AddCustomer from '../../views/addCustomer/AddCustomer'; // Import the AddCustomer component
 import './style.css';
 
 export default function AllCustomers() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false); // State to control modal visibility
 
-    // useEffect(() => {
-    // const fetchUsers = async () => {
-    //     try {
-    //         const response = await instance.get('/users');
-    //         const data = Array.isArray(response.data) ? response.data : [];
-    //         const customersData = data.filter(user => user.userType === 'Customer');
-    //         setCustomers(customersData);
-    //     } catch (err) {
-    //         setError('Failed to fetch users');
-    //         console.error('Error fetching users:', err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
     useEffect(() => {
-
         const fetchUsers = async () => {
-
             const mockData = [
                 {
                     userType: 'Customer',
@@ -54,10 +44,8 @@ export default function AllCustomers() {
                 },
             ];
 
-
             setLoading(true);
             try {
-
                 const data = mockData;
                 const customerData = data.filter(user => user.userType === 'Customer');
                 setCustomers(customerData);
@@ -73,6 +61,14 @@ export default function AllCustomers() {
 
     const handleDelete = (username) => {
         setCustomers(prevCustomers => prevCustomers.filter(customer => customer.username !== username));
+    };
+
+    const handleAddCustomerClick = () => {
+        setShowModal(true);
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
     };
 
     if (loading) {
@@ -91,7 +87,9 @@ export default function AllCustomers() {
     return (
         <div className="container mt-4">
             <h2 className="text-center text-white mb-4">All Customers</h2>
-            <CButton className=" Add mb-3" href='http://localhost:3000/#/addCustomer'>Add Customer</CButton>
+            <CButton className="Add mb-3" onClick={handleAddCustomerClick}>
+                Add Customer
+            </CButton>
             <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead>
                     <CTableRow>
@@ -106,9 +104,6 @@ export default function AllCustomers() {
                     {customers.length > 0 ? (
                         customers.map((user, index) => (
                             <CTableRow key={index}>
-                                {/* <CTableDataCell className="text-center">
-                                    <CAvatar size="md" src={user.profileImage || 'default-avatar.png'} /> 
-                                </CTableDataCell> */}
                                 <CTableDataCell className="text-center">
                                     <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
                                 </CTableDataCell>
@@ -117,7 +112,7 @@ export default function AllCustomers() {
                                 <CTableDataCell>{user.contact}</CTableDataCell>
                                 <CTableDataCell className="text-center">
                                     <CButton className='Update me-2'>Update</CButton>
-                                    <CButton className='Delete'>Delete</CButton>
+                                    <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
                                 </CTableDataCell>
                             </CTableRow>
                         ))
@@ -130,6 +125,16 @@ export default function AllCustomers() {
                     )}
                 </CTableBody>
             </CTable>
+
+            {/* Add Customer Modal */}
+            <CModal visible={showModal} onClose={handleModalClose} size="lg">
+                <CModalHeader closeButton>
+                    <h5>Add Customer</h5>
+                </CModalHeader>
+                <CModalBody>
+                    <AddCustomer />
+                </CModalBody>
+            </CModal>
         </div>
     );
 }
