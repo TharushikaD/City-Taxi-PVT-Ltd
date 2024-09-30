@@ -46,7 +46,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name:'History & Feedbacks',
+    name:'Trip History',
     icon:<CIcon icon={cilAlignCenter} customClassName="nav-icon" />,
     to:'/tripHistory'
 
