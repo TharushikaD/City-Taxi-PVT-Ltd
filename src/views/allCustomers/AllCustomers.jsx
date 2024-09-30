@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-    CAvatar,
     CTable,
     CTableBody,
     CTableDataCell,
@@ -13,17 +12,18 @@ import {
     CModal,
     CModalHeader,
     CModalBody,
-    CModalFooter,
 } from '@coreui/react';
-import instance from '../../components/service/Service';
-import AddCustomer from '../../views/addCustomer/AddCustomer'; // Import the AddCustomer component
+import AddCustomer from '../../views/addCustomer/AddCustomer';
+import AppFooter from '../../components/AppFooter'; 
+import AppHeader from '../../components/AppHeader';
+import AppSidebar from '../../components/AppSidebar';
 import './style.css';
 
 export default function AllCustomers() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showModal, setShowModal] = useState(false); // State to control modal visibility
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -85,56 +85,65 @@ export default function AllCustomers() {
     }
 
     return (
-        <div className="container mt-4">
-            <h2 className="text-center text-white mb-4">All Customers</h2>
-            <CButton className="Add mb-3" onClick={handleAddCustomerClick}>
-                Add Customer
-            </CButton>
-            <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell className="text-center">Profile Image</CTableHeaderCell>
-                        <CTableHeaderCell>Username</CTableHeaderCell>
-                        <CTableHeaderCell>Email</CTableHeaderCell>
-                        <CTableHeaderCell>Contact</CTableHeaderCell>
-                        <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
-                    </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                    {customers.length > 0 ? (
-                        customers.map((user, index) => (
-                            <CTableRow key={index}>
-                                <CTableDataCell className="text-center">
-                                    <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
-                                </CTableDataCell>
-                                <CTableDataCell>{user.username}</CTableDataCell>
-                                <CTableDataCell>{user.email}</CTableDataCell>
-                                <CTableDataCell>{user.contact}</CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                    <CButton className='Update me-2'>Update</CButton>
-                                    <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
-                                </CTableDataCell>
-                            </CTableRow>
-                        ))
-                    ) : (
-                        <CTableRow>
-                            <CTableDataCell colSpan="5" className="text-center">
-                                No customers found
-                            </CTableDataCell>
-                        </CTableRow>
-                    )}
-                </CTableBody>
-            </CTable>
+        <div className="app-container">
+            <AppHeader />
+            <div className="main-content">
+                <AppSidebar className="app-sidebar" />
+                <div className="content-wrap">
+                    <div className="gradient-container"> {/* Add a div with gradient background */}
+                        <h2 className="text-center text-white mb-4">All Customers</h2>
+                        <CButton className="Add" onClick={handleAddCustomerClick}>
+                            Add Customer
+                        </CButton>
+                        <CTable align="middle" className="mb-0 border" hover responsive>
+                            <CTableHead>
+                                <CTableRow>
+                                    <CTableHeaderCell className="text-center">Profile Image</CTableHeaderCell>
+                                    <CTableHeaderCell>Username</CTableHeaderCell>
+                                    <CTableHeaderCell>Email</CTableHeaderCell>
+                                    <CTableHeaderCell>Contact</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
+                                </CTableRow>
+                            </CTableHead>
+                            <CTableBody>
+                                {customers.length > 0 ? (
+                                    customers.map((user, index) => (
+                                        <CTableRow key={index}>
+                                            <CTableDataCell className="text-center">
+                                                <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
+                                            </CTableDataCell>
+                                            <CTableDataCell>{user.username}</CTableDataCell>
+                                            <CTableDataCell>{user.email}</CTableDataCell>
+                                            <CTableDataCell>{user.contact}</CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <CButton className='Update me-2'>Update</CButton>
+                                                <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    ))
+                                ) : (
+                                    <CTableRow>
+                                        <CTableDataCell colSpan="5" className="text-center">
+                                            No customers found
+                                        </CTableDataCell>
+                                    </CTableRow>
+                                )}
+                            </CTableBody>
+                        </CTable>
 
-            {/* Add Customer Modal */}
-            <CModal visible={showModal} onClose={handleModalClose} size="lg">
-                <CModalHeader closeButton>
-                    <h5>Add Customer</h5>
-                </CModalHeader>
-                <CModalBody>
-                    <AddCustomer />
-                </CModalBody>
-            </CModal>
+                        {/* Add Customer Modal */}
+                        <CModal visible={showModal} onClose={handleModalClose} size="lg">
+                            <CModalHeader closeButton>
+                                <h5>Add Customer</h5>
+                            </CModalHeader>
+                            <CModalBody>
+                                <AddCustomer />
+                            </CModalBody>
+                        </CModal>
+                    </div> {/* Close gradient-container */}
+                </div>
+            </div>
+            <AppFooter />
         </div>
     );
 }
