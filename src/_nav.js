@@ -4,7 +4,8 @@ import {
   cilSpeedometer,
   cilStar,
   cilCarAlt,
-  cilHome
+  cilHome,
+  cilAlignCenter
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -36,6 +37,18 @@ const _nav = [
     name:'Trip',
     icon:<CIcon icon={cilCarAlt} customClassName="nav-icon" />,
     to:'/trip'
+
+  },
+
+  {
+    component: CNavTitle,
+    name: 'View',
+  },
+  {
+    component: CNavItem,
+    name:'History & Feedbacks',
+    icon:<CIcon icon={cilAlignCenter} customClassName="nav-icon" />,
+    to:'/tripHistory'
 
   },
 
