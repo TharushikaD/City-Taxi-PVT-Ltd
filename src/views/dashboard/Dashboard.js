@@ -9,6 +9,7 @@ import {
   CAlert
 } from '@coreui/react';
 import { useNavigate } from 'react-router-dom';
+import promoImage from 'src/assets/resources/promo3.png';
 
 
 const getTripStatus = () => {
@@ -48,6 +49,24 @@ const Dashboard = () => {
 
   return (
     <>
+      <CCard className="mb-3"  style={{backgroundColor:'#e0b506'}}>
+        <CCardBody>
+          <CRow >
+            <CCol sm={12} style={{backgroundColor:'#2a303d ' ,padding:'20px'}} >
+              <h4 className="card-title mb-3 text-white text-center">P R O M O T I O N S !!!</h4>
+            </CCol>
+          </CRow>
+        </CCardBody>
+        <CCardFooter>
+        <img
+                src={promoImage}
+                alt="Promotional Advertisement"
+                style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+              />
+        </CCardFooter>
+      </CCard>
+
+
       <CCard className="mb-4">
         <CCardBody>
           <CRow>
