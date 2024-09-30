@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { CSpinner, useColorModes } from '@coreui/react';
 import './scss/style.scss';
 
+
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
 const DriverLayout = React.lazy(() => import('./layout/DriverLayout'));
@@ -28,7 +29,7 @@ const Trip = React.lazy(() => import('./views/trip/Trip'))
 const AddDriver = React.lazy(() => import('./views/addDriver/AddDriver'))
 const AddCustomer = React.lazy(() => import('./views/addCustomer/AddCustomer'))
 const TripHistory =  React.lazy(() => import('./views/tripHistory/TripHistory'))
-
+const Payment =  React.lazy(() => import('./views/payment/Payment'))
 
 
 
@@ -105,6 +106,7 @@ const App = () => {
           <Route path="/addDriver" element={<PrivateRoute element={<AddDriver />} />} />
           <Route path="/addCustomer" element={<PrivateRoute element={<AddCustomer />} />} />
           <Route path="/tripHistory" element={<PrivateRoute element={<TripHistory />} />} />
+          <Route path="/payment" element={<PrivateRoute element={<Payment />} />} />
 
 
          
