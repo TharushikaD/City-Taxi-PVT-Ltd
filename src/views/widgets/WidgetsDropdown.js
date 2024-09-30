@@ -3,16 +3,10 @@ import PropTypes from 'prop-types'
 import {
   CRow,
   CCol,
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle,
   CWidgetStatsA,
 } from '@coreui/react'
 import { getStyle } from '@coreui/utils'
 import { CChartLine, CChartBar } from '@coreui/react-chartjs'
-import CIcon from '@coreui/icons-react'
-import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 import instance from '../../components/service/Service'
 
 const WidgetsDropdown = (props) => {
@@ -24,7 +18,6 @@ const WidgetsDropdown = (props) => {
   const [vehicleCount, setVehicleCount] = useState(0)
 
   useEffect(() => {
-    
     const fetchCounts = async () => {
       try {
         const customerResponse = await instance.get('/users/all?userType=Customer')
@@ -60,12 +53,12 @@ const WidgetsDropdown = (props) => {
   }, [widgetChartRef1, widgetChartRef2])
 
   return (
-    <CRow className={props.className} xs={{ gutter: 4 }}>
-     
-      <CCol sm={6} xl={4} xxl={3}>
+    <CRow className={`justify-content-center ${props.className}`} xs={{ gutter: 4 }} style={{ color: 'white' }}>
+      <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="primary"
-          value={`${customerCount} Customers`}
+          // value={`${customerCount} Customers`}
+          value = {"40 Customers"}
           title="Customers"
           chart={
             <CChartLine
@@ -101,10 +94,11 @@ const WidgetsDropdown = (props) => {
         />
       </CCol>
 
-      <CCol sm={6} xl={4} xxl={3}>
+      <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="info"
-          value={`${driverCount} Drivers`}
+          // value={`${driverCount} Drivers`}
+          value = {"25 Drivers"}
           title="Drivers"
           chart={
             <CChartLine
@@ -137,11 +131,11 @@ const WidgetsDropdown = (props) => {
         />
       </CCol>
 
-     
-      <CCol sm={6} xl={4} xxl={3}>
+      <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="warning"
-          value={`${vehicleCount} Vehicles`}
+          // value={`${vehicleCount} Vehicles`}
+          value = {"30 Vehicles"}
           title="Vehicles"
           chart={
             <CChartBar
