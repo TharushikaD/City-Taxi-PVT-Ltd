@@ -5,6 +5,7 @@ import { CSpinner, useColorModes } from '@coreui/react';
 import './scss/style.scss';
 
 
+
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
 const DriverLayout = React.lazy(() => import('./layout/DriverLayout'));
@@ -30,6 +31,10 @@ const AddDriver = React.lazy(() => import('./views/addDriver/AddDriver'))
 const AddCustomer = React.lazy(() => import('./views/addCustomer/AddCustomer'))
 const TripHistory =  React.lazy(() => import('./views/tripHistory/TripHistory'))
 const Payment =  React.lazy(() => import('./views/payment/Payment'))
+const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const DriverDashboard = React.lazy(() => import('./views/dashboard/DriverDashboard'))
+const AdminDashboard = React.lazy(() => import('./views/dashboard/AdminDashboard'))
+const BookingHistory = React.lazy(() => import('./views/bookingHistory/BookingHistory'))
 
 
 
@@ -106,7 +111,12 @@ const App = () => {
           <Route path="/addDriver" element={<PrivateRoute element={<AddDriver />} />} />
           <Route path="/addCustomer" element={<PrivateRoute element={<AddCustomer />} />} />
           <Route path="/tripHistory" element={<PrivateRoute element={<TripHistory />} />} />
+          <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+          <Route path="/driverDashboard" element={<PrivateRoute element={<DriverDashboard />} />} />
+          <Route path="/adminDashboard" element={<PrivateRoute element={<AdminDashboard />} />} />
           <Route path="/payment" element={<PrivateRoute element={<Payment />} />} />
+          <Route path="/bookingHistory" element={<PrivateRoute element={<BookingHistory />} />} />
+
 
 
          
