@@ -20,6 +20,7 @@ const Login = ({ onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -45,13 +46,13 @@ const Login = ({ onLoginSuccess }) => {
 
       const { object: { id, usertype, username, email, contact }, token } = response.data;
 
-      
+
       localStorage.setItem('userId', id);
       localStorage.setItem('userRole', usertype);
       localStorage.setItem('authToken', token);
       localStorage.setItem('userName', username);
-      
-      
+
+
       localStorage.setItem('profileData', JSON.stringify({ username, email, contact }));
 
       onLoginSuccess(token, usertype, username);
@@ -147,7 +148,16 @@ const Login = ({ onLoginSuccess }) => {
 
                   <CRow className="mb-3">
                     <CCol xs={12}>
-                      <CButton type="submit" className="w-100 text-white" style={{ backgroundColor: '#2a303d' }}>
+                      <CButton
+                        type="submit"
+                        className="w-100 text-white"
+                        style={{
+                          backgroundColor: isHovered ? 'bisque' : '#2a303d',
+                          transition: 'background-color 0.3s ease',
+                        }}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                      >
                         Login
                       </CButton>
                     </CCol>

@@ -91,7 +91,7 @@ export default function AllCustomers() {
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
                     <div className="gradient-container"> {/* Add a div with gradient background */}
-                        <h2 className="text-center text-white mb-4">All Customers</h2>
+                        <h4 className="text-center text-white mb-4" style={{ fontWeight: '600', letterSpacing: '1px' }}>All Customers</h4>
                         <CButton className="Add" onClick={handleAddCustomerClick}>
                             Add Customer
                         </CButton>

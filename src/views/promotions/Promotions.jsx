@@ -13,6 +13,11 @@ import {
     CCol,
     CRow
 } from '@coreui/react';
+import AppHeader from '../../components/AppHeader';
+import AppFooter from '../../components/AppFooter';
+import AppSidebar from '../../components/AppSidebar';
+import './style.css';
+
 
 const Promotions = () => {
     const [promotions, setPromotions] = useState([
@@ -47,38 +52,26 @@ const Promotions = () => {
     };
 
     return (
-        <>
-            <div style={{  display: 'flex', justifyContent: 'center', margin: 'auto', padding: '2rem 0' }}>
-                <CCard className="mb-4" style={{ borderRadius: '10px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-                    <CCardHeader
-                        style={{
-                            background: 'linear-gradient(135deg, #FFD700, #322e2e)',
-                            borderTopLeftRadius: '10px',
-                            borderTopRightRadius: '10px'
-                        }}
-                        className='text-center text-white p-4'
-                    >
-                        <h4 style={{ fontWeight: '600', letterSpacing: '1px' }}>Manage Promotions</h4>
-                    </CCardHeader>
-                    <CCardBody style={{ padding: '2rem' }}>
+
+
+        <div className="app-container">
+            <AppHeader />
+            <div className="main-content">
+                <AppSidebar className="app-sidebar" />
+                <div className="content-wrap">
+                    <div className="gradient-container">
+                        <h4 className='text-center' style={{ fontWeight: '600', letterSpacing: '1px' }}>Manage Promotions</h4>
                         <CRow className="mb-4">
                             <CCol className="text-start">
                                 <CButton
+                                    className='Add'
                                     onClick={handleAddPromotion}
-                                    style={{
-                                        backgroundColor: '#2a303d',
-                                        borderColor: '#4CAF50',
-                                        borderRadius: '8px',
-                                        padding: '0.5rem 1.5rem',
-                                        fontWeight: '600',
-                                        color:'white'
-                                    }}
                                 >
                                     Add Promotion
                                 </CButton>
                             </CCol>
                         </CRow>
-                        <CTable hover responsive style={{ fontSize: '1rem', borderRadius: '10px' }}>
+                        <CTable align="middle" className="mb-0 border" hover responsive style={{ fontSize: '1rem', borderRadius: '10px' }}>
                             <CTableHead>
                                 <CTableRow style={{ backgroundColor: '#f8f9fa' }}>
                                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
@@ -93,33 +86,19 @@ const Promotions = () => {
                                 {promotions.map((promotion) => (
                                     <CTableRow key={promotion.id} style={{ transition: '0.3s' }}>
                                         <CTableDataCell>{promotion.name}</CTableDataCell>
-                                        <CTableDataCell className='text-center'>{promotion.discountPercentage}</CTableDataCell>
+                                        <CTableDataCell>{promotion.discountPercentage}</CTableDataCell>
                                         <CTableDataCell>{promotion.promotionType}</CTableDataCell>
                                         <CTableDataCell>{promotion.validFrom}</CTableDataCell>
                                         <CTableDataCell>{promotion.validTo}</CTableDataCell>
                                         <CTableDataCell>
                                             <CButton
-                                                size="sm"
-                                                className="me-2"
-                                                style={{
-                                                    borderRadius: '8px',
-                                                    backgroundColor: '#2a303d',
-                                                    color:'white',
-                                                     padding:'10px'
-                                                }}
+                                                className=" Update me-2"
                                                 onClick={() => handleUpdatePromotion(promotion.id)}
                                             >
                                                 Update
                                             </CButton>
                                             <CButton
-                                                size="sm"
-                                                style={{
-                                                    borderRadius: '8px',
-                                                    backgroundColor: '#2a303d',
-                                                    color:'white',
-                                                    padding:'10px'
-
-                                                }}
+                                                className='Delete'
                                                 onClick={() => handleDeletePromotion(promotion.id)}
                                             >
                                                 Delete
@@ -129,12 +108,14 @@ const Promotions = () => {
                                 ))}
                             </CTableBody>
                         </CTable>
-                    </CCardBody>
-                </CCard>
+                    </div>
+                </div>
             </div>
+            <AppFooter />
+        </div>
 
-        </>
+
     );
-};
+}
 
 export default Promotions;

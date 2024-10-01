@@ -79,7 +79,7 @@ export default function AllDrivers() {
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
                     <div className="gradient-container"> {/* Add a div with gradient background */}
-                        <h2 className="text-center text-white mb-4">All Drivers</h2>
+                        <h4 className="text-center text-white mb-4" style={{ fontWeight: '600', letterSpacing: '1px' }}>All Drivers</h4>
                         <CButton className="Add mb-3" onClick={() => setShowAddDriverModal(true)}>
                             Add Driver
                         </CButton>

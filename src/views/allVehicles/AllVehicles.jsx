@@ -20,7 +20,7 @@ export default function AllVehicles() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Mock data to simulate fetched vehicle data
+    
     useEffect(() => {
         const fetchVehicles = async () => {
             const mockData = [
@@ -38,7 +38,7 @@ export default function AllVehicles() {
                     vehicleType: 'Car', 
                     imageUrl: 'src/assets/resources/vitz.jpg' 
                 },
-            ];
+            ]; 
 
             setLoading(true);
             try {
@@ -52,7 +52,7 @@ export default function AllVehicles() {
             }
         };
 
-        // Real fetch method that could be used once integrated with an API
+        
         // const fetchVehicles = async () => {
         //     setLoading(true);
         //     try {
@@ -89,13 +89,13 @@ export default function AllVehicles() {
 
     return (
         <div className="app-container">
-            {/* Header, Sidebar, and Footer integration */}
+            
             <AppHeader />
             <div className="main-content">
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
-                    <div className="gradient-container"> {/* Gradient background */}
-                        <h2 className="text-center text-white mb-4">All Vehicles</h2>
+                    <div className="gradient-container"> 
+                        <h4 className="text-center text-white mb-4"  style={{ fontWeight: '600', letterSpacing: '1px' }}>All Vehicles</h4>
 
                         <CTable align="middle" className="mb-0 border" hover responsive>
                             <CTableHead>

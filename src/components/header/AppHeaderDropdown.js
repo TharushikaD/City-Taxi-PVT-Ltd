@@ -54,7 +54,7 @@ const AppHeaderDropdown = () => {
       </CDropdown>
 
       {/* Profile Modal */}
-      <CModal visible={isProfileModalVisible} onClose={toggleProfileModal} size="lg">
+      <CModal visible={isProfileModalVisible} onClose={toggleProfileModal}>
         <CModalHeader onClose={toggleProfileModal}>Profile</CModalHeader>
         <CModalBody>
           <Profile /> {/* Render the Profile component inside the modal */}

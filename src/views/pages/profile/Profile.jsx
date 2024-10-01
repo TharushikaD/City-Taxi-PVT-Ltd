@@ -87,7 +87,7 @@ const Profile = () => {
 
   return (
     <div className='pro'>
-      <CCard className="profile-form shadow-lg">
+      <CCard className="profile-form">
         <CCardBody>
           <h5 className="text-center mb-4">{`Hello, ${userName || 'User'}`}</h5>
           <h3 className="text-center mb-4">Update Profile</h3>
