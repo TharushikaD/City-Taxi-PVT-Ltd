@@ -1,9 +1,13 @@
-.gradient-container {
-    background: linear-gradient(135deg, #FFD700, #322e2e);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.app-header, .app-footer {
+    background-color: #444;
     color: white;
+    padding: 15px;
+    width: calc(100% - 250px); /* Sidebar width subtracted */
+    margin-left: 250px; /* Sidebar width */
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .app-container {
@@ -34,16 +38,4 @@
     background-color: #f8f9fa;
     padding: 20px;
     overflow-y: auto;
-}
-
-.app-header, .app-footer {
-    background-color: #444;
-    color: white;
-    padding: 15px;
-    width: calc(100% - 250px); /* Sidebar width subtracted */
-    margin-left: 250px; /* Sidebar width */
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 1000;
 }

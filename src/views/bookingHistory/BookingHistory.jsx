@@ -11,7 +11,9 @@ import {
     CTableDataCell,
 } from '@coreui/react';
 import './style.css';
-
+import AppFooter from '../../components/AppFooter';
+import AppHeader from '../../components/AppHeader';
+import AppSidebar from '../../components/AppSidebar';
 
 
 const getBookingHistoryByDriverId = (driverId) => {
@@ -60,13 +62,13 @@ const BookingHistory = ({ driverId }) => {
     }
 
     return (
-        <CCard className="mb-4">
-            <CCardHeader
-                className='text-white text-center'
-                style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e' }}>
-                <h4>Booking History</h4>
-            </CCardHeader>
-            <CCardBody>
+        <div className="app-container">
+        <AppHeader />
+        <div className="main-content">
+            <AppSidebar className="app-sidebar" />
+            <div className="content-wrap">
+                <div className="gradient-container">
+                <h4 className='text-center' style={{ fontWeight: '600', letterSpacing: '1px',padding:'10px' }}>Booking History</h4>
                 {bookingHistory.length > 0 ? (
                     <CTable hover>
                         <CTableHead>
@@ -99,8 +101,11 @@ const BookingHistory = ({ driverId }) => {
                 ) : (
                     <p>No booking history available.</p>
                 )}
-            </CCardBody>
-        </CCard>
+            </div>
+            </div>
+            </div>
+            <AppFooter/>
+            </div>
     );
 };
 

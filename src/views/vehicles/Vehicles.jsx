@@ -127,9 +127,9 @@ const Vehicles = () => {
     return (
         <>
             <CCard className="form-container">
-                <CCardHeader className="form-header" style={{background:'linear-gradient(135deg, #FFD700, #322e2e)'}}>
+                {/* <CCardHeader className="form-header" style={{background:'linear-gradient(135deg, #FFD700, #322e2e)'}}>
                     <h3 className='text-white'>Register Vehicle</h3>
-                </CCardHeader>
+                </CCardHeader> */}
                 <CCardBody className="form-body">
                     <CForm onSubmit={handleSubmit}>
                         <CRow>

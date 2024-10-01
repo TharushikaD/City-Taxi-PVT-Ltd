@@ -111,10 +111,10 @@ export default function AddDriver() {
 
     return (
         <>
-            <CCard className="form-container">
-                <CCardHeader className="form-header" style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e)' }}>
+            <CCard style={{padding:'20px'}}>
+                {/* <CCardHeader className="form-header" style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e)' }}>
                     <h3 className='text-white text-center'>Add Driver</h3>
-                </CCardHeader>
+                </CCardHeader> */}
                 <CCardBody className="form-body">
 
                     <CForm onSubmit={handleSubmit}>
@@ -204,9 +204,10 @@ export default function AddDriver() {
                                 </CInputGroup>
                             </CCol>
                         </CRow>
-
-                        <CButton type="submit" className="w-100 text-white" style={{
-                            backgroundColor: isHovered ? 'bisque' : '#2a303d',
+                        <CRow>
+                        <CCol style={{display:'flex', justifyContent:'center'}}>
+                        <CButton type="submit" className="w-25 text-white" style={{
+                            backgroundColor: isHovered ? 'bisque' : '#e0b506',
                             transition: 'background-color 0.3s ease',
                         }}
                             onMouseEnter={() => setIsHovered(true)}
@@ -214,6 +215,8 @@ export default function AddDriver() {
                         >
                             Register
                         </CButton>
+                        </CCol>
+                        </CRow>
                     </CForm>
                 </CCardBody>
             </CCard>

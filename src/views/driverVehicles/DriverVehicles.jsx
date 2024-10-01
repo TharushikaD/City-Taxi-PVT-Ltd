@@ -121,7 +121,7 @@ export default function DriverVehicles() {
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
                     <div className="gradient-container">
-                        <h2 className="text-center text-white mb-4">Registered Vehicles</h2>
+                        <h4 className="text-center text-white mb-4" style={{ fontWeight: '600', letterSpacing: '1px', }}>Registered Vehicles</h4>
                         <CButton onClick={handleAdd} className="Add mb-3">Add Vehicle</CButton>
                         
                         <CTable align="middle" className="mb-0 border" hover responsive>

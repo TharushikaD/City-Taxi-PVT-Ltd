@@ -90,7 +90,7 @@ export default function AllCustomers() {
             <div className="main-content">
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
-                    <div className="gradient-container"> {/* Add a div with gradient background */}
+                    <div className="gradient-container"> 
                         <h4 className="text-center text-white mb-4" style={{ fontWeight: '600', letterSpacing: '1px' }}>All Customers</h4>
                         <CButton className="Add" onClick={handleAddCustomerClick}>
                             Add Customer
@@ -133,7 +133,7 @@ export default function AllCustomers() {
 
                         {/* Add Customer Modal */}
                         <CModal visible={showModal} onClose={handleModalClose} size="lg">
-                            <CModalHeader closeButton>
+                            <CModalHeader  closeButton>
                                 <h5>Add Customer</h5>
                             </CModalHeader>
                             <CModalBody>
