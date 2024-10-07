@@ -100,28 +100,7 @@ const App = () => {
           <Route path="/contact" name="Contact" element={<Contact />} />
           <Route path="/login" name="Login Page" element={<Login onLoginSuccess={handleLoginSuccess} />} /> 
           <Route path="/register" name="Register Page" element={<Register />} />
-          {/* <Route path="/defaultLayout/*" element={<DefaultLayout />}/>
-          <Route path="/adminLayout/*" element={<AdminLayout />}/>
-          <Route path="/driverLayout/*" element={<DriverLayout />} />
-          <Route path= element={<OperatorLayout/>}/>
-          <Route path="/profile" element={ <Profile/>} />
-          <Route path="/vehicles" element={<Vehicles />} />
-          <Route path="/allCustomers" element={<AllCustomers />} />
-          <Route path="/allDrivers" element={<AllDrivers />} />
-          <Route path="/driverVehicles" element={<PrivateRoute element={<DriverVehicles />} />} />
-          <Route path="/allVehicles" element={<AllVehicles />} />
-          <Route path="/trip" element={<Trip />}  />
-          <Route path="/addDriver" element={<AddDriver />} />
-          <Route path="/addCustomer" element={<AddCustomer />} />
-          <Route path="/tripHistory" element={<TripHistory />}  />
-          <Route path="/dashboard" element={<Dashboard />}  />
-          <Route path="/driverDashboard" element={<DriverDashboard />} />
-          <Route path="/adminDashboard" element={<AdminDashboard />} />
-          <Route path="/payment" element={<Payment />}  />
-          <Route path="/bookingHistory" element={<BookingHistory />}  />
-          <Route path="/promotions" element={<Promotions />} />
-          <Route path="/map" element={<Map/>} /> */}
-
+        
           <Route path="/adminLayout/*" element={<PrivateRoute element={<AdminLayout />} />} />
           <Route path="/defaultLayout/*" element={<PrivateRoute element={<DefaultLayout />} />} /> 
           <Route path="/driverLayout/*" element={<PrivateRoute element={<DriverLayout />} />} />

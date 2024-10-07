@@ -11,7 +11,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import { AppSidebarNav } from './AppSidebarNav';
 
-import operatorNav from '../operatorNav';
+import operatorNav from 'src/operatorNav';
 import adminNav from 'src/adminNav';
 import driverNav from 'src/driverNav';
 import _nav from 'src/_nav';
