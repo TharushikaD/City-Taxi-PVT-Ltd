@@ -144,7 +144,7 @@ const Register = () => {
                           required
                         />
                       </CInputGroup>
-                      {errors.username && <p className="text-danger">{errors.username}</p>}
+                      {errors.username && <p className="text-white">{errors.username}</p>}
                     </CCol>
                     <CCol md={6}>
                       <CInputGroup>
@@ -157,7 +157,7 @@ const Register = () => {
                           required
                         />
                       </CInputGroup>
-                      {errors.email && <p className="text-danger">{errors.email}</p>}
+                      {errors.email && <p className="text-white">{errors.email}</p>}
                     </CCol>
                   </CRow>
 
@@ -194,7 +194,7 @@ const Register = () => {
                           <CIcon icon={showPassword ? cilLowVision : cilLowVision} />
                         </CInputGroupText>
                       </CInputGroup>
-                      {errors.password && <p className="text-danger">{errors.password}</p>}
+                      {errors.password && <p className="text-white">{errors.password}</p>}
                     </CCol>
                   </CRow>
 
