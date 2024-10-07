@@ -9,7 +9,7 @@ import {
   CRow,
   CCol
 } from '@coreui/react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
@@ -17,18 +17,106 @@ import AppFooter from '../../components/AppFooter';
 import AppHeader from '../../components/AppHeader';
 import AppSidebar from '../../components/AppSidebar';
 import '../../scss/formStyles.css';
+import RoutingMachine from '../routeMachine/RoutingMachine';
+import instance from '../../components/service/Service';
+
+
+// Leaflet icon fix
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
 
 const Trip = () => {
+  const [pickupCoords, setpickupCoords] = useState(null);
+  const [destinationCoords, setdestinationCoords] = useState(null);
+  const [clickCount, setClickCount] = useState(0);
+  const [distance, setDistance] = useState(0); // State to hold distance
+  const [fare, setFare] = useState(0); // State to hold the fare
+
   const [formData, setFormData] = useState({
-    pickupLocation: { lat: 7.8731, lng: 80.7718 },  
-    destination: { lat: 0, lng: 0 },
+    driverId: '',
     startLatitude: '',
-    startLongitude: '',
-    destinationLatitude: '',
-    destinationLongitude: '',
-    scheduledTime: '',
-    selectedDriver: ''
+    startLongitude:'',
+    endLatitude:'',
+    endLongitude:'',
+    bookingTime:'',
+    startTime:'',
+    endTime:'',
+    passengerId: localStorage.getItem('userId'),
+    destination: '',
+    fare:''
   });
+
+  // Calculate distance whenever pickup or destination coords change
+  useEffect(() => {
+    if (pickupCoords && destinationCoords) {
+      const pickupLatLng = L.latLng(pickupCoords.lat, pickupCoords.lng);
+      const dropoffLatLng = L.latLng(destinationCoords.lat, destinationCoords.lng);
+      const calculatedDistance = pickupLatLng.distanceTo(dropoffLatLng); // Distance in meters
+      setDistance(calculatedDistance.toFixed(2)); // Round to 2 decimal places
+      const totalFare = ((calculatedDistance / 1000) * 200).toFixed(2); // Calculate fare as ₹200 per km
+      setFare(totalFare); // Store the calculated fare
+    formData.fare = totalFare;
+
+    }
+  }, [pickupCoords, destinationCoords]);
+
+
+  const LocationSelector = () => {
+    useMapEvents({
+      click: async (e) =>{
+        const { lat, lng } = e.latlng; // Define lat and lng here
+        if (clickCount === 0) {
+          setpickupCoords(e.latlng);
+          formData.pickupLocation= e.latlng;
+
+          setFormData(prev => ({
+            ...prev,
+            pickupLocation: { lat, lng },
+            startLatitude: lat,
+            startLongitude: lng,
+
+          }));
+          setClickCount(1);
+        } else if (clickCount === 1) {
+          setdestinationCoords(e.latlng); // Second click for dropoff location
+          formData.destination = e.latlng;
+          setFormData(prev => ({
+            ...prev,
+            destination: { lat, lng },
+            endLatitude: lat,
+            endLongitude: lng,
+
+          }));
+          setClickCount(0);
+        }
+      },
+    });
+    console.log('pickupCoords', pickupCoords)
+   
+    return null;
+  };
+
+  const fetchLocationName = async (lat, lng) => {
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+      const data = await response.json();
+      return data.display_name; // This contains the location name
+    } catch (error) {
+      console.error("Error fetching location name:", error);
+      return null;
+    }
+  };
+
+  const clearSelection = () => {
+    setClickCount(0);
+    setpickupCoords(null);
+    setdestinationCoords(null);
+  };
 
   const drivers = [
     { id: 1, name: 'Harendra P' },
@@ -38,29 +126,53 @@ const Trip = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name.includes("Latitude") || name.includes("Longitude")) {
-      const isLatitude = name.includes("Latitude");
-      const locationKey = isLatitude ? "pickupLocation" : "destination";
-      setFormData(prev => ({
-        ...prev,
-        [locationKey]: {
-          ...prev[locationKey],
-          [name]: value
-        },
-        [name]: value
-      }));
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-  };
+    const response = await instance.post(`/vehicles/all?userId=${userID}`, vehicleData, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+      },
+  });
+
+  if (validateForm()) {
+      setLoading(true);
+
+      const vehicleData = {
+          registrationNumber: formData.registrationNumber,
+          make: formData.make,
+          model: formData.model,
+          year: formData.year,
+          licensePlateNumber: formData.licensePlateNumber,
+          vehicleType: formData.vehicleType,
+          image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
+          image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
+          userID: userID
+      };
+
+      console.log('User ID:', userID);
+      console.log('Vehicle Data:', vehicleData);
+
+      try {
+          const response = await instance.post(`/vehicles/create?userId=${userID}`, vehicleData, {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          });
+          console.log('Vehicle created:', response.data);
+          setLoading(false);
+      } catch (error) {
+          console.error('Error creating vehicle:', error);
+          setLoading(false);
+      }
+  }
+};
+
 
   const handleClear = () => {
     setFormData({
@@ -75,8 +187,8 @@ const Trip = () => {
     });
   };
 
-  const pickupCoords = [formData.pickupLocation.lat, formData.pickupLocation.lng];
-  const destinationCoords = [formData.destination.lat, formData.destination.lng];
+  // const pickupCoords = [formData.pickupLocation.lat, formData.pickupLocation.lng];
+  // const destinationCoords = [formData.destination.lat, formData.destination.lng];
 
   return (
     <div className="app-container">
@@ -86,7 +198,7 @@ const Trip = () => {
         <div className="content-wrap">
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px', width: '100%' }}>
             <div style={{ width: '50%', height: '450px', display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-              <MapContainer
+              {/* <MapContainer
                 center={pickupCoords}
                 zoom={12} 
                 style={{ minHeight: '450px', width: '90%', border: '1px solid #ccc' }}
@@ -101,6 +213,26 @@ const Trip = () => {
                 <Marker position={destinationCoords}>
                   <Popup>Destination</Popup>
                 </Marker>
+                <RoutingMachine
+                pickupCoords={pickupCoords}
+                destinationCoords={destinationCoords}
+              />
+              </MapContainer> */}
+              <MapContainer
+                center={[7.8731, 80.7718]} // Sri Lanka coordinates
+                zoom={8}
+                style={{ height: "400px", width: "100%" }}
+              >
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+                {pickupCoords && <Marker position={pickupCoords} />}
+                {destinationCoords && <Marker position={destinationCoords} />}
+
+                <LocationSelector />
+                <RoutingMachine
+                  pickupCoords={pickupCoords}
+                  destinationCoords={destinationCoords}
+                />
               </MapContainer>
             </div>
             <div style={{ width: '50%', padding: '0 15px' }}>
@@ -113,30 +245,6 @@ const Trip = () => {
                     <CRow>
                       <CCol md="6">
                         <CInputGroup className="input-group mb-3">
-                          <label htmlFor="pickupLocation" className="form-label">Pickup Location</label>
-                          <input
-                            type="text"
-                            id="pickupLocation"
-                            name="pickupLocation"
-                            className="form-control"
-                            placeholder="Enter Pickup Location"
-                            onChange={handleChange}
-                            required
-                          />
-                        </CInputGroup>
-                        <CInputGroup className="input-group mb-3">
-                          <label htmlFor="destination" className="form-label">Destination</label>
-                          <input
-                            type="text"
-                            id="destination"
-                            name="destination"
-                            className="form-control"
-                            placeholder="Enter Destination"
-                            onChange={handleChange}
-                            required
-                          />
-                        </CInputGroup>
-                        <CInputGroup className="input-group mb-3">
                           <label htmlFor="startLatitude" className="form-label">Start Latitude</label>
                           <input
                             type="number"
@@ -145,7 +253,6 @@ const Trip = () => {
                             className="form-control"
                             placeholder="Enter Start Latitude"
                             value={formData.startLatitude}
-                            onChange={handleChange}
                             required
                           />
                         </CInputGroup>
@@ -158,47 +265,45 @@ const Trip = () => {
                             className="form-control"
                             placeholder="Enter Start Longitude"
                             value={formData.startLongitude}
-                            onChange={handleChange}
                             required
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="input-group mb-3">
+                          <label htmlFor="fare" className="form-label">Fee</label>
+                          <input
+                            type="number"
+                            id="fare"
+                            name="fare"
+                            className="form-control"
+                            placeholder="Enter Start Longitude"
+                            value={fare}
+                            readOnly
                           />
                         </CInputGroup>
                       </CCol>
 
                       <CCol md="6">
                         <CInputGroup className="input-group mb-3">
-                          <label htmlFor="destinationLatitude" className="form-label">Destination Latitude</label>
+                          <label htmlFor="endLatitude" className="form-label">Destination Latitude</label>
                           <input
                             type="number"
-                            id="destinationLatitude"
-                            name="destinationLatitude"
+                            id="endLatitude"
+                            name="endLatitude"
                             className="form-control"
                             placeholder="Enter Destination Latitude"
-                            value={formData.destinationLatitude}
-                            onChange={handleChange}
+                            value={formData.endLatitude}
                             required
                           />
                         </CInputGroup>
                         <CInputGroup className="input-group mb-3">
-                          <label htmlFor="destinationLongitude" className="form-label">Destination Longitude</label>
+                          <label htmlFor="endLongitude" className="form-label">Destination Longitude</label>
                           <input
                             type="number"
-                            id="destinationLongitude"
-                            name="destinationLongitude"
+                            id="endLongitude"
+                            name="endLongitude"
                             className="form-control"
                             placeholder="Enter Destination Longitude"
-                            value={formData.destinationLongitude}
-                            onChange={handleChange}
-                            required
-                          />
-                        </CInputGroup>
-                        <CInputGroup className="input-group mb-3">
-                          <label htmlFor="scheduledTime" className="form-label">Scheduled Time</label>
-                          <input
-                            type="datetime-local"
-                            id="scheduledTime"
-                            name="scheduledTime"
-                            className="form-control"
-                            onChange={handleChange}
+                            value={formData.endLongitude}
                             required
                           />
                         </CInputGroup>
@@ -210,8 +315,9 @@ const Trip = () => {
                             className="form-select"
                             onChange={handleChange}
                             required
+                            style={{ width: '100%' }}                       
                           >
-                            <option value="">Select a driver</option>
+                            <option  value="">Select a driver</option>
                             {drivers.map(driver => (
                               <option key={driver.id} value={driver.id}>{driver.name}</option>
                             ))}

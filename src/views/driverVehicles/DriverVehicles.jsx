@@ -101,6 +101,15 @@ export default function DriverVehicles() {
         setModalVisible(false); // Close the modal
     };
 
+    const handleRegistrationClick = (vehicle) => {
+        // Save the entire vehicle object to localStorage
+        localStorage.setItem('selectedVehicle', JSON.stringify(vehicle));
+        console.log(`Vehicle ${vehicle.registrationNumber} saved!`);
+        const selectedVehicle = localStorage.getItem('selectedVehicle');
+        console.log(selectedVehicle)
+        handleAdd();
+    };
+
     if (loading) {
         return (
             <div className="text-center">
@@ -128,7 +137,7 @@ export default function DriverVehicles() {
                             <CTableHead>
                                 <CTableRow>
                                     <CTableHeaderCell className="text-center">Image</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Registration Number</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" >Registration Number</CTableHeaderCell>
                                     <CTableHeaderCell>Manufacturer</CTableHeaderCell>
                                     <CTableHeaderCell>Model</CTableHeaderCell>
                                     <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
@@ -142,7 +151,8 @@ export default function DriverVehicles() {
                                             <CTableDataCell className="text-center">
                                                 <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
                                             </CTableDataCell>
-                                            <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
+                                            <CTableDataCell className="text-center" onClick={() => handleRegistrationClick(vehicle)}
+                                                style={{ cursor: 'pointer', color: 'blue' }}>{vehicle.registrationNumber}</CTableDataCell>
                                             <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
                                             <CTableDataCell>{vehicle.model}</CTableDataCell>
                                             <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>

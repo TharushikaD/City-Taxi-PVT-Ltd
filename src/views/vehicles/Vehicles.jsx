@@ -8,7 +8,7 @@ import instance from '../../components/service/Service';
 const Vehicles = () => {
     const [formData, setFormData] = useState({
         registrationNumber: '',
-        manufacturer: '',
+        make: '',
         model: '',
         licensePlateNumber: '',
         vehicleType: '',
@@ -25,12 +25,32 @@ const Vehicles = () => {
     //     });
     // };
 
+    useEffect(() => {
+        const storedData = localStorage.getItem('vehicleData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setFormData(prevState => ({
+                ...prevState,
+                registrationNumber: parsedData.getItem('registrationNumber') || '',
+                make: parsedData.getItem('make') || '',
+                model: parsedData.getItem('model') || '',
+                year: parsedData.getItem('year') || '',
+                licensePlateNumber: parsedData.getItem('licensePlateNumber') || '',
+                vehicleType: parsedData.getItem('vehicleType') || '',
+                image1: parsedData.getItem('image1') || '',
+                image2: parsedData.getItem('image2') || '',
+            }));
+        }
+    }, []);
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 
-    
+
     const [userID, setUserId] = useState(localStorage.getItem('userId'));
     const token = localStorage.getItem('authToken');
+    const selectedVehicle = localStorage.getItem('selectedVehicle');
+    console.log(selectedVehicle)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,10 +67,10 @@ const Vehicles = () => {
         } else if (!/^[A-Z0-9]{6,10}$/.test(formData.registrationNumber)) {
             formErrors.registrationNumber = 'Registration number should be 6-10 characters long and contain only uppercase letters and numbers';
         }
-        if (!formData.manufacturer.trim()) {
-            formErrors.manufacturer = 'Manufacturer is required';
-        } else if (formData.manufacturer.length < 2) {
-            formErrors.manufacturer = 'Manufacturer name must be at least 2 characters long';
+        if (!formData.make.trim()) {
+            formErrors.make = 'make is required';
+        } else if (formData.make.length < 2) {
+            formErrors.make = 'make name must be at least 2 characters long';
         }
         if (!formData.model.trim()) {
             formErrors.model = 'Model is required';
@@ -77,29 +97,35 @@ const Vehicles = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const response = await instance.post(`/vehicles/all?userId=${userID}`, vehicleData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
         if (validateForm()) {
             setLoading(true);
-            
+
             const vehicleData = {
                 registrationNumber: formData.registrationNumber,
-                manufacturer: formData.manufacturer,
+                make: formData.make,
                 model: formData.model,
                 year: formData.year,
                 licensePlateNumber: formData.licensePlateNumber,
                 vehicleType: formData.vehicleType,
-                image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp", 
-                image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",  
+                image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
+                image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
                 userID: userID
             };
-    
-            console.log('User ID:', userID); 
-            console.log('Vehicle Data:', vehicleData); 
-    
+
+            console.log('User ID:', userID);
+            console.log('Vehicle Data:', vehicleData);
+
             try {
                 const response = await instance.post(`/vehicles/create?userId=${userID}`, vehicleData, {
-                    // headers: {
-                    //     Authorization: `Bearer ${token}`, 
-                    // },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 console.log('Vehicle created:', response.data);
                 setLoading(false);
@@ -109,11 +135,11 @@ const Vehicles = () => {
             }
         }
     };
-    
+
     const handleClear = () => {
         setFormData({
             registrationNumber: '',
-            manufacturer: '',
+            make: '',
             model: '',
             year: '',
             licensePlateNumber: '',
@@ -150,18 +176,18 @@ const Vehicles = () => {
                                 </CInputGroup>
 
                                 <CInputGroup className="input-group mb-3">
-                                    <label htmlFor="manufacturer" className="form-label">Manufacturer</label>
+                                    <label htmlFor="make" className="form-label">make</label>
                                     <input
                                         type="text"
-                                        id="manufacturer"
-                                        name="manufacturer"
+                                        id="make"
+                                        name="make"
                                         className="form-control"
-                                        placeholder="Enter manufacturer name"
-                                        value={formData.manufacturer}
+                                        placeholder="Enter make name"
+                                        value={formData.make}
                                         onChange={handleChange}
                                         required
                                     />
-                                    {errors.manufacturer && <span className="error-message">{errors.manufacturer}</span>}
+                                    {errors.make && <span className="error-message">{errors.make}</span>}
                                 </CInputGroup>
 
                                 <CInputGroup className="input-group mb-3">
