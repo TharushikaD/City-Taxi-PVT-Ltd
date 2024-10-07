@@ -18,7 +18,7 @@ const TripHistory =  React.lazy(() => import('./views/tripHistory/TripHistory'))
 const Payment =  React.lazy(() => import('./views/payment/Payment'))
 const BookingHistory = React.lazy(() => import('./views/bookingHistory/BookingHistory'))
 const Promotions = React.lazy(() => import('./views/promotions/Promotions'))
-
+const Map = React.lazy(() => import('./views/map/Map'))
 
 
 
@@ -42,6 +42,7 @@ const routes = [
   { path: '/payment', name: 'Payment', element: Payment },
   { path: '/bookingHistory', name: 'BookingHistory', element: BookingHistory },
   { path: '/promtions', name: 'Promotions', element: Promotions },
+  { path: '/map', name: 'Map', element: Map },
 
  
   

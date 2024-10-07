@@ -36,6 +36,7 @@ const Trip = () => {
   const [clickCount, setClickCount] = useState(0);
   const [distance, setDistance] = useState(0); // State to hold distance
   const [fare, setFare] = useState(0); // State to hold the fare
+  
 
   const [formData, setFormData] = useState({
     driverId: '',

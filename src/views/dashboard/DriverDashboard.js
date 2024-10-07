@@ -7,7 +7,11 @@ import {
   CCol,
   CRow,
   CFormCheck,
+  CModal,
+  CModalHeader,
+  CModalBody,
 } from '@coreui/react';
+import Map from '../map/Map';
 
 const getFormattedCurrentDate = () => {
   const today = new Date();
@@ -18,6 +22,7 @@ const getFormattedCurrentDate = () => {
 const DriverDashboard = () => {
   const [isHovered, setIsHovered] = useState(false);
   const currentDate = getFormattedCurrentDate();
+  const[showModal, setShowModal] = useState(false);
 
 
   const [tripRequests, setTripRequests] = useState([
@@ -62,6 +67,14 @@ const DriverDashboard = () => {
   const toggleDriverStatus = () => {
     setDriverStatus((prevStatus) => (prevStatus === 'Available' ? 'Busy' : 'Available'));
   };
+
+  const handleMapClick = () => {
+    setShowModal(true);
+};
+
+const handleModalClose = () => {
+    setShowModal(false);
+};
 
   return (
     <>
@@ -117,6 +130,13 @@ const DriverDashboard = () => {
                   <div className="mt-2">
                     <CButton
                       style={{ backgroundColor: '#2a303d' }}
+                      onClick={handleMapClick}
+                      className="me-2 text-white"
+                    >
+                     View map
+                    </CButton>
+                    <CButton
+                      style={{ backgroundColor: '#2a303d' }}
                       onClick={() => handleAcceptTrip(request.id)}
                       className="me-2 text-white"
                     >
@@ -166,6 +186,14 @@ const DriverDashboard = () => {
             ) : (
               <div>No trip accepted yet.</div>
             )}
+             <CModal visible={showModal} onClose={handleModalClose} size="lg">
+                            <CModalHeader  closeButton>
+                                <h5>Map</h5>
+                            </CModalHeader>
+                            <CModalBody>
+                                <Map />
+                            </CModalBody>
+                        </CModal>
           </div>
         </CCardFooter>
       </CCard>

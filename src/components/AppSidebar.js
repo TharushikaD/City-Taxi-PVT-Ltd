@@ -11,7 +11,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import { AppSidebarNav } from './AppSidebarNav';
 
-
+import operatorNav from '../operatorNav';
 import adminNav from 'src/adminNav';
 import driverNav from 'src/driverNav';
 import _nav from 'src/_nav';
@@ -32,6 +32,9 @@ const AppSidebar = () => {
       break;
     case 'Driver':
       navigation = driverNav;
+      break;
+    case 'Operator':
+      navigation = operatorNav;
       break;
     case 'Customer':
     default:

@@ -10,6 +10,7 @@ import './scss/style.scss';
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
 const DriverLayout = React.lazy(() => import('./layout/DriverLayout'));
 const AdminLayout = React.lazy(() => import('./layout/AdminLayout'));
+const OperatorLayout = React.lazy(() => import('./layout/OperatorLayout'));
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'));
@@ -36,6 +37,7 @@ const DriverDashboard = React.lazy(() => import('./views/dashboard/DriverDashboa
 const AdminDashboard = React.lazy(() => import('./views/dashboard/AdminDashboard'))
 const BookingHistory = React.lazy(() => import('./views/bookingHistory/BookingHistory'))
 const Promotions = React.lazy(() => import('./views/promotions/Promotions'))
+const Map =  React.lazy(() => import('./views/map/Map'))
 
 
 
@@ -96,12 +98,34 @@ const App = () => {
           <Route path="/ride" name="Ride" element={<Ride />} />
           <Route path="/drive" name="Drive" element={<Drive />} />
           <Route path="/contact" name="Contact" element={<Contact />} />
-          <Route path="/login" name="Login Page" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+          <Route path="/login" name="Login Page" element={<Login onLoginSuccess={handleLoginSuccess} />} /> 
           <Route path="/register" name="Register Page" element={<Register />} />
+          {/* <Route path="/defaultLayout/*" element={<DefaultLayout />}/>
+          <Route path="/adminLayout/*" element={<AdminLayout />}/>
+          <Route path="/driverLayout/*" element={<DriverLayout />} />
+          <Route path= element={<OperatorLayout/>}/>
+          <Route path="/profile" element={ <Profile/>} />
+          <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/allCustomers" element={<AllCustomers />} />
+          <Route path="/allDrivers" element={<AllDrivers />} />
+          <Route path="/driverVehicles" element={<PrivateRoute element={<DriverVehicles />} />} />
+          <Route path="/allVehicles" element={<AllVehicles />} />
+          <Route path="/trip" element={<Trip />}  />
+          <Route path="/addDriver" element={<AddDriver />} />
+          <Route path="/addCustomer" element={<AddCustomer />} />
+          <Route path="/tripHistory" element={<TripHistory />}  />
+          <Route path="/dashboard" element={<Dashboard />}  />
+          <Route path="/driverDashboard" element={<DriverDashboard />} />
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/payment" element={<Payment />}  />
+          <Route path="/bookingHistory" element={<BookingHistory />}  />
+          <Route path="/promotions" element={<Promotions />} />
+          <Route path="/map" element={<Map/>} /> */}
 
           <Route path="/adminLayout/*" element={<PrivateRoute element={<AdminLayout />} />} />
-          <Route path="/defaultLayout/*" element={<PrivateRoute element={<DefaultLayout />} />} />
+          <Route path="/defaultLayout/*" element={<PrivateRoute element={<DefaultLayout />} />} /> 
           <Route path="/driverLayout/*" element={<PrivateRoute element={<DriverLayout />} />} />
+          <Route path="/operatorLayout/*" element={<PrivateRoute element={<OperatorLayout/>} />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
           <Route path="/vehicles" element={<PrivateRoute element={<Vehicles />} />} />
           <Route path="/allCustomers" element={<PrivateRoute element={<AllCustomers />} />} />
@@ -118,6 +142,7 @@ const App = () => {
           <Route path="/payment" element={<PrivateRoute element={<Payment />} />} />
           <Route path="/bookingHistory" element={<PrivateRoute element={<BookingHistory />} />} />
           <Route path="/promotions" element={<PrivateRoute element={<Promotions />} />} />
+          <Route path ="/map" element={<PrivateRoute element={<Map/>}/>}/>
 
 
 
