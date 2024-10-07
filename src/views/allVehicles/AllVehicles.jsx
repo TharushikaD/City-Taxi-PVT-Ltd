@@ -74,6 +74,8 @@ export default function AllVehicles() {
         fetchVehicles();
     }, []);
 
+
+
     if (loading) {
         return (
             <div className="text-center">
@@ -115,7 +117,8 @@ export default function AllVehicles() {
                                             <CTableDataCell className="text-center">
                                                 <CImage src={vehicle.imageUrl} width={100} height={100} alt="Vehicle" />
                                             </CTableDataCell>
-                                            <CTableDataCell className="text-center">{vehicle.registrationNumber}</CTableDataCell>
+                                            <CTableDataCell className="text-center"  onClick={() => handleRegistrationClick(vehicles)}
+                                                style={{ cursor: 'pointer', color: 'blue' }}>{vehicle.registrationNumber}</CTableDataCell>
                                             <CTableDataCell>{vehicle.manufacturer}</CTableDataCell>
                                             <CTableDataCell>{vehicle.model}</CTableDataCell>
                                             <CTableDataCell>{vehicle.vehicleType}</CTableDataCell>
