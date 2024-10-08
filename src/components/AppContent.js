@@ -6,6 +6,7 @@ import routes from '../routes';
 const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'));
 const DriverDashboard = React.lazy(() => import('../views/dashboard/DriverDashboard'));
 const AdminDashboard = React.lazy(() => import('../views/dashboard/AdminDashboard'));
+const OperatorDashboard = React.lazy(() => import('../views/dashboard/OperatorDashboard'))
 
 const AppContent = () => {
   const [userRole, setUserRole] = useState(null);
@@ -23,6 +24,8 @@ const AppContent = () => {
         return <AdminDashboard />;
       case 'Driver':
         return <DriverDashboard />;
+      case 'Operator':
+        return <OperatorDashboard/>;
       case 'Customer':
       default:
         return <Dashboard />;

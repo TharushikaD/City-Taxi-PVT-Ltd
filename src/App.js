@@ -35,6 +35,7 @@ const Payment =  React.lazy(() => import('./views/payment/Payment'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const DriverDashboard = React.lazy(() => import('./views/dashboard/DriverDashboard'))
 const AdminDashboard = React.lazy(() => import('./views/dashboard/AdminDashboard'))
+const OperatorDashboard = React.lazy(() => import('./views/dashboard/OperatorDashboard'))
 const BookingHistory = React.lazy(() => import('./views/bookingHistory/BookingHistory'))
 const Promotions = React.lazy(() => import('./views/promotions/Promotions'))
 const Map =  React.lazy(() => import('./views/map/Map'))
@@ -118,6 +119,7 @@ const App = () => {
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
           <Route path="/driverDashboard" element={<PrivateRoute element={<DriverDashboard />} />} />
           <Route path="/adminDashboard" element={<PrivateRoute element={<AdminDashboard />} />} />
+          <Route path="/operatorDashboard" element={<PrivateRoute element={<OperatorDashboard />} />} />
           <Route path="/payment" element={<PrivateRoute element={<Payment />} />} />
           <Route path="/bookingHistory" element={<PrivateRoute element={<BookingHistory />} />} />
           <Route path="/promotions" element={<PrivateRoute element={<Promotions />} />} />

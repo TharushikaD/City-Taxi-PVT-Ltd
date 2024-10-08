@@ -6,6 +6,7 @@ import React from 'react'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const DriverDashobard = React.lazy(() => import('./views/dashboard/DriverDashboard'))
 const AdminDashobard = React.lazy(() => import('./views/dashboard/AdminDashboard'))
+const OperatorDashboard = React.lazy(() => import('./views/dashboard/OperatorDashboard'))
 const Vehicles = React.lazy(() => import('./views/vehicles/Vehicles'))
 const Trip =  React.lazy(() => import('./views/trip/Trip'))
 const DriverVehicles = React.lazy(() => import('./views/driverVehicles/DriverVehicles'))
@@ -30,6 +31,7 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/driverDashboard', name: 'DriverDashboard', element: DriverDashobard },
   { path: '/adminDashboard', name: 'AdminDashboard', element: AdminDashobard },
+  { path: '/operatorDashboard', name: 'OperatorDashboard', element: OperatorDashboard },
   { path: '/vehicles', name: 'Vehicles', element: Vehicles },
   { path: '/trip', name: 'Trip', element: Trip },
   { path: '/driverVehicles', name: 'DriverVehicles', element: DriverVehicles },
