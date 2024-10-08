@@ -214,7 +214,7 @@ const Register = () => {
                           <option value="">Select user type</option>
                           <option value="Driver">Driver</option>
                           <option value="Customer">Customer</option>
-                          <option value="Admin">Admin</option>
+                          <option value="Operator">Operator</option>
                         </select>
                       </CInputGroup>
                     </CCol>
