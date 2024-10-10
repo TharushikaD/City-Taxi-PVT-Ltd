@@ -19,6 +19,7 @@ import AppSidebar from '../../components/AppSidebar';
 import '../../scss/formStyles.css';
 import RoutingMachine from '../routeMachine/RoutingMachine';
 import instance from '../../components/service/Service';
+import Alert from '../../components/alert/Alert';
 
 
 // Leaflet icon fix
@@ -34,22 +35,24 @@ const Trip = () => {
   const [pickupCoords, setpickupCoords] = useState(null);
   const [destinationCoords, setdestinationCoords] = useState(null);
   const [clickCount, setClickCount] = useState(0);
+  const [pickupLocationName, setPickupLocationName] = useState(''); // State for pickup location name
+  const [destinationLocationName, setDestinationLocationName] = useState(''); // State for destination location name
   const [distance, setDistance] = useState(0); // State to hold distance
   const [fare, setFare] = useState(0); // State to hold the fare
-  
+
 
   const [formData, setFormData] = useState({
     driverId: '',
     startLatitude: '',
-    startLongitude:'',
-    endLatitude:'',
-    endLongitude:'',
-    bookingTime:'',
-    startTime:'',
-    endTime:'',
+    startLongitude: '',
+    endLatitude: '',
+    endLongitude: '',
+    bookingTime: '',
+    startTime: '',
+    endTime: '',
     passengerId: localStorage.getItem('userId'),
     destination: '',
-    fare:''
+    fare: ''
   });
 
   // Calculate distance whenever pickup or destination coords change
@@ -61,7 +64,7 @@ const Trip = () => {
       setDistance(calculatedDistance.toFixed(2)); // Round to 2 decimal places
       const totalFare = ((calculatedDistance / 1000) * 200).toFixed(2); // Calculate fare as ₹200 per km
       setFare(totalFare); // Store the calculated fare
-    formData.fare = totalFare;
+      formData.fare = totalFare;
 
     }
   }, [pickupCoords, destinationCoords]);
@@ -69,11 +72,11 @@ const Trip = () => {
 
   const LocationSelector = () => {
     useMapEvents({
-      click: async (e) =>{
+      click: async (e) => {
         const { lat, lng } = e.latlng; // Define lat and lng here
         if (clickCount === 0) {
           setpickupCoords(e.latlng);
-          formData.pickupLocation= e.latlng;
+          formData.pickupLocation = e.latlng;
 
           setFormData(prev => ({
             ...prev,
@@ -82,6 +85,11 @@ const Trip = () => {
             startLongitude: lng,
 
           }));
+          // Fetch pickup location name
+          const locationName = await fetchLocationName(lat, lng);
+          setPickupLocationName(locationName); // Set the fetched pickup location name
+          console.log(locationName)
+
           setClickCount(1);
         } else if (clickCount === 1) {
           setdestinationCoords(e.latlng); // Second click for dropoff location
@@ -93,12 +101,16 @@ const Trip = () => {
             endLongitude: lng,
 
           }));
+          // Fetch destination location name
+          const locationName = await fetchLocationName(lat, lng);
+          setDestinationLocationName(locationName); // Set the fetched destination location name
+          console.log(locationName)
           setClickCount(0);
         }
       },
     });
     console.log('pickupCoords', pickupCoords)
-   
+
     return null;
   };
 
@@ -135,44 +147,52 @@ const Trip = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await instance.post(`/vehicles/all?userId=${userID}`, vehicleData, {
+    Alert({
+      title: 'Processing Trip',
+      message: 'Trip request processed.',
+      icon: 'info',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timer: 3000,
+    });
+    const response = await instance.post('/vehicles/all?userId=${userID}', vehicleData, {
       headers: {
-          Authorization: `Bearer ${token}`,
+        Authorization: 'Bearer ${token}',
       },
-  });
+    });
 
-  if (validateForm()) {
+    if (validateForm()) {
       setLoading(true);
 
       const vehicleData = {
-          registrationNumber: formData.registrationNumber,
-          make: formData.make,
-          model: formData.model,
-          year: formData.year,
-          licensePlateNumber: formData.licensePlateNumber,
-          vehicleType: formData.vehicleType,
-          image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
-          image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
-          userID: userID
+        registrationNumber: formData.registrationNumber,
+        make: formData.make,
+        model: formData.model,
+        year: formData.year,
+        licensePlateNumber: formData.licensePlateNumber,
+        vehicleType: formData.vehicleType,
+        image1: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
+        image2: "C:/Users/94752/Downloads/ai-generated-8045101_1280.webp",
+        userID: userID
       };
 
       console.log('User ID:', userID);
       console.log('Vehicle Data:', vehicleData);
 
       try {
-          const response = await instance.post(`/vehicles/create?userId=${userID}`, vehicleData, {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-              },
-          });
-          console.log('Vehicle created:', response.data);
-          setLoading(false);
+        const response = await instance.post('/vehicles/create?userId=${userID}', vehicleData, {
+          headers: {
+            Authorization: 'Bearer ${token}',
+          },
+        });
+        console.log('Vehicle created:', response.data);
+        setLoading(false);
       } catch (error) {
-          console.error('Error creating vehicle:', error);
-          setLoading(false);
+        console.error('Error creating vehicle:', error);
+        setLoading(false);
       }
-  }
-};
+    }
+  };
 
 
   const handleClear = () => {
@@ -246,6 +266,17 @@ const Trip = () => {
                     <CRow>
                       <CCol md="6">
                         <CInputGroup className="input-group mb-3">
+                          <label htmlFor="pickupLocationName" className="form-label">Pickup Location Name</label>
+                          <input
+                            type="text"
+                            id="pickupLocationName"
+                            name="pickupLocationName"
+                            className="form-control"
+                            value={pickupLocationName}
+                            readOnly
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="input-group mb-3">
                           <label htmlFor="startLatitude" className="form-label">Start Latitude</label>
                           <input
                             type="number"
@@ -257,6 +288,7 @@ const Trip = () => {
                             required
                           />
                         </CInputGroup>
+
                         <CInputGroup className="input-group mb-3">
                           <label htmlFor="startLongitude" className="form-label">Start Longitude</label>
                           <input
@@ -276,7 +308,6 @@ const Trip = () => {
                             id="fare"
                             name="fare"
                             className="form-control"
-                            placeholder="Enter Start Longitude"
                             value={fare}
                             readOnly
                           />
@@ -284,6 +315,17 @@ const Trip = () => {
                       </CCol>
 
                       <CCol md="6">
+                        <CInputGroup className="input-group mb-3">
+                          <label htmlFor="destinationLocationName" className="form-label">Destination Location Name</label>
+                          <input
+                            type="text"
+                            id="destinationLocationName"
+                            name="destinationLocationName"
+                            className="form-control"
+                            value={destinationLocationName}
+                            readOnly
+                          />
+                        </CInputGroup>
                         <CInputGroup className="input-group mb-3">
                           <label htmlFor="endLatitude" className="form-label">Destination Latitude</label>
                           <input
@@ -316,9 +358,9 @@ const Trip = () => {
                             className="form-select"
                             onChange={handleChange}
                             required
-                            style={{ width: '100%' }}                       
+                            style={{ width: '100%' }}
                           >
-                            <option  value="">Select a driver</option>
+                            <option value="">Select a driver</option>
                             {drivers.map(driver => (
                               <option key={driver.id} value={driver.id}>{driver.name}</option>
                             ))}

@@ -14,21 +14,24 @@ import {
 import { cilUser, cilLockLocked } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import { useNavigate } from 'react-router-dom';
-import { Alert } from '../alert/Alert';
-import Profile from '../../views/pages/profile/Profile'; // Update this path
+import Alert from '../alert/Alert'; 
+import Profile from '../../views/pages/profile/Profile'; 
 
 const AppHeaderDropdown = () => {
   const navigate = useNavigate();
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
 
   const handleLogOut = () => {
-    Alert('Log Out', 'Are you sure you want to log out?', 'warning')
-      .then((result) => {
-        if (result.isConfirmed) {
-          localStorage.clear();
-          navigate('/home');
-        }
-      });
+    Alert({
+      title: 'Log Out',
+      message: 'Are you sure you want to log out?',
+      icon:'info',
+      showYesNo: true,
+      onConfirm: () => {
+        localStorage.clear(); 
+        navigate('/home'); 
+      },
+    });
   };
 
   const toggleProfileModal = () => {
@@ -60,7 +63,6 @@ const AppHeaderDropdown = () => {
           <Profile /> {/* Render the Profile component inside the modal */}
         </CModalBody>
       </CModal>
-
     </>
   );
 };

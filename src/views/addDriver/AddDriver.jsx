@@ -15,7 +15,7 @@ import {
   import CIcon from '@coreui/icons-react';
   import { cilLockLocked, cilUser, cilLowVision, cilPhone } from '@coreui/icons';
   import instance from '../../components/service/Service';
-  import { Alert } from '../../components/alert/Alert';
+  import Alert from '../../components/alert/Alert';
 
 export default function AddDriver() {
     const [formData, setFormData] = useState({

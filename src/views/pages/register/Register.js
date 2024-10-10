@@ -12,9 +12,9 @@ import {
   CRow,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilLockLocked, cilUser, cilLowVision, cilPhone, cilCamera } from '@coreui/icons';
+import { cilLockLocked, cilUser, cilLowVision, cilPhone } from '@coreui/icons';
 import instance from '../../../components/service/Service';
-import { Alert } from '../../../components/alert/Alert';
+import Alert from '../../../components/alert/Alert';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const [isHovered, setIsHovered] = useState(false);
+  const [alertData, setAlertData] = useState(null);
 
   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const regexName = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
@@ -71,14 +71,14 @@ const Register = () => {
           },
         });
 
-        Alert('Registration Successful', 'You have registered successfully!', 'success');
+        setAlertData({ title: 'Registration Successful', message: 'You have registered successfully!', icon: 'success' });
         console.log('Registration successful:', response.data);
       } catch (error) {
         console.error('Registration error:', error);
         if (error.response && error.response.data) {
           setErrors({ server: error.response.data.message });
         }
-        Alert('Registration Failed', 'There was an error during registration.', 'error');
+        setAlertData({ title: 'Registration Failed', message: 'There was an error during registration.', icon: 'error' });
       }
     } else {
       console.error('Validation errors:', validationErrors);
@@ -115,7 +115,6 @@ const Register = () => {
           <CCol lg={8}>
             <CCard className="p-4 shadow-lg" style={{ backgroundColor: '#e0b506' }}>
               <CCardBody className="p-4">
-
                 <div className="text-center mb-4">
                   <img
                     src="src/assets/resources/logo.jpeg"
@@ -170,12 +169,12 @@ const Register = () => {
                         <CFormInput
                           name="contact"
                           placeholder="Contact Number"
-                          value={formData.contactNumber}
+                          value={formData.contact}
                           onChange={handleInputChange}
                           required
                         />
                       </CInputGroup>
-                      {errors.contactNumber && <p className="text-danger">{errors.contactNumber}</p>}
+                      {errors.contact && <p className="text-danger">{errors.contact}</p>}
                     </CCol>
                     <CCol md={6}>
                       <CInputGroup>
@@ -219,30 +218,12 @@ const Register = () => {
                         </select>
                       </CInputGroup>
                     </CCol>
-                    {/* <CCol>
-                    <CInputGroup>
-                        <CInputGroupText>
-                          <CIcon icon={cilCamera} />
-                        </CInputGroupText>
-                        <CFormInput
-                          type='file'
-                          name="contact"
-                          placeholder="Select Profile Image"
-                          value={formData.contactNumber}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </CInputGroup>
-                    </CCol> */}
                   </CRow>
 
                   <CButton type="submit" className="w-100 text-white" style={{
-                    backgroundColor: isHovered ? 'bisque' : '#2a303d',
+                    backgroundColor: '#2a303d',
                     transition: 'background-color 0.3s ease',
-                  }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                  >
+                  }}>
                     Register
                   </CButton>
                   <CCol xs={12} className="text-center">
@@ -256,6 +237,9 @@ const Register = () => {
           </CCol>
         </CRow>
       </CContainer>
+
+      {/* Render Alert Component */}
+      {alertData && <Alert title={alertData.title} message={alertData.message} icon={alertData.icon} />}
     </div>
   );
 };

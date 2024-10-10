@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import {
-    CCard,
-    CCardBody,
-    CCardHeader,
     CTable,
     CTableHead,
     CTableRow,
@@ -11,8 +8,12 @@ import {
     CTableDataCell,
     CButton,
     CCol,
-    CRow
+    CRow,
+    CModal,
+    CModalHeader,
+    CModalBody,
 } from '@coreui/react';
+import AddPromotion from '../addPromotion/AddPromotion';
 import AppHeader from '../../components/AppHeader';
 import AppFooter from '../../components/AppFooter';
 import AppSidebar from '../../components/AppSidebar';
@@ -38,9 +39,14 @@ const Promotions = () => {
             validTo: '2024-12-30'
         }
     ]);
+    const [showModal, setShowModal] = useState(false);
 
     const handleAddPromotion = () => {
-        alert('Add promotion clicked');
+        setShowModal(true);
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
     };
 
     const handleUpdatePromotion = (id) => {
@@ -108,6 +114,15 @@ const Promotions = () => {
                                 ))}
                             </CTableBody>
                         </CTable>
+
+                        <CModal visible={showModal} onClose={handleModalClose} size="lg">
+                            <CModalHeader closeButton>
+                                <h5>Add Promotion</h5>
+                            </CModalHeader>
+                            <CModalBody>
+                                <AddPromotion />
+                            </CModalBody>
+                        </CModal>
                     </div>
                 </div>
             </div>

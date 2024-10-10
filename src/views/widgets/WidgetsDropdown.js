@@ -58,7 +58,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="primary"
           // value={`${customerCount} Customers`}
-          value = {"40 Customers"}
+          value = {"10 Customers"}
           title="Customers"
           chart={
             <CChartLine
@@ -98,7 +98,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="info"
           // value={`${driverCount} Drivers`}
-          value = {"25 Drivers"}
+          value = {"5 Drivers"}
           title="Drivers"
           chart={
             <CChartLine
@@ -135,7 +135,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="warning"
           // value={`${vehicleCount} Vehicles`}
-          value = {"30 Vehicles"}
+          value = {"5 Vehicles"}
           title="Vehicles"
           chart={
             <CChartBar

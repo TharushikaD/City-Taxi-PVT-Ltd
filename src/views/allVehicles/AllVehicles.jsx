@@ -25,6 +25,14 @@ export default function AllVehicles() {
         const fetchVehicles = async () => {
             const mockData = [
                 { 
+                    registrationNumber: 'DV001', 
+                    manufacturer: 'Bajaj', 
+                    model: 'Pulsor', 
+                    vehicleType: 'Bike' ,
+                    imageUrl: 'src/assets/resources/bike1.webp',
+                
+                },
+                { 
                     registrationNumber: 'ABC123', 
                     manufacturer: 'Suzuki', 
                     model: 'Alto', 
@@ -38,6 +46,20 @@ export default function AllVehicles() {
                     vehicleType: 'Car', 
                     imageUrl: 'src/assets/resources/vitz.jpg' 
                 },
+                { 
+                    registrationNumber: 'DV002', 
+                    manufacturer: 'Tata', 
+                    model: 'Nano', 
+                    vehicleType: 'Car' ,
+                    imageUrl: 'src/assets/resources/nano.jpg',
+                },
+                { 
+                    registrationNumber: 'DV003', 
+                    manufacturer: 'Suzuki', 
+                    model: 'Alto', 
+                    vehicleType: 'Car' ,
+                    imageUrl: 'src/assets/resources/alto.jpg',
+                }
             ]; 
 
             setLoading(true);

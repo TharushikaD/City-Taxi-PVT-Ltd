@@ -42,6 +42,20 @@ export default function AllDrivers() {
                     email: 'hasindu2024@gmail.com',
                     contact: '0765434567',
                 },
+                {
+                    userType: 'Driver',
+                    profileImage: 'src/assets/resources/drv2.png',
+                    username: 'Damith Prasanna',
+                    email: 'prasa99@gmail.com',
+                    contact: '0777527091',
+                },
+                {
+                    userType: 'Driver',
+                    profileImage: 'src/assets/resources/drv3.jpg',
+                    username: 'KevinW',
+                    email: 'wichramaarachchi70@gmail.com',
+                    contact: '0745434520',
+                },
             ];
 
             setLoading(true);

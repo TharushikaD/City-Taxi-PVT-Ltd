@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <CCard className="mb-3"  style={{backgroundColor:'#e0b506'}}>
+      <CCard style={{backgroundColor:'#e0b506', marginBottom:'65px'}}>
         <CCardBody>
           <CRow >
             <CCol sm={12} style={{backgroundColor:'#2a303d ' ,padding:'20px'}} >

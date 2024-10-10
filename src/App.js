@@ -30,6 +30,7 @@ const AllVehicles = React.lazy(() => import('./views/allVehicles/AllVehicles'))
 const Trip = React.lazy(() => import('./views/trip/Trip'))
 const AddDriver = React.lazy(() => import('./views/addDriver/AddDriver'))
 const AddCustomer = React.lazy(() => import('./views/addCustomer/AddCustomer'))
+const AddPromotion = React.lazy(() => import('./views/addPromotion/AddPromotion'))
 const TripHistory =  React.lazy(() => import('./views/tripHistory/TripHistory'))
 const Payment =  React.lazy(() => import('./views/payment/Payment'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
@@ -115,6 +116,7 @@ const App = () => {
           <Route path="/trip" element={<PrivateRoute element={<Trip />} />} />
           <Route path="/addDriver" element={<PrivateRoute element={<AddDriver />} />} />
           <Route path="/addCustomer" element={<PrivateRoute element={<AddCustomer />} />} />
+          <Route path="/addPromotion" element={<PrivateRoute element={<AddPromotion />} />} />
           <Route path="/tripHistory" element={<PrivateRoute element={<TripHistory />} />} />
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
           <Route path="/driverDashboard" element={<PrivateRoute element={<DriverDashboard />} />} />

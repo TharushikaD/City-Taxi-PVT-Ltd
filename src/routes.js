@@ -14,6 +14,7 @@ const AllCustomers = React.lazy(() => import('./views/allCustomers/AllCustomers'
 const AllDrivers = React.lazy(() => import('./views/allDrivers/AllDrivers'))
 const AllVehicles = React.lazy(() => import('./views/allVehicles/AllVehicles'))
 const AddDriver = React.lazy(() => import('./views/addDriver/AddDriver'))
+const AddPromotion = React.lazy(() => import('./views/addPromotion/AddPromotion'))
 const AddCustomer =  React.lazy(() => import('./views/addCustomer/AddCustomer'))
 const TripHistory =  React.lazy(() => import('./views/tripHistory/TripHistory'))
 const Payment =  React.lazy(() => import('./views/payment/Payment'))
@@ -39,7 +40,7 @@ const routes = [
   { path: '/allDrivers', name: 'AllDrivers', element: AllDrivers },
   { path: '/allVehicles', name: 'AllVehicles', element: AllVehicles },
   { path: '/addDriver', name: 'AddDriver', element: AddDriver },
-  { path: '/addCustomer', name: 'AddCustomer', element: AddCustomer },
+  { path: '/addPromotion', name: 'AddPromotion', element: AddPromotion },
   { path: '/tripHistory', name: 'TripHistory', element: TripHistory },
   { path: '/payment', name: 'Payment', element: Payment },
   { path: '/bookingHistory', name: 'BookingHistory', element: BookingHistory },

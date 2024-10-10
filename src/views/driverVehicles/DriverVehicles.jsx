@@ -14,7 +14,7 @@ import {
     CModalTitle,
     CModalBody,
 } from '@coreui/react';
-import Vehicles from '../vehicles/Vehicles'; // Assuming Vehicles is in the same folder
+import Vehicles from '../vehicles/Vehicles';
 import AppFooter from '../../components/AppFooter'; 
 import AppHeader from '../../components/AppHeader';
 import AppSidebar from '../../components/AppSidebar';
@@ -47,7 +47,6 @@ export default function DriverVehicles() {
         //   }
         // };
 
-        // Mock data for testing
         const mockVehicles = [
             { 
                 imageUrl: 'src/assets/resources/bike1.webp',
@@ -86,7 +85,7 @@ export default function DriverVehicles() {
     }, []);
 
     const handleAdd = () => {
-        setModalVisible(true); // Show the modal when the button is clicked
+        setModalVisible(true); 
     };
 
     const handleUpdate = (registrationNumber) => {
@@ -176,16 +175,16 @@ export default function DriverVehicles() {
                             </CTableBody>
                         </CTable>
 
-                        {/* Modal for Adding Vehicle */}
+                        
                         <CModal visible={modalVisible} onClose={handleCloseModal} size='xl'>
                             <CModalHeader>
                                 <CModalTitle>Add Vehicle</CModalTitle>
                             </CModalHeader>
                             <CModalBody>
-                                <Vehicles onClose={handleCloseModal} /> {/* Pass the onClose function to the Vehicles component */}
+                                <Vehicles/> 
                             </CModalBody>
                         </CModal>
-                    </div> {/* Close gradient-container */}
+                    </div> 
                 </div>
             </div>
             <AppFooter />

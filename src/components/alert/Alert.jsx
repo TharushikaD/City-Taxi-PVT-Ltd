@@ -1,12 +1,25 @@
 import Swal from 'sweetalert2';
 
-export function Alert(title, text, icon) {
-    return Swal.fire({
-        title: title,
-        text: text,
-        icon: icon,
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
+const Alert = ({ title, message, showYesNo, onConfirm,icon }) => {
+  const showAlert = () => {
+    const options = {
+      title,
+      text: message,
+      icon:icon,
+      showCancelButton: showYesNo,
+      confirmButtonText: showYesNo ? 'Yes' : 'Close',
+      cancelButtonText: showYesNo ? 'No' : undefined,
+    };
+
+    Swal.fire(options).then((result) => {
+      if (result.isConfirmed) {
+        if (onConfirm) onConfirm(); 
+      }
     });
-}
+  };
+
+  showAlert(); 
+  return null; 
+};
+
+export default Alert;
