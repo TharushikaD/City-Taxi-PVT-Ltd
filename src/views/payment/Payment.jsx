@@ -11,15 +11,14 @@ import {
     CFormLabel,
     CFormInput,
     CButton,
-    CAlert,
 } from '@coreui/react';
+import Alert from '../../components/alert/Alert';
 
 const Payment = () => {
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [cardNumber, setCardNumber] = useState('');
     const [csv, setCsv] = useState('');
 
-    
     const currentDate = new Date().toLocaleDateString('default', {
         year: 'numeric',
         month: 'long',
@@ -32,18 +31,21 @@ const Payment = () => {
         pickupLocation: 'Galle',
         destination: 'Karapitiya',
         fare: 525.00,
-        date: currentDate
+        date: currentDate,
     };
 
-   
     const handlePayment = (e) => {
         e.preventDefault();
         if (paymentMethod === 'card' && (cardNumber === '' || csv === '')) {
-            alert('Please fill in all card details.');
+            Alert({
+                title: 'Missisng Data',
+                message: "Please add required details",
+                icon: 'info',
+                confirmButtonText:'close',
+            })
         } else {
             alert('Payment successfully processed using ' + paymentMethod + '!');
 
-            
             const tripHistory = JSON.parse(localStorage.getItem('tripHistory')) || [];
             tripHistory.push({
                 ...trip,
@@ -55,10 +57,7 @@ const Payment = () => {
 
     return (
         <>
-            <CCard className="mb-4" style={{ width: '60%' }}>
-                <CCardHeader className='text-center text-white' style={{ background: 'linear-gradient(135deg, #FFD700, #322e2e' }}>
-                    <h4>Payment Options</h4>
-                </CCardHeader>
+            <CCard className="mb-4" style={{ width: '100%' }}>
                 <CCardBody>
                     <CForm onSubmit={handlePayment}>
                         <CRow>
@@ -86,60 +85,54 @@ const Payment = () => {
                         </CRow>
 
                         {paymentMethod === 'card' && (
-                            <>
+                            <CRow className="mt-3">
+                                <CCol sm={6}>
+                                    <CFormLabel htmlFor="cardNumber">Card Number</CFormLabel>
+                                    <CFormInput
+                                        type="text"
+                                        id="cardNumber"
+                                        placeholder="Enter card number"
+                                        value={cardNumber}
+                                        onChange={(e) => setCardNumber(e.target.value)}
+                                    />
+                                </CCol>
+                                <CCol sm={6}>
+                                    <CFormLabel htmlFor="csv">CSV</CFormLabel>
+                                    <CFormInput
+                                        type="text"
+                                        id="csv"
+                                        placeholder="Enter CSV"
+                                        value={csv}
+                                        onChange={(e) => setCsv(e.target.value)}
+                                    />
+                                </CCol>
                                 <CRow className="mt-3">
                                     <CCol sm={6}>
-                                        <CFormLabel htmlFor="cardNumber">Card Number</CFormLabel>
+                                        <CFormLabel htmlFor="date">Current Date</CFormLabel>
                                         <CFormInput
                                             type="text"
-                                            id="cardNumber"
-                                            placeholder="Enter card number"
-                                            value={cardNumber}
-                                            onChange={(e) => setCardNumber(e.target.value)}
-                                            required
+                                            id="currentDate"
+                                            value={currentDate}
+                                            disabled
                                         />
-                                    </CCol>
-                                    <CCol sm={6}>
-                                        <CFormLabel htmlFor="csv">CSV</CFormLabel>
-                                        <CFormInput
-                                            type="text"
-                                            id="csv"
-                                            placeholder="Enter CSV"
-                                            value={csv}
-                                            onChange={(e) => setCsv(e.target.value)}
-                                            required
-                                        />
-                                    </CCol>
-                                    <CCol sm={6} className='mt-3'>
-                                        <CCol sm={6}>
-                                            <CFormLabel htmlFor='date'>Current Date</CFormLabel>
-                                            <CFormInput
-                                                type="text"
-                                                id="currentDate"
-                                                value={currentDate}
-                                                disabled
-                                            />
-                                        </CCol>
-                                        <CCol className='mt-3' style={{ display: 'flex', justifyContent: 'right' }}>
-                                            <CButton
-                                                className='text-white'
-                                                style={{ backgroundColor: '#2a303d', marginTop: '10px', padding: '12px' }}
-                                                onClick={handlePayment}
-                                            >
-                                                Checkout
-                                            </CButton>
-
-
-                                        </CCol>
-
                                     </CCol>
                                 </CRow>
-                            </>
+                            </CRow>
                         )}
+
+
+                        <CCol className="mt-3" style={{ display: 'flex', justifyContent: 'right' }}>
+                            <CButton
+                                className="text-white"
+                                style={{ backgroundColor: '#2a303d', marginTop: '10px', padding: '12px' }}
+                                type="submit"
+                            >
+                                Checkout
+                            </CButton>
+                        </CCol>
                     </CForm>
                 </CCardBody>
             </CCard>
-
         </>
     );
 };

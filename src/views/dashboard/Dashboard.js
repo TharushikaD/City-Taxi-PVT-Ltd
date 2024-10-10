@@ -7,58 +7,61 @@ import {
   CCol,
   CButton,
   CAlert,
-  CSpinner
+  CModal,
+  CModalHeader,
+  CModalBody,
 } from '@coreui/react';
 import { useNavigate } from 'react-router-dom';
 import promoImage from 'src/assets/resources/promo3.png';
-import instance from '../../components/service/Service'; 
+import Payment from '../../views/payment/Payment';
+
+
+const getTripStatus = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        tripId: 1234,
+        status: 'accepted',
+        driverName: 'HarendraP',
+        pickupLocation: 'Galle',
+        destination: 'Karapitiya',
+        fare: 525.00
+      });
+    }, 1000);
+  });
+};
 
 const Dashboard = () => {
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchTripStatus = async () => {
-      try {
-        const token = localStorage.getItem('authToken'); 
-        const response = await instance.get('/trips/status', { 
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setTrip(response.data); 
-      } catch (err) {
-        setError('Failed to fetch trip status');
-        console.error('Error fetching trip status:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTripStatus();
+    getTripStatus().then((data) => {
+      setTrip(data);
+      setLoading(false);
+    });
   }, []);
 
   const handlePayment = () => {
-    navigate('/payment');
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
   };
 
   if (loading) {
-    return (
-      <div className="text-center">
-        <CSpinner color="primary" />
-        <p>Loading trip status...</p>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
     <>
       <CCard style={{ backgroundColor: '#e0b506', marginBottom: '65px' }}>
         <CCardBody>
-          <CRow>
-            <CCol sm={12} style={{ backgroundColor: '#2a303d', padding: '20px' }}>
+          <CRow >
+            <CCol sm={12} style={{ backgroundColor: '#2a303d ', padding: '20px' }} >
               <h4 className="card-title mb-3 text-white text-center">P R O M O T I O N S !!!</h4>
             </CCol>
           </CRow>
@@ -72,47 +75,42 @@ const Dashboard = () => {
         </CCardFooter>
       </CCard>
 
+
       <CCard className="mb-4">
         <CCardBody>
           <CRow>
             <CCol sm={12}>
               <h4 className="card-title mb-3">Trip Status</h4>
-              {error ? (
-                <CAlert color="danger">{error}</CAlert>
-              ) : trip ? (
-                trip.status === 'accepted' ? (
-                  <CAlert color="success">
-                    <strong>Trip Accepted!</strong> Your driver {trip.driverName} has accepted the trip.
-                  </CAlert>
-                ) : (
-                  <CAlert color="danger">
-                    <strong>Trip Declined!</strong> Your driver {trip.driverName} has declined the trip.
-                  </CAlert>
-                )
+              {trip.status === 'accepted' ? (
+                <CAlert color="success">
+                  <strong>Trip Accepted!</strong> Your driver {trip.driverName} has accepted the trip.
+                </CAlert>
               ) : (
-                <CAlert color="warning">
-                  <strong>No Trip Data Available!</strong> Please check back later.
+                <CAlert color="danger">
+                  <strong>Trip Declined!</strong> Your driver {trip.driverName} has declined the trip.
                 </CAlert>
               )}
             </CCol>
           </CRow>
 
-          {trip && trip.status === 'accepted' && (
-            <CRow>
-              <CCol sm={6}>
-                <div><strong>Pickup Location:</strong> {trip.pickupLocation}</div>
-                <div><strong>Destination:</strong> {trip.destination}</div>
-              </CCol>
-              <CCol sm={6}>
-                <div><strong>Driver Name:</strong> {trip.driverName}</div>
-                <div><strong>Fare:</strong> Rs. {trip.fare.toFixed(2)}</div>
-              </CCol>
-            </CRow>
+          {trip.status === 'accepted' && (
+            <>
+              <CRow>
+                <CCol sm={6}>
+                  <div><strong>Pickup Location:</strong> {trip.pickupLocation}</div>
+                  <div><strong>Destination:</strong> {trip.destination}</div>
+                </CCol>
+                <CCol sm={6}>
+                  <div><strong>Driver Name:</strong> {trip.driverName}</div>
+                  <div><strong>Fare:</strong> Rs. {trip.fare.toFixed(2)}</div>
+                </CCol>
+              </CRow>
+            </>
           )}
         </CCardBody>
 
-        {trip && trip.status === 'accepted' && (
-          <CCardFooter>
+        <CCardFooter>
+          {trip.status === 'accepted' && (
             <CButton
               style={{ backgroundColor: '#2a303d' }}
               className='text-white'
@@ -120,9 +118,17 @@ const Dashboard = () => {
             >
               Proceed to Payment
             </CButton>
-          </CCardFooter>
-        )}
+          )}
+        </CCardFooter>
       </CCard>
+      <CModal visible={showModal} onClose={handleModalClose} size="lg">
+        <CModalHeader closeButton>
+          <h5>Payment Gateway</h5>
+        </CModalHeader>
+        <CModalBody>
+          <Payment />
+        </CModalBody>
+      </CModal>
     </>
   );
 };
