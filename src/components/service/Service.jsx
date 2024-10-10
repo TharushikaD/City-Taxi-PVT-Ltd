@@ -3,7 +3,7 @@ import axios from 'axios';
 let token = localStorage.getItem('authToken');
 const instance = axios.create({
 
-    baseURL: 'https://003a-2402-d000-a400-e70-1c59-450b-5152-6a75.ngrok-free.app/city-taxi/v1',
+    baseURL: 'http://localhost:8080/city-taxi/v1',
 
     // headers: {
     //     Authorization: `Bearer ${token}`, 
