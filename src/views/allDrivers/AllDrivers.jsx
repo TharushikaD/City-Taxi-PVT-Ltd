@@ -18,6 +18,8 @@ import AppHeader from '../../components/AppHeader';
 import AppFooter from '../../components/AppFooter';
 import AppSidebar from '../../components/AppSidebar';
 import './style.css';
+import Alert from '../../components/alert/Alert';
+import instance from '../../components/service/Service';
 
 export default function AllDrivers() {
     const [drivers, setDrivers] = useState([]);
@@ -27,41 +29,10 @@ export default function AllDrivers() {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const mockData = [
-                {
-                    userType: 'Driver',
-                    profileImage: 'src/assets/resources/dasun.webp',
-                    username: 'HarendraP',
-                    email: 'harendra2024@gmail.com',
-                    contact: '0776567890',
-                },
-                {
-                    userType: 'Driver',
-                    profileImage: 'src/assets/resources/sasindu.jpeg',
-                    username: 'HasinduW',
-                    email: 'hasindu2024@gmail.com',
-                    contact: '0765434567',
-                },
-                {
-                    userType: 'Driver',
-                    profileImage: 'src/assets/resources/drv2.png',
-                    username: 'Damith Prasanna',
-                    email: 'prasa99@gmail.com',
-                    contact: '0777527091',
-                },
-                {
-                    userType: 'Driver',
-                    profileImage: 'src/assets/resources/drv3.jpg',
-                    username: 'KevinW',
-                    email: 'wichramaarachchi70@gmail.com',
-                    contact: '0745434520',
-                },
-            ];
-
             setLoading(true);
             try {
-                const data = mockData;
-                const driversData = data.filter((user) => user.userType === 'Driver');
+                const response = await instance.get('/users');
+                const driversData = response.data.filter(user => user.userType === 'Driver');
                 setDrivers(driversData);
             } catch (err) {
                 setError('Failed to fetch users');
@@ -73,6 +44,26 @@ export default function AllDrivers() {
         fetchUsers();
     }, []);
 
+    const handleDelete = (username) => {
+        Alert({
+            title: 'Are you sure?',
+            message: "Want to remove the data",
+            icon: 'warning',
+            showYesNo: true,
+            confirmButtonColor: '#3085d6',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setDrivers(prevDrivers => prevDrivers.filter(driver => driver.username !== username));
+
+                Alert({
+                    title: 'Deleted!',
+                    message: 'The driver has been deleted.',
+                    icon: 'success',
+                });
+            }
+        });
+    };
+
     if (loading) {
         return (
             <div className="text-center">
@@ -82,17 +73,13 @@ export default function AllDrivers() {
         );
     }
 
-    if (error) {
-        return <div className="text-danger text-center">{error}</div>;
-    }
-
     return (
         <div className="app-container">
             <AppHeader />
             <div className="main-content">
                 <AppSidebar className="app-sidebar" />
                 <div className="content-wrap">
-                    <div className="gradient-container"> {/* Add a div with gradient background */}
+                    <div className="gradient-container">
                         <h4 className="text-center text-white mb-4" style={{ fontWeight: '600', letterSpacing: '1px' }}>All Drivers</h4>
                         <CButton className="Add mb-3" onClick={() => setShowAddDriverModal(true)}>
                             Add Driver
@@ -120,7 +107,7 @@ export default function AllDrivers() {
                                             <CTableDataCell>{user.contact}</CTableDataCell>
                                             <CTableDataCell>
                                                 <CButton className="Update me-2">Update</CButton>
-                                                <CButton className="Delete">Delete</CButton>
+                                                <CButton className="Delete" onClick={() => handleDelete(user.username)}>Delete</CButton>
                                             </CTableDataCell>
                                         </CTableRow>
                                     ))
@@ -134,7 +121,7 @@ export default function AllDrivers() {
                             </CTableBody>
                         </CTable>
 
-                        {/* Add Driver Modal */}
+                       
                         <CModal visible={showAddDriverModal} onClose={() => setShowAddDriverModal(false)} size="lg">
                             <CModalHeader closeButton>
                                 <h5 className="modal-title">Add Driver</h5>
@@ -143,11 +130,10 @@ export default function AllDrivers() {
                                 <AddDriver />
                             </CModalBody>
                         </CModal>
-                    </div> {/* Close gradient-container */}
+                    </div>
                 </div>
             </div>
             <AppFooter />
         </div>
     );
 }
-

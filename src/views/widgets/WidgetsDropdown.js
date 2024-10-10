@@ -1,64 +1,63 @@
-import React, { useEffect, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   CRow,
   CCol,
   CWidgetStatsA,
-} from '@coreui/react'
-import { getStyle } from '@coreui/utils'
-import { CChartLine, CChartBar } from '@coreui/react-chartjs'
-import instance from '../../components/service/Service'
+} from '@coreui/react';
+import { getStyle } from '@coreui/utils';
+import { CChartLine, CChartBar } from '@coreui/react-chartjs';
+import instance from '../../components/service/Service';
 
 const WidgetsDropdown = (props) => {
-  const widgetChartRef1 = useRef(null)
-  const widgetChartRef2 = useRef(null)
+  const widgetChartRef1 = useRef(null);
+  const widgetChartRef2 = useRef(null);
 
-  const [customerCount, setCustomerCount] = useState(0)
-  const [driverCount, setDriverCount] = useState(0)
-  const [vehicleCount, setVehicleCount] = useState(0)
+  const [customerCount, setCustomerCount] = useState(0);
+  const [driverCount, setDriverCount] = useState(0);
+  const [vehicleCount, setVehicleCount] = useState(0);
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const customerResponse = await instance.get('/users/all?userType=Customer')
-        setCustomerCount(customerResponse.data.length)
+        const customerResponse = await instance.get('/users/all?userType=Customer');
+        setCustomerCount(customerResponse.data.length);
 
-        const driverResponse = await instance.get('/users/all?userType=Driver')
-        setDriverCount(driverResponse.data.length)
+        const driverResponse = await instance.get('/users/all?userType=Driver');
+        setDriverCount(driverResponse.data.length);
 
-        const vehicleResponse = await instance.get('/vehicles/all')
-        setVehicleCount(vehicleResponse.data.length)
+        const vehicleResponse = await instance.get('/vehicles/all');
+        setVehicleCount(vehicleResponse.data.length);
       } catch (err) {
-        console.error('Error fetching counts:', err)
+        console.error('Error fetching counts:', err);
       }
-    }
+    };
 
-    fetchCounts()
+    fetchCounts();
 
     document.documentElement.addEventListener('ColorSchemeChange', () => {
       if (widgetChartRef1.current) {
         setTimeout(() => {
-          widgetChartRef1.current.data.datasets[0].pointBackgroundColor = getStyle('--cui-primary')
-          widgetChartRef1.current.update()
-        })
+          widgetChartRef1.current.data.datasets[0].pointBackgroundColor = getStyle('--cui-primary');
+          widgetChartRef1.current.update();
+        });
       }
 
       if (widgetChartRef2.current) {
         setTimeout(() => {
-          widgetChartRef2.current.data.datasets[0].pointBackgroundColor = getStyle('--cui-info')
-          widgetChartRef2.current.update()
-        })
+          widgetChartRef2.current.data.datasets[0].pointBackgroundColor = getStyle('--cui-info');
+          widgetChartRef2.current.update();
+        });
       }
-    })
-  }, [widgetChartRef1, widgetChartRef2])
+    });
+  }, [widgetChartRef1, widgetChartRef2]);
 
   return (
     <CRow className={`justify-content-center ${props.className}`} xs={{ gutter: 4 }} style={{ color: 'white' }}>
       <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="primary"
-          // value={`${customerCount} Customers`}
-          value = {"10 Customers"}
+          value={`${customerCount} Customers`}
           title="Customers"
           chart={
             <CChartLine
@@ -97,8 +96,7 @@ const WidgetsDropdown = (props) => {
       <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="info"
-          // value={`${driverCount} Drivers`}
-          value = {"5 Drivers"}
+          value={`${driverCount} Drivers`}
           title="Drivers"
           chart={
             <CChartLine
@@ -134,8 +132,7 @@ const WidgetsDropdown = (props) => {
       <CCol sm={12} md={6} xl={4} className="mb-3">
         <CWidgetStatsA
           color="warning"
-          // value={`${vehicleCount} Vehicles`}
-          value = {"5 Vehicles"}
+          value={`${vehicleCount} Vehicles`}
           title="Vehicles"
           chart={
             <CChartBar
@@ -166,12 +163,12 @@ const WidgetsDropdown = (props) => {
         />
       </CCol>
     </CRow>
-  )
-}
+  );
+};
 
 WidgetsDropdown.propTypes = {
   className: PropTypes.string,
   withCharts: PropTypes.bool,
-}
+};
 
-export default WidgetsDropdown
+export default WidgetsDropdown;

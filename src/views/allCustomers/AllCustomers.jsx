@@ -19,6 +19,7 @@ import AppHeader from '../../components/AppHeader';
 import AppSidebar from '../../components/AppSidebar';
 import './style.css';
 import Alert from '../../components/alert/Alert';
+import instance from '../../components/service/Service'; 
 
 export default function AllCustomers() {
     const [customers, setCustomers] = useState([]);
@@ -28,52 +29,10 @@ export default function AllCustomers() {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const mockData = [
-                {
-                    userType: 'Customer',
-                    profileImage: 'src/assets/resources/img2.jpg',
-                    username: 'Sasindu Kumara',
-                    email: 'sasindu123@gmail.com',
-                    contact: '0743234567'
-                },
-                {
-                    userType: 'Customer',
-                    profileImage: 'src/assets/resources/img1.jpg',
-                    username: 'DasunP',
-                    email: 'dasun567@gmail.com',
-                    contact: '0775434567'
-                },
-                {
-                    userType: 'Customer',
-                    profileImage: 'src/assets/resources/img3.jpg',
-                    username: 'AnishaM',
-                    email: 'anisha024@gmail.com',
-                    contact: '0776743400'
-                },
-                {
-                    userType: 'Customer',
-                    profileImage: 'src/assets/resources/img4.webp',
-                    username: 'KanthiPriya',
-                    email: 'kpriya24@gmail.com',
-                    contact: '0766789420'
-                },
-                {
-                    userType: 'Customer',
-                    profileImage: 'src/assets/resources/img5.jpg',
-                    username: 'Shivam Setti',
-                    email: 'ssetti90@gmail.com',
-                    contact: '0746789789'
-                },
-                
-            ];
-
-            const storedCustomerData = localStorage.getItem('customerData');
-            const localStorageData = storedCustomerData ? [JSON.parse(storedCustomerData)] : [];
-
             setLoading(true);
             try {
-                const allData = [...mockData, ...localStorageData];
-                const customerData = allData.filter(user => user.userType === 'Customer');
+                const response = await instance.get('/users'); 
+                const customerData = response.data.filter(user => user.userType === 'Customer');
                 setCustomers(customerData);
             } catch (err) {
                 setError('Failed to fetch users');
@@ -113,19 +72,6 @@ export default function AllCustomers() {
         setShowModal(false);
     };
 
-    if (loading) {
-        return (
-            <div className="text-center">
-                <CSpinner color="primary" />
-                <p>Loading customers...</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return <div className="text-danger text-center">{error}</div>;
-    }
-
     return (
         <div className="app-container">
             <AppHeader />
@@ -150,27 +96,36 @@ export default function AllCustomers() {
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {customers.length > 0 ? (
-                                    customers.map((user, index) => (
-                                        <CTableRow key={index}>
-                                            <CTableDataCell className="text-center">
-                                                <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
-                                            </CTableDataCell>
-                                            <CTableDataCell>{user.username}</CTableDataCell>
-                                            <CTableDataCell>{user.email}</CTableDataCell>
-                                            <CTableDataCell>{user.contact}</CTableDataCell>
-                                            <CTableDataCell className="text-center">
-                                                <CButton className='Update me-2'>Update</CButton>
-                                                <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
-                                            </CTableDataCell>
-                                        </CTableRow>
-                                    ))
-                                ) : (
+                                {loading ? (
                                     <CTableRow>
                                         <CTableDataCell colSpan="5" className="text-center">
-                                            No customers found
+                                            <CSpinner color="primary" />
+                                            <p>Loading customers...</p>
                                         </CTableDataCell>
                                     </CTableRow>
+                                ) : (
+                                    customers.length > 0 ? (
+                                        customers.map((user, index) => (
+                                            <CTableRow key={index}>
+                                                <CTableDataCell className="text-center">
+                                                    <CImage src={user.profileImage} width={100} height={100} alt="Customer" />
+                                                </CTableDataCell>
+                                                <CTableDataCell>{user.username}</CTableDataCell>
+                                                <CTableDataCell>{user.email}</CTableDataCell>
+                                                <CTableDataCell>{user.contact}</CTableDataCell>
+                                                <CTableDataCell className="text-center">
+                                                    <CButton className='Update me-2'>Update</CButton>
+                                                    <CButton className='Delete' onClick={() => handleDelete(user.username)}>Delete</CButton>
+                                                </CTableDataCell>
+                                            </CTableRow>
+                                        ))
+                                    ) : (
+                                        <CTableRow>
+                                            <CTableDataCell colSpan="5" className="text-center">
+                                                No customers found
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    )
                                 )}
                             </CTableBody>
                         </CTable>
