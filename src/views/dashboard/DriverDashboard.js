@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios for API requests
 import {
   CButton,
   CCard,
@@ -16,6 +17,7 @@ import {
   CDropdownMenu
 } from '@coreui/react';
 import Map from '../map/Map';
+import instance from '../../components/service/Service';
 
 const getFormattedCurrentDate = () => {
   const today = new Date();
@@ -29,29 +31,22 @@ const DriverDashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState(null);
 
-  const [tripRequests, setTripRequests] = useState([
-    {
-      id: 1,
-      pickupLocation: 'Galle',
-      destination: 'Karapitiya',
-      customerName: 'Mihindu Kulasooriya',
-      status: 'pending',
-      pickupCoordinates: { lat: 6.0324, lng: 80.217 }, // Coordinates for Galle
-      destinationCoordinates: { lat: 6.0535, lng: 80.220 }, // Coordinates for Karapitiya
-    },
-    {
-      id: 2,
-      pickupLocation: 'Mirissa',
-      destination: 'Mathara',
-      customerName: 'Jasmin Weerasingha',
-      status: 'pending',
-      pickupCoordinates: { lat: 5.9485, lng: 80.4571 }, // Coordinates for Mirissa
-      destinationCoordinates: { lat: 5.9485, lng: 80.5353 }, // Coordinates for Matara
-    },
-  ]);
-
+  const [tripRequests, setTripRequests] = useState([]);
   const [driverStatus, setDriverStatus] = useState('Available');
   const [acceptedTrip, setAcceptedTrip] = useState(null);
+
+  useEffect(() => {
+    // Fetch trip requests from the API
+    instance
+      .get('/trip-requests')
+      .then((response) => {
+        setTripRequests(response.data || []);
+      })
+      .catch((error) => {
+        console.error('Error fetching trip requests:', error);
+        setTripRequests([]); 
+      });
+  }, []);
 
   const handleAcceptTrip = (id) => {
     const acceptedRequest = tripRequests.find((request) => request.id === id);
@@ -125,55 +120,59 @@ const DriverDashboard = () => {
           </CRow>
 
           <div className="mt-3">
-            {tripRequests.map((request) => (
-              <div
-                key={request.id}
-                className="border p-2 mb-2 rounded"
-                style={{
-                  padding: '20px',
-                  backgroundColor: '#e0b506',
-                  lineHeight: '30px',
-                }}
-              >
-                <div>
-                  <strong>Customer:</strong> {request.customerName}
-                </div>
-                <div>
-                  <strong>Pickup:</strong> {request.pickupLocation}
-                </div>
-                <div>
-                  <strong>Destination:</strong> {request.destination}
-                </div>
-                <div>
-                  <strong>Status:</strong> {request.status}
-                </div>
-                {request.status === 'pending' && (
-                  <div className="mt-2">
-                    <CButton
-                      style={{ backgroundColor: '#2a303d' }}
-                      onClick={() => handleMapClick(request)}
-                      className="me-2 text-white"
-                    >
-                      View Map
-                    </CButton>
-                    <CButton
-                      style={{ backgroundColor: '#2a303d' }}
-                      onClick={() => handleAcceptTrip(request.id)}
-                      className="me-2 text-white"
-                    >
-                      Accept
-                    </CButton>
-                    <CButton
-                      style={{ backgroundColor: '#2a303d' }}
-                      onClick={() => handleDeclineTrip(request.id)}
-                      className="text-white"
-                    >
-                      Decline
-                    </CButton>
+            {tripRequests.length > 0 ? (
+              tripRequests.map((request) => (
+                <div
+                  key={request.id}
+                  className="border p-2 mb-2 rounded"
+                  style={{
+                    padding: '20px',
+                    backgroundColor: '#e0b506',
+                    lineHeight: '30px',
+                  }}
+                >
+                  <div>
+                    <strong>Customer:</strong> {request.customerName}
                   </div>
-                )}
-              </div>
-            ))}
+                  <div>
+                    <strong>Pickup:</strong> {request.pickupLocation}
+                  </div>
+                  <div>
+                    <strong>Destination:</strong> {request.destination}
+                  </div>
+                  <div>
+                    <strong>Status:</strong> {request.status}
+                  </div>
+                  {request.status === 'pending' && (
+                    <div className="mt-2">
+                      <CButton
+                        style={{ backgroundColor: '#2a303d' }}
+                        onClick={() => handleMapClick(request)}
+                        className="me-2 text-white"
+                      >
+                        View Map
+                      </CButton>
+                      <CButton
+                        style={{ backgroundColor: '#2a303d' }}
+                        onClick={() => handleAcceptTrip(request.id)}
+                        className="me-2 text-white"
+                      >
+                        Accept
+                      </CButton>
+                      <CButton
+                        style={{ backgroundColor: '#2a303d' }}
+                        onClick={() => handleDeclineTrip(request.id)}
+                        className="text-white"
+                      >
+                        Decline
+                      </CButton>
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div>No trip requests available at the moment.</div>
+            )}
           </div>
         </CCardBody>
         <CCardFooter>
