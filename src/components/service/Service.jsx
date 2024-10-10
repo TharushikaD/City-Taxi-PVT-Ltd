@@ -10,7 +10,6 @@ const instance = axios.create({
     // },
 });
 
-// Conditionally set the Authorization header
 if (token) {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }

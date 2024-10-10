@@ -33,6 +33,7 @@ const Register = () => {
   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const regexName = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
   const regexPassword = /^(?=.*[A-Z])(?=.*\W)(?=.*\d).{8,}$/;
+  const regexContact = /^(?:\+94|0)?[7]\d{8}$/;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -89,10 +90,10 @@ const Register = () => {
     const validationErrors = {};
 
     if (!regexName.test(formData.username)) {
-      validationErrors.username = 'Invalid username format';
+      validationErrors.username = 'Invalid username';
     }
     if (!regexEmail.test(formData.email)) {
-      validationErrors.email = 'Invalid email format';
+      validationErrors.email = 'Invalid email';
     }
     if (!regexPassword.test(formData.password)) {
       validationErrors.password =
@@ -103,6 +104,9 @@ const Register = () => {
     }
     if (!formData.contact) {
       validationErrors.contact = 'Contact number is required';
+    }
+    if (!regexContact.test(formData.contact)) {
+      validationErrors.contact = 'Invalid contact number. Please enter a valid number.';
     }
 
     return validationErrors;
@@ -174,7 +178,7 @@ const Register = () => {
                           required
                         />
                       </CInputGroup>
-                      {errors.contact && <p className="text-danger">{errors.contact}</p>}
+                      {errors.contact && <p className="text-white">{errors.contact}</p>}
                     </CCol>
                     <CCol md={6}>
                       <CInputGroup>
@@ -213,8 +217,6 @@ const Register = () => {
                           <option value="">Select user type</option>
                           <option value="Driver">Driver</option>
                           <option value="Customer">Customer</option>
-                          <option value="Operator">Operator</option>
-                          <option value="Admin">Admin</option>
                         </select>
                       </CInputGroup>
                     </CCol>
@@ -238,7 +240,7 @@ const Register = () => {
         </CRow>
       </CContainer>
 
-      {/* Render Alert Component */}
+     
       {alertData && <Alert title={alertData.title} message={alertData.message} icon={alertData.icon} />}
     </div>
   );
